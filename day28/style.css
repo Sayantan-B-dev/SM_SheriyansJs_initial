@@ -67,8 +67,13 @@ h3{
     border: 1px black solid;
     padding: 10px;
 }
-pre{
-    padding-right: 20;
+pre {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: "Courier New", monospace;
 }
 
 

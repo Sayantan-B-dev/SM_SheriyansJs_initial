@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: wheat;
+}
+h5{
+    position: fixed;
+    top: 10px;
+    right:10px;
+    background-color: rgb(182, 182, 177);
+    border-radius: 10px;
+    border: 1px black solid;
+    padding: 10px;
+}
+pre {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: "Courier New", monospace;
+}

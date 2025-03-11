@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day30</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h5>Check browser console for the use of these functions <br>
+        (f12 or rightclick--inspect--console)</h5>
+    <main>
+        <div>
+            <h2>Raw code:</h2>
+            <pre><code>
+function printNaturalNumbers() {
+    n = Number(prompt("Enter a number: "))
+    if (isNaN(n) || n &lt; 1) {
+        console.log("Wrong input, try again.")
+    } else {
+        ans = ""
+        for (let i = 1; i &lt; n + 1; i++) {
+            ans += `${i} `
+        }
+        console.log(ans)
+    }
+}
+
+function printNto1() {
+    n = Number(prompt("Enter a number: "))
+    if (isNaN(n) || n &lt; 1) {
+        console.log("Wrong input, try again.")
+    } else {
+        ans = ""
+        for (let i = n; i &gt; 0; i--) {
+            ans += `${i} `
+        }
+        console.log(ans)
+    }
+}
+
+function sumUpToN() {
+    n = Number(prompt("Enter a number: "))
+    if (isNaN(n) || n &lt; 1) {
+        console.log("Wrong input, try again.")
+    } else {
+        let sum = 0
+        for (let i = 1; i &lt;= n; i++) {
+            sum += i
+        }
+        console.log(sum)
+    }
+}
+
+function factorial() {
+    n = Number(prompt("Enter a number: "))
+    if (isNaN(n) || n &lt; 1) {
+        console.log("Wrong input, try again.")
+    } else {
+        let fact = 1
+        for (let i = 1; i &lt;= n; i++) {
+            fact *= i
+        }
+        console.log(fact)
+    }
+}
+
+function sumEvenOddInRange() {
+    start = Number(prompt("Enter start: "))
+    end = Number(prompt("Enter end: "))
+
+    if (isNaN(start) || isNaN(end)) {
+        console.log("Wrong input, try again.")
+    } else {
+        if (start &gt; end) {
+            [start, end] = [end, start];
+        }
+        let evenSum = 0, oddSum = 0
+        for (let i = start; i &lt;= end; i++) {
+            i % 2 === 0 ? evenSum += i : oddSum += i
+        }
+        console.log("Sum of even numbers in the range and 
+        Sum of odd numbers in the range are " + [evenSum, oddSum])
+    }
+}
+
+function printFactors() {
+    n = Number(prompt("Enter a number: "))
+    if (isNaN(n) || n &lt; 1) {
+        console.log("Wrong input, try again.")
+    } else {
+        let str = ""
+        for (let i = 0; i &lt; n + 1; i++) {
+            if (n % i == 0) str += `${i} `
+        }
+        console.log(str)
+    }
+}
+
+function isPrime() {
+    n = Number(prompt("Enter a number: "))
+    if (isNaN(n)) {
+        console.log("Wrong input, try again.")
+    } else {
+        if(n==2){
+            console.log("Prime")
+        }
+        else if(n&lt;=1||n%2==0){
+            console.log("Not Prime")
+        }
+        else{
+            for(let i=3;i&lt;n;i++){
+                if(n%i==0){
+                    return console.log("Not Prime")
+                }
+            }
+            console.log("Prime")
+        }
+    }
+}
+
+function calculatePower() {
+    a = Number(prompt("Enter a number: "))
+    b = Number(prompt("Enter the exponent: "))
+
+    if (isNaN(a) || isNaN(b)) {
+        console.log("Wrong input, try again.")
+    } else {
+        let ans = 1;
+        let exp = Math.abs(b);
+
+        for (var i = 0; i &lt; exp; i++) {
+            ans *= a;
+        }
+        let result = b &gt;= 0 ? ans : 1 / ans
+        console.log(`${a} to the power ${b} is ${result}`) 
+    }
+}
+            </code></pre>
+        </div>
+        <div>
+            <h2>Optimized code</h2>
+            <pre><code>
+function getNumberInput(message) {
+    let n = Number(prompt(message));
+    return isNaN(n) || n &lt; 1 ? null : n;
+}
+
+function printNaturalNumbers() {
+    let n = getNumberInput("Enter a number:");
+    if (!n) return console.log("Wrong input, try again.");
+    console.log([...Array(n).keys()].map(i =&gt; i + 1).join(" "));
+}
+
+function printNto1() {
+    let n = getNumberInput("Enter a number:");
+    if (!n) return console.log("Wrong input, try again.");
+    console.log([...Array(n).keys()].map(i =&gt; n - i).join(" "));
+}
+
+function sumUpToN() {
+    let n = getNumberInput("Enter a number:");
+    if (!n) return console.log("Wrong input, try again.");
+    console.log((n * (n + 1)) / 2); // Using formula for efficiency
+}
+
+function factorial() {
+    let n = getNumberInput("Enter a number:");
+    if (!n) return console.log("Wrong input, try again.");
+    console.log([...Array(n).keys()].map(i =&gt; i + 1).reduce((a, b) =&gt; a * b, 1));
+}
+
+function sumEvenOddInRange() {
+    let start = Number(prompt("Enter start:"));
+    let end = Number(prompt("Enter end:"));
+
+    if (isNaN(start) || isNaN(end)) return console.log("Wrong input, try again.");
+    if (start &gt; end) [start, end] = [end, start];
+
+    let evenSum = 0, oddSum = 0;
+    for (let i = start; i &lt;= end; i++) i % 2 === 0 ? evenSum += i : oddSum += i;
+
+    console.log(`Sum of evens: ${evenSum}, Sum of odds: ${oddSum}`);
+}
+
+function printFactors() {
+    let n = getNumberInput("Enter a number:");
+    if (!n) return console.log("Wrong input, try again.");
+    console.log([...Array(n + 1).keys()].filter(i =&gt; i &amp;&amp; n % i === 0).join(" "));
+}
+
+function isPrime() {
+    let n = getNumberInput("Enter a number:");
+    if (!n) return console.log("Wrong input, try again.");
+    if (n &lt; 2) return console.log("Not Prime");
+    if (n === 2 || n === 3) return console.log("Prime");
+    if (n % 2 === 0 || n % 3 === 0) return console.log("Not Prime");
+
+    for (let i = 5; i * i &lt;= n; i += 6)
+        if (n % i === 0 || n % (i + 2) === 0) return console.log("Not Prime");
+
+    console.log("Prime");
+}
+
+function calculatePower() {
+    let a = Number(prompt("Enter a number:"));
+    let b = Number(prompt("Enter the exponent:"));
+
+    if (isNaN(a) || isNaN(b)) return console.log("Wrong input, try again.");
+    console.log(`${a} to the power ${b} is ${b &gt;= 0 ? a ** b : 1 / (a ** -b)}`);
+}
+            </code></pre>
+        </div>
+    </main>
+    <script src="./day30.js"></script>
+</body>
+
+</html>

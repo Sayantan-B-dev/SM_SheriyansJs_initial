@@ -7,7 +7,6 @@
     <title>Matrix Transformer</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./view45.css">
-        
 </head>
 
 <body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-start py-10 px-4">
@@ -32,6 +31,8 @@
             class="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded">Transpose</button>
         <button onclick="handleAction('rotate')" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded">Rotate
             90°</button>
+        <button onclick="handleAction('spiral')" class="bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded">Spiral
+            Matrix</button>
     </div>
 
     <div id="output" class="text-center space-y-2"></div>
@@ -77,6 +78,41 @@ const rotateMatrix = (matrix) =&gt; {
         }
     }
     return matrix
+}
+const spiralMatrix = (matrix) =&gt; {
+    const result = [];
+    let top = 0, bottom = matrix.length - 1, left = 0, right = matrix[0].length - 1;
+
+    while (top &lt;= bottom && left &lt;= right) {
+        // Traverse from left to right
+        for (let i = left; i &lt;= right; i++) {
+            result.push(matrix[top][i]);
+        }
+        top++;
+
+        // Traverse downwards
+        for (let i = top; i &lt;= bottom; i++) {
+            result.push(matrix[i][right]);
+        }
+        right--;
+
+        if (top &lt;= bottom) {
+            // Traverse from right to left
+            for (let i = right; i &gt;= left; i--) {
+                result.push(matrix[bottom][i]);
+            }
+            bottom--;
+        }
+
+        if (left &lt;= right) {
+            // Traverse upwards
+            for (let i = bottom; i &gt;= top; i--) {
+                result.push(matrix[i][left]);
+            }
+            left++;
+        }
+    }
+    return result;
 }</code></pre>
         </div>
     </div>

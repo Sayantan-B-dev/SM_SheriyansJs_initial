@@ -26,14 +26,14 @@ function getMatrixFromInput() {
 }
 
 function transposeMatrix(matrix) {
-    const matrix2 = Array.from({ length: matrix[0].length }, () => Array(matrix.length))
+    const matrix2 = Array.from({ length: matrix[0].length }, () => Array(matrix.length));
     for (let i = 0; i < matrix[0].length; i++) {
-        matrix2[i] = []
+        matrix2[i] = [];
         for (let j = 0; j < matrix.length; j++) {
-            matrix2[i][j] = matrix[j][i]
+            matrix2[i][j] = matrix[j][i];
         }
     }
-    return matrix2
+    return matrix2;
 }
 
 function rotateMatrix(matrix) {
@@ -59,6 +59,42 @@ function rotateMatrix(matrix) {
     return matrix;
 }
 
+function spiralMatrix(matrix) {
+    const result = [];
+    let top = 0, bottom = matrix.length - 1, left = 0, right = matrix[0].length - 1;
+
+    while (top <= bottom && left <= right) {
+        // Traverse from left to right
+        for (let i = left; i <= right; i++) {
+            result.push(matrix[top][i]);
+        }
+        top++;
+
+        // Traverse downwards
+        for (let i = top; i <= bottom; i++) {
+            result.push(matrix[i][right]);
+        }
+        right--;
+
+        if (top <= bottom) {
+            // Traverse from right to left
+            for (let i = right; i >= left; i--) {
+                result.push(matrix[bottom][i]);
+            }
+            bottom--;
+        }
+
+        if (left <= right) {
+            // Traverse upwards
+            for (let i = bottom; i >= top; i--) {
+                result.push(matrix[i][left]);
+            }
+            left++;
+        }
+    }
+    return result;
+}
+
 function displayMatrix(matrix, title) {
     const output = document.getElementById("output");
     output.innerHTML = `<h2 class='text-lg font-semibold mb-2 text-white'>${title}</h2>`;
@@ -79,7 +115,6 @@ function displayMatrix(matrix, title) {
     output.appendChild(grid);
 }
 
-
 function handleAction(action) {
     let matrix = getMatrixFromInput();
     if (action === 'transpose') {
@@ -88,6 +123,9 @@ function handleAction(action) {
     } else if (action === 'rotate') {
         const result = rotateMatrix(matrix);
         displayMatrix(result, '90° Rotated Matrix');
+    } else if (action === 'spiral') {
+        const result = spiralMatrix(matrix);
+        displayMatrix([result], 'Spiral Matrix');
     } else {
         displayMatrix(matrix, 'Original Matrix');
     }

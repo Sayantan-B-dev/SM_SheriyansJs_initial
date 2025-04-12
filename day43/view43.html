@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multidimensional Array Documentation</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #00ffff;
+        }
+
+        code {
+            background-color: #2e2e2e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #00ff99;
+        }
+
+        pre {
+            background-color: #2e2e2e;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #444;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+        }
+
+        a {
+            color: #4ec9b0;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            margin: 30px 0;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Multidimensional Array Documentation</h1>
+    <h2 id="1">1. What is a Multidimensional Array?</h2>
+    <p>A <strong>multidimensional array</strong> is an array of arrays. Instead of a simple linear structure (like a 1D
+        array), you have multiple dimensions — each index leads to another array.</p>
+    <pre><code>[
+ [1, 2, 3, 4],
+ [5, 6, 7, 8],
+ [9, 10, 11, 12]
+]</code></pre>
+    <p>This can be visualized as a <strong>table</strong> with <code>3 rows</code> and <code>4 columns</code>.</p>
+
+    <h2 id="2">2. Types of Multidimensional Arrays</h2>
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Example Dimensions</th>
+        </tr>
+        <tr>
+            <td>1D Array</td>
+            <td>Linear collection of elements</td>
+            <td>[1, 2, 3, 4]</td>
+        </tr>
+        <tr>
+            <td>2D Array</td>
+            <td>Array of arrays</td>
+            <td>[[1,2],[3,4]]</td>
+        </tr>
+        <tr>
+            <td>3D Array</td>
+            <td>Array of 2D arrays</td>
+            <td>[[[1],[2]],[[3],[4]]]</td>
+        </tr>
+        <tr>
+            <td>N-D Array</td>
+            <td>Extends to N dimensions (rare)</td>
+            <td>N &gt; 3</td>
+        </tr>
+    </table>
+
+    <h2 id="3">3. Declaration &amp; Initialization</h2>
+    <h3>C / C++</h3>
+    <pre><code>int arr[3][4];
+int arr[2][2][3];</code></pre>
+    <h3>Java</h3>
+    <pre><code>int[][] arr = new int[3][4];
+int[][][] arr = new int[2][2][3];</code></pre>
+    <h3>Python</h3>
+    <pre><code>arr = [[1, 2], [3, 4]]
+
+import numpy as np
+arr = np.array([[1, 2], [3, 4]])</code></pre>
+    <h3>JavaScript</h3>
+    <pre><code>let arr = [
+  [1, 2],
+  [3, 4]
+];</code></pre>
+
+    <h2 id="4">4. Accessing Elements</h2>
+    <pre><code>arr[1][2]
+arr[1][2][0]</code></pre>
+
+    <h2 id="5">5. Memory Representation</h2>
+    <h3>Row-major order (C/C++)</h3>
+    <pre><code>arr[2][3] = {
+  {1,2,3},
+  {4,5,6}
+}
+Memory: 1 2 3 4 5 6</code></pre>
+    <h3>Column-major order (Fortran/Matlab)</h3>
+    <pre><code>Memory: 1 4 2 5 3 6</code></pre>
+
+    <h2 id="6">6. Traversing Techniques</h2>
+    <h3>C++</h3>
+    <pre><code>for(int i = 0; i &lt; rows; i++)
+  for(int j = 0; j &lt; cols; j++)
+    cout &lt;&lt; arr[i][j];</code></pre>
+    <h3>Python</h3>
+    <pre><code>for row in arr:
+    for col in row:
+        print(col)</code></pre>
+
+    <h2 id="7">7. Advantages &amp; Use Cases</h2>
+    <table>
+        <tr>
+            <th>Use Case</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Matrix Operations</td>
+            <td>Used in math-heavy computations</td>
+        </tr>
+        <tr>
+            <td>Images (Pixels)</td>
+            <td>Each pixel has rows and columns</td>
+        </tr>
+        <tr>
+            <td>Gaming (Grids, Boards)</td>
+            <td>For representing chess, maze, etc.</td>
+        </tr>
+        <tr>
+            <td>Tabular Data</td>
+            <td>Store spreadsheets, table records</td>
+        </tr>
+        <tr>
+            <td>Simulations</td>
+            <td>Weather, physics, etc.</td>
+        </tr>
+        <tr>
+            <td>Deep Learning Tensors</td>
+            <td>Used in neural networks</td>
+        </tr>
+    </table>
+
+    <h2 id="8">8. Common Operations</h2>
+    <table>
+        <tr>
+            <th>Operation</th>
+            <th>Example Syntax (Python)</th>
+            <th>Meaning</th>
+        </tr>
+        <tr>
+            <td>Access</td>
+            <td>arr[i][j]</td>
+            <td>Get value</td>
+        </tr>
+        <tr>
+            <td>Update</td>
+            <td>arr[i][j] = 10</td>
+            <td>Set value</td>
+        </tr>
+        <tr>
+            <td>Append Row</td>
+            <td>arr.append([7,8])</td>
+            <td>Add row</td>
+        </tr>
+        <tr>
+            <td>Remove Row</td>
+            <td>arr.pop(1)</td>
+            <td>Remove row</td>
+        </tr>
+        <tr>
+            <td>Length</td>
+            <td>len(arr)</td>
+            <td>No. of rows</td>
+        </tr>
+        <tr>
+            <td>Column Length</td>
+            <td>len(arr[0])</td>
+            <td>No. of columns</td>
+        </tr>
+    </table>
+
+    <h2 id="9">9. Real-world Examples</h2>
+    <h3>Tic Tac Toe Board</h3>
+    <pre><code>let board = [
+  ['X', 'O', 'X'],
+  ['O', 'X', ''],
+  ['X', '', 'O']
+];</code></pre>
+    <h3>Image Representation</h3>
+    <pre><code>image = [
+  [0, 255, 128],
+  [128, 128, 255],
+  [0, 64, 128]
+]</code></pre>
+
+    <h2 id="10">10. Common Mistakes</h2>
+    <table>
+        <tr>
+            <th>Mistake</th>
+            <th>Why It Happens</th>
+            <th>Fix</th>
+        </tr>
+        <tr>
+            <td>Index Out of Bounds</td>
+            <td>Accessing beyond limit</td>
+            <td>Validate indices</td>
+        </tr>
+        <tr>
+            <td>Jagged Array Confusion</td>
+            <td>Assuming all rows same length</td>
+            <td>Check row lengths</td>
+        </tr>
+        <tr>
+            <td>Memory Misunderstanding</td>
+            <td>Especially in C/C++</td>
+            <td>Understand memory layout</td>
+        </tr>
+        <tr>
+            <td>Wrong Loop Order</td>
+            <td>Reversed loop indexing</td>
+            <td>Ensure correct order</td>
+        </tr>
+    </table>
+
+    <h2 id="11">11. Language Comparison Table</h2>
+    <table>
+        <tr>
+            <th>Language</th>
+            <th>Multi-D Support</th>
+            <th>Jagged Arrays</th>
+            <th>Row-major</th>
+        </tr>
+        <tr>
+            <td>C/C++</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>Java</td>
+            <td>Yes (Jagged default)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>Python</td>
+            <td>No (via lists)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>JavaScript</td>
+            <td>No (via arrays)</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>MATLAB</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>No</td>
+        </tr>
+    </table>
+
+    <h2 id="12">12. Diagrams</h2>
+    <h3>2D Array (Row-Major)</h3>
+    <pre><code>Matrix:
+[ [1, 2, 3],
+  [4, 5, 6] ]
+
+Memory:
+Index  -&gt; 0  1  2  3  4  5
+Element-&gt; 1  2  3  4  5  6</code></pre>
+
+    <h3>3D Array Representation</h3>
+    <pre><code>arr[2][2][2] = [
+   [ [1, 2], [3, 4] ],
+   [ [5, 6], [7, 8] ]
+]</code></pre>
+
+    <h2 id="13">13. Summary</h2>
+    <ul>
+        <li>A <strong>multidimensional array</strong> is an array containing one or more arrays.</li>
+        <li>Commonly used: <strong>2D Arrays</strong> (like a table).</li>
+        <li>You can have <strong>N-dimensional arrays</strong>, but they get complex.</li>
+        <li>Great for <strong>grids, games, matrices, and tensors</strong>.</li>
+        <li>Each language has <strong>different syntax</strong> and <strong>capabilities</strong>.</li>
+        <li>Beware of <strong>memory layout</strong> and performance concerns.</li>
+    </ul>
+    <div style="
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  font-family: monospace;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border: 1px solid #444;
+">
+        <h3 style="color:#00ffff;"> 3×4 Random Matrix Generator</h3>
+        <p><strong>Code:</strong></p>
+        <pre><code>let arr = Array.from({ length: 3 }, () =&gt; 
+  Array.from({ length: 4 }, () =&gt; Math.floor(Math.random() * 100))
+);
+process.stdout.write(`${JSON.stringify(arr)}\\n`);</code></pre>
+
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><code>Array.from({ length: 3 })</code> → Creates 3 rows</li>
+            <li><code>Array.from({ length: 4 })</code> → Each row has 4 columns</li>
+            <li><code>Math.random() * 100</code> → Random number 0–99</li>
+            <li><code>JSON.stringify(arr)</code> → Converts array to string</li>
+            <li><code>process.stdout.write</code> → Prints output to terminal</li>
+        </ul>
+
+        <p><strong>Sample Output:</strong></p>
+        <pre><code>[[14, 73, 6, 91],
+ [65, 43, 9, 87],
+ [27, 88, 19, 54]]</code></pre>
+    </div>
+
+</body>
+
+</html>

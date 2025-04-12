@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Transformer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./view45.css">
+        
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-start py-10 px-4">
+    <h1 class="text-3xl font-bold mb-6 animate-pulse">Matrix Transformer</h1>
+
+    <div class="mb-4">
+        <label for="size" class="block text-sm font-medium">Matrix Size (e.g., 3 for 3x3)</label>
+        <input type="number" id="size" min="1" value="3"
+            class="mt-1 p-2 rounded bg-gray-800 border border-gray-600 w-24">
+        <button onclick="generateMatrixInputs()"
+            class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+            Generate
+        </button>
+    </div>
+
+    <div id="matrixInputContainer" class="space-y-2 mb-6"></div>
+
+    <div class="flex space-x-4 mb-6">
+        <button onclick="handleAction('original')" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded">Show
+            Original</button>
+        <button onclick="handleAction('transpose')"
+            class="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded">Transpose</button>
+        <button onclick="handleAction('rotate')" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded">Rotate
+            90°</button>
+    </div>
+
+    <div id="output" class="text-center space-y-2"></div>
+
+    <div class="mt-10 w-full max-w-4xl">
+        <h2 class="text-xl font-semibold mb-2">Original JavaScript Code</h2>
+        <div class="bg-gray-800 p-4 rounded overflow-x-auto text-sm">
+            <pre><code class="text-green-300">const matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+const transposeMatrix = (matrix) =&gt; {
+    const matrix2 = Array.from({ length: matrix[0].length }, () =&gt; Array(matrix.length))
+    for (let i = 0; i &lt; matrix[0].length; i++) {
+        matrix2[i] = []
+        for (let j = 0; j &lt; matrix.length; j++) {
+            matrix2[i][j] = matrix[j][i]
+        }
+    }
+    return matrix2
+}
+
+const rotateMatrix = (matrix) =&gt; {
+    let m0 = matrix[0].length
+    let m = matrix.length
+    for (let i = 0; i &lt; m; i++) {
+        for (let j = i + 1; j &lt; m0; j++) {
+            let temp = matrix[i][j]
+            matrix[i][j] = matrix[j][i]
+            matrix[j][i] = temp
+        }
+    }
+    for (let i = 0; i &lt; m; i++) {
+        let k = 0, j = m0 - 1
+        while (k &lt; j) {
+            let temp = matrix[i][k]
+            matrix[i][k] = matrix[i][j]
+            matrix[i][j] = temp
+            k++
+            j--
+        }
+    }
+    return matrix
+}</code></pre>
+        </div>
+    </div>
+
+    <script src="./view45.js"></script>
+</body>
+
+</html>

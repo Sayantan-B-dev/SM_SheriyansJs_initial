@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced DOM Manipulation</title>
+    <link rel="stylesheet" href="./view37.css">
+</head>
+
+<body>
+
+    <div id="dom-manipulation-info"
+        style="font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; color: #f0f0f0; background-color: #1e1e2f; border-radius: 10px;">
+        <h1 style="color: #00ffff;">DOM Manipulation – Complete Guide</h1>
+
+        <section>
+            <h2 style="color: #ffd700;">What is DOM?</h2>
+            <p>The <strong>Document Object Model (DOM)</strong> is a programming interface for web documents. It
+                represents the page as a structured tree of objects that can be manipulated with JavaScript.</p>
+            <ul>
+                <li>Every HTML element becomes a node in this tree.</li>
+                <li>You can add, remove, or modify these elements using JavaScript.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">DOM Access Methods</h2>
+            <ul>
+                <li><code>document.getElementById(id)</code></li>
+                <li><code>document.getElementsByClassName(class)</code></li>
+                <li><code>document.getElementsByTagName(tag)</code></li>
+                <li><code>document.querySelector(selector)</code></li>
+                <li><code>document.querySelectorAll(selector)</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Node Properties</h2>
+            <ul>
+                <li><code>node.innerHTML</code>: Get/set HTML content</li>
+                <li><code>node.textContent</code>: Get/set text content</li>
+                <li><code>node.innerText</code>: Similar to <code>textContent</code> but respects CSS styles</li>
+                <li><code>node.nodeType</code>: Type of the node (1 = Element, 3 = Text, etc.)</li>
+                <li><code>node.nodeName</code>: Name of the node (e.g., DIV, SPAN)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Traversing the DOM</h2>
+            <ul>
+                <li><code>parentNode</code>, <code>childNodes</code>, <code>firstChild</code>, <code>lastChild</code>
+                </li>
+                <li><code>children</code>, <code>firstElementChild</code>, <code>lastElementChild</code></li>
+                <li><code>nextSibling</code>, <code>previousSibling</code>, <code>nextElementSibling</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Creating and Modifying Elements</h2>
+            <ul>
+                <li><code>document.createElement("tag")</code></li>
+                <li><code>node.appendChild(child)</code></li>
+                <li><code>node.insertBefore(newNode, referenceNode)</code></li>
+                <li><code>node.replaceChild(newNode, oldNode)</code></li>
+                <li><code>node.removeChild(child)</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Attributes Manipulation</h2>
+            <ul>
+                <li><code>element.setAttribute("attr", "value")</code></li>
+                <li><code>element.getAttribute("attr")</code></li>
+                <li><code>element.removeAttribute("attr")</code></li>
+                <li>Also accessible directly like: <code>element.id</code>, <code>element.href</code>, etc.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Class Manipulation</h2>
+            <ul>
+                <li><code>element.classList.add("class")</code></li>
+                <li><code>element.classList.remove("class")</code></li>
+                <li><code>element.classList.toggle("class")</code></li>
+                <li><code>element.classList.contains("class")</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Style Manipulation</h2>
+            <ul>
+                <li><code>element.style.property</code> (e.g., <code>element.style.color = "red"</code>)</li>
+                <li>To access computed styles: <code>window.getComputedStyle(element)</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Event Handling</h2>
+            <ul>
+                <li><code>element.addEventListener("event", callback)</code></li>
+                <li><code>element.removeEventListener("event", callback)</code></li>
+                <li>Common events: <code>click</code>, <code>mouseover</code>, <code>keydown</code>, <code>submit</code>
+                </li>
+            </ul>
+            <p><strong>Event Object Properties:</strong></p>
+            <ul>
+                <li><code>event.target</code>, <code>event.currentTarget</code></li>
+                <li><code>event.preventDefault()</code>, <code>event.stopPropagation()</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Event Delegation</h2>
+            <p>Attaching one event listener to a parent element to handle events from children using
+                <code>event.target</code>. Efficient for dynamically added elements.
+            </p>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Forms &amp; Input</h2>
+            <ul>
+                <li>Access form: <code>document.forms["formName"]</code></li>
+                <li>Input values: <code>inputElement.value</code></li>
+                <li>Radio/Checkbox: <code>element.checked</code></li>
+                <li>Submit forms: <code>form.submit()</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Advanced Techniques</h2>
+            <ul>
+                <li><strong>MutationObserver:</strong> Watch for changes in the DOM</li>
+                <li><strong>Shadow DOM:</strong> Encapsulation inside web components</li>
+                <li><strong>template &amp; slot:</strong> Declarative DOM fragments in HTML5</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Performance Tips</h2>
+            <ul>
+                <li>Use <code>documentFragment</code> when adding multiple elements</li>
+                <li>Avoid layout thrashing (multiple reads &amp; writes)</li>
+                <li>Debounce expensive event listeners (scroll, resize)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Best Practices</h2>
+            <ul>
+                <li>Use <code>const</code> / <code>let</code> for variables</li>
+                <li>Keep selectors scoped to minimize DOM search time</li>
+                <li>Use semantic HTML and avoid deeply nested DOMs</li>
+                <li>Clean up listeners to avoid memory leaks</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Live Example</h2>
+            <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      const btn = document.querySelector("#clickMe");
+      btn.addEventListener("click", () =&gt; {
+        const newDiv = document.createElement("div");
+        newDiv.textContent = "You clicked!";
+        document.body.appendChild(newDiv);
+      });
+          </code></pre>
+        </section>
+
+        <section>
+            <h2 style="color: #ffd700;">Debugging Tips</h2>
+            <ul>
+                <li>Use <code>console.log()</code> to inspect elements and events</li>
+                <li>Inspect elements with browser DevTools</li>
+                <li>Use breakpoints to pause code execution</li>
+            </ul>
+        </section>
+    </div>
+
+    <div id="event-listeners-details"
+        style="font-family: Arial, sans-serif; background-color: #1e1e2f; color: #f0f0f0; padding: 20px; border-radius: 10px; line-height: 1.7;">
+        <h1 style="color: #00ffff;">📌 JavaScript Event Listeners – Complete Breakdown</h1>
+
+        <p><strong>Event listeners</strong> allow JavaScript to "listen" for interactions or changes in the DOM. They
+            enable dynamic, interactive websites.</p>
+        <p>MDN Docs: <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"
+                target="_blank" style="color: #ffd700;">addEventListener()</a></p>
+
+        <h2 style="color: #ffd700;">🧠 Syntax:</h2>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      element.addEventListener("eventType", callbackFunction, useCapture);
+        </code></pre>
+        <ul>
+            <li><code>eventType</code>: A string like "click", "keydown", "submit"</li>
+            <li><code>callbackFunction</code>: Function to run when the event fires</li>
+            <li><code>useCapture</code> (optional): Boolean for event phase (true = capture, false = bubbling)</li>
+        </ul>
+
+        <h2 style="color: #ffd700;">🛠️ Commonly Used Events &amp; Examples:</h2>
+
+        <h3 style="color: #ff7b00;">1. Click Event</h3>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      document.querySelector("#btn").addEventListener("click", function() {
+        alert("Button Clicked!");
+      });
+        </code></pre>
+
+        <h3 style="color: #ff7b00;">2. Mouse Events</h3>
+        <ul>
+            <li><code>mouseover</code>, <code>mouseout</code>, <code>mousemove</code>, <code>mousedown</code>,
+                <code>mouseup</code>, <code>dblclick</code></li>
+        </ul>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      element.addEventListener("mouseover", () =&gt; {
+        element.style.backgroundColor = "yellow";
+      });
+        </code></pre>
+
+        <h3 style="color: #ff7b00;">3. Keyboard Events</h3>
+        <ul>
+            <li><code>keydown</code>, <code>keypress</code>, <code>keyup</code></li>
+        </ul>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      document.addEventListener("keydown", function(e) {
+        console.log("Key pressed:", e.key);
+      });
+        </code></pre>
+
+        <h3 style="color: #ff7b00;">4. Form Events</h3>
+        <ul>
+            <li><code>submit</code>, <code>change</code>, <code>input</code>, <code>focus</code>, <code>blur</code></li>
+        </ul>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      document.querySelector("form").addEventListener("submit", function(e) {
+        e.preventDefault(); // Prevents actual submission
+        alert("Form submitted!");
+      });
+        </code></pre>
+
+        <h3 style="color: #ff7b00;">5. Window Events</h3>
+        <ul>
+            <li><code>load</code>, <code>resize</code>, <code>scroll</code>, <code>beforeunload</code></li>
+        </ul>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      window.addEventListener("resize", () =$gt; {
+        console.log("Window resized!");
+      });
+        </code></pre>
+
+        <h3 style="color: #ff7b00;">6. Touch Events (Mobile)</h3>
+        <ul>
+            <li><code>touchstart</code>, <code>touchmove</code>, <code>touchend</code></li>
+        </ul>
+
+        <h3 style="color: #ff7b00;">7. Custom Events</h3>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      const myEvent = new Event("customEvent");
+      element.addEventListener("customEvent", () =$gt; console.log("Custom event fired!"));
+      element.dispatchEvent(myEvent);
+        </code></pre>
+
+        <h2 style="color: #ffd700;">📌 Event Object</h2>
+        <p>The callback function receives an <code>event</code> object with useful properties:</p>
+        <ul>
+            <li><code>event.type</code> – Event name</li>
+            <li><code>event.target</code> – The element that triggered the event</li>
+            <li><code>event.currentTarget</code> – The element the listener is attached to</li>
+            <li><code>event.preventDefault()</code> – Stops default action (e.g., form submit)</li>
+            <li><code>event.stopPropagation()</code> – Stops event bubbling</li>
+        </ul>
+
+        <h2 style="color: #ffd700;">🧭 Event Flow (Capture vs. Bubbling)</h2>
+        <p>Events travel in three phases:</p>
+        <ol>
+            <li><strong>Capture phase</strong> – Down the DOM tree</li>
+            <li><strong>Target phase</strong> – Event reaches target</li>
+            <li><strong>Bubbling phase</strong> – Bubbles back up the DOM tree (default)</li>
+        </ol>
+        <p>To handle capturing:</p>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      element.addEventListener("click", handler, true); // capture = true
+        </code></pre>
+
+        <h2 style="color: #ffd700;">🧹 Removing Event Listeners</h2>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      function logClick() {
+        console.log("Clicked");
+      }
+      element.addEventListener("click", logClick);
+      element.removeEventListener("click", logClick);
+        </code></pre>
+        <p><strong>Note:</strong> You must reference the same function to remove it!</p>
+
+        <h2 style="color: #ffd700;">🚀 Event Delegation</h2>
+        <p>Attach a single listener to a parent and use <code>event.target</code> to handle child interactions.</p>
+        <pre style="background: #333; padding: 10px; border-radius: 5px;"><code>
+      document.querySelector("#list").addEventListener("click", function(e) {
+        if (e.target.tagName === "LI") {
+          console.log("Clicked:", e.target.textContent);
+        }
+      });
+        </code></pre>
+        <p>✅ Efficient for dynamic elements!</p>
+
+        <h2 style="color: #ffd700;">📚 More MDN Event Reference</h2>
+        <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/Events" target="_blank"
+                    style="color: #00ffcc;">Complete List of DOM Events</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event" target="_blank"
+                    style="color: #00ffcc;">Event Object Details</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget" target="_blank"
+                    style="color: #00ffcc;">EventTarget Interface</a></li>
+        </ul>
+
+        <h2 style="color: #ffd700;">✅ Best Practices</h2>
+        <ul>
+            <li>Use <code>const</code> for named event handler functions</li>
+            <li>Always remove listeners on cleanup (especially in SPA or React)</li>
+            <li>Delegate for lists and tables with many children</li>
+            <li>Throttle or debounce heavy events (scroll, resize)</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <!-- HTML Manipulation -->
+        <div class="box" id="html-box">
+            <p id="html-text">This is a paragraph. Click the button to change this text.</p>
+            <button id="toggle-html">Toggle HTML</button>
+        </div>
+
+        <!-- CSS Manipulation -->
+        <div class="box" id="css-box">
+            <p>This box changes color when you click the button.</p>
+            <button id="toggle-css">Toggle CSS</button>
+        </div>
+
+        <!-- Event Listeners -->
+        <div class="box" id="event-box">
+            <p>Click the button to see an alert.</p>
+            <button id="event-listener">Click Me</button>
+        </div>
+
+        <!-- NodeList Manipulation -->
+        <div class="box" id="nodelist-box">
+            <p>Click the button to highlight all paragraphs.</p>
+            <button id="toggle-highlight">Toggle Highlight</button>
+        </div>
+
+        <!-- Adding and Removing Elements -->
+        <div class="box" id="add-remove-box">
+            <p>Click the button to add or remove an item.</p>
+            <ul id="item-list" type="none">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+            <button id="add-item">Add Item</button>
+            <button id="remove-item">Remove Item</button>
+        </div>
+
+        <!-- Toggle Visibility -->
+        <div class="box" id="visibility-box">
+            <p id="toggle-text">This text can be toggled.</p>
+            <button id="toggle-visibility">Toggle Visibility</button>
+        </div>
+    </div>
+
+    <script src="./view37.js"></script>
+</body>
+
+</html>

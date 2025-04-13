@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>day39</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./view39.css">
+</head>
+
+<body>
+    <div id="download-progress" class="p-8 bg-gray-900 text-white rounded-2xl shadow-xl max-w-md w-full space-y-6 m-auto mt-10">
+        <div>
+            <p class="text-lg font-medium">
+                File Name:
+                <span id="file-name" class="text-teal-400"></span>
+            </p>
+        </div>
+
+        <div class="text-center">
+            <span id="download-percentage" class="text-xl font-semibold">0%</span>
+        </div>
+
+        <div class="w-full bg-gray-800 rounded-full h-6 overflow-hidden">
+            <div id="progress-bar" class="bg-blue-600 h-6 rounded-full" style="width: 0%;"></div>
+        </div>
+
+        <button id="download-btn"
+            class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md font-semibold transition">
+            Download
+        </button>
+
+    </div>
+
+    <div class="p-8 bg-gray-900 text-white rounded-3xl shadow-2xl space-y-8 max-w-6xl mx-auto my-10">
+        <!-- Title -->
+        <div>
+            <h1 class="text-4xl font-bold text-teal-300">In-Depth JavaScript Concepts</h1>
+            <p class="text-gray-300 mt-2">Comprehensive notes including detailed explanations and multiple examples of
+                Web APIs, callbacks, memory phases, event loops, window methods, and timer functions.</p>
+        </div>
+
+        <!-- Section 1: Web API -->
+        <div>
+            <h2 class="text-3xl font-semibold text-yellow-400">1. Web API</h2>
+            <p class="text-gray-200 mt-2">
+                A <strong>Web API</strong> is a set of programming interfaces provided by the browser that extends
+                JavaScript's core capabilities. These APIs allow you to interact with the browser’s functionality to
+                handle things like:
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-300">
+                <li>Document Object Model (DOM) manipulation</li>
+                <li>HTTP requests (<code>fetch</code>, <code>XMLHttpRequest</code>)</li>
+                <li>Timers (<code>setTimeout</code>, <code>setInterval</code>)</li>
+                <li>Geolocation</li>
+                <li>Storage (<code>localStorage</code>, <code>sessionStorage</code>)</li>
+                <li>Multimedia handling (Canvas, WebGL, Audio APIs, etc.)</li>
+            </ul>
+            <p class="text-gray-200 mt-2">
+                They are implemented natively by the browser and provide asynchronous mechanisms to help your script
+                perform tasks without blocking the main thread.
+            </p>
+
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Example: Using fetch (a Web API) to get data from an API.
+      fetch('https://api.example.com/data')
+        .then(response =&gt; response.json())
+        .then(data =&gt; console.log(data))
+        .catch(error =&gt; console.error('Error:', error));
+            </code></pre>
+            </div>
+        </div>
+
+        <!-- Section 2: Callback -->
+        <div>
+            <h2 class="text-3xl font-semibold text-yellow-400">2. Callbacks</h2>
+            <p class="text-gray-200 mt-2">
+                A <strong>callback</strong> is a function passed as an argument into another function and is executed
+                after the parent function completes its task. They are essential for asynchronous programming in
+                JavaScript.
+            </p>
+            <p class="text-gray-200 mt-2">
+                The callback pattern lets you define what should happen once an asynchronous operation finishes.
+                However, excessive nesting of callbacks (commonly known as "callback hell") can make code harder to
+                maintain.
+            </p>
+
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Example: Basic callback usage
+      function processData(data, callback) {
+        // simulate processing data
+        let processedData = data + ' is processed';
+        callback(processedData);
+      }
+      
+      processData('Sample data', function(result) {
+        console.log('Callback result:', result);
+      });
+            </code></pre>
+            </div>
+
+            <p class="text-gray-200 mt-2">
+                Modern JavaScript uses promises and async/await to handle asynchronous operations more gracefully,
+                reducing the need for nested callbacks.
+            </p>
+        </div>
+
+        <!-- Section 3: Memory Creation Phase -->
+        <div>
+            <h2 class="text-3xl font-semibold text-yellow-400">3. Memory Creation Phase</h2>
+            <p class="text-gray-200 mt-2">
+                This is the first phase of the execution context in JavaScript. During this phase:
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-300">
+                <li>The JavaScript engine scans through the code to allocate memory for variables and function
+                    declarations.</li>
+                <li>Function declarations are fully hoisted (meaning their code is available throughout the scope).</li>
+                <li>Variable declarations are hoisted and set to <code>undefined</code> until they are assigned a value
+                    during the execution phase.</li>
+            </ul>
+
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Example demonstrating hoisting during memory creation phase
+      console.log(foo); // Outputs: undefined (variable is hoisted)
+      var foo = 'Hello, world!';
+      
+      function bar() {
+        console.log('Function bar is hoisted fully');
+      }
+      bar(); // Correctly logs the message
+            </code></pre>
+            </div>
+            <p class="text-gray-200 mt-2">
+                Note: <code>let</code> and <code>const</code> are also hoisted but are not initialized, causing a
+                temporal dead zone (TDZ) until their declaration is evaluated.
+            </p>
+        </div>
+
+        <!-- Section 4: Code Execution Phase -->
+        <div>
+            <h2 class="text-3xl font-semibold text-yellow-400">4. Code Execution Phase</h2>
+            <p class="text-gray-200 mt-2">
+                During the code execution phase, JavaScript runs through the code line by line:
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-300">
+                <li>Variables are assigned their values.</li>
+                <li>Functions are executed.</li>
+                <li>The call stack processes each function invocation.</li>
+            </ul>
+            <p class="text-gray-200 mt-2">
+                It is during this phase that asynchronous callbacks are pushed to the callback queue after their
+                associated Web API tasks complete, waiting for the call stack to be free.
+            </p>
+
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Example showing order of execution
+      console.log('Start');
+      
+      setTimeout(function() {
+        console.log('Timeout callback executed');
+      }, 1000); // This callback will execute after 1 second
+      
+      console.log('End');
+      // Execution order: "Start", "End", then "Timeout callback executed" after delay
+            </code></pre>
+            </div>
+        </div>
+
+        <!-- Section 5: Window Methods -->
+        <div>
+            <h2 class="text-3xl font-semibold text-yellow-400">5. Window Methods</h2>
+            <p class="text-gray-200 mt-2">
+                The <code>window</code> object is the global object in browsers, representing the browser window. It
+                includes a set of methods and properties that allow interaction with the browser's environment:
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-300">
+                <li><code>window.alert()</code> – Opens a modal dialog with a message.</li>
+                <li><code>window.confirm()</code> – Displays a dialog with OK/Cancel options.</li>
+                <li><code>window.prompt()</code> – Displays a dialog prompting the user for input.</li>
+                <li><code>window.setTimeout()</code> and <code>window.setInterval()</code> – Timer functions for
+                    asynchronous operations.</li>
+            </ul>
+            <p class="text-gray-200 mt-2">
+                Since <code>window</code> is global, you can call these methods without explicitly referring to
+                <code>window</code>.
+            </p>
+
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Using window methods implicitly
+      alert('This is an alert!'); // Same as window.alert('...');
+      console.log('Logging to the console');
+            </code></pre>
+            </div>
+        </div>
+
+        <!-- Section 6: setTimeout, setInterval, clearInterval -->
+        <div>
+            <h2 class="text-3xl font-semibold text-yellow-400">6. Timer Functions: setTimeout, setInterval &amp;
+                clearInterval</h2>
+            <p class="text-gray-200 mt-2">
+                <strong>setTimeout:</strong> Schedules a one-time callback execution after a specified delay.
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-300">
+                <li><strong>Syntax:</strong> <code>setTimeout(callback, delay[, ...args])</code></li>
+                <li>The callback is executed once after the delay (in milliseconds).</li>
+                <li>Returns a timeoutID that can be used to cancel the scheduled task.</li>
+            </ul>
+
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Example: Using setTimeout to delay execution
+      const timeoutID = setTimeout(() =&gt; {
+        console.log('Executed after 2 seconds');
+      }, 2000);
+      
+      // You can cancel the timeout before it fires using clearTimeout
+      // clearTimeout(timeoutID);
+            </code></pre>
+            </div>
+
+            <p class="text-gray-200 mt-4">
+                <strong>setInterval:</strong> Repeatedly executes a callback every specified interval.
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-300">
+                <li><strong>Syntax:</strong> <code>setInterval(callback, delay[, ...args])</code></li>
+                <li>The callback continues to run until you explicitly cancel it.</li>
+                <li>Returns an intervalID which is used to cancel the interval.</li>
+            </ul>
+
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Example: Using setInterval to run a function every second
+      const intervalID = setInterval(() =&gt; {
+        console.log('This message repeats every second');
+      }, 1000);
+      
+      // Later you can stop it using clearInterval
+      // clearInterval(intervalID);
+            </code></pre>
+            </div>
+
+            <p class="text-gray-200 mt-4">
+                <strong>clearInterval:</strong> Cancels an interval set by <code>setInterval</code> using the returned
+                ID.
+            </p>
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Example: Stopping an interval after 5 iterations
+      let count = 0;
+      const intervalID2 = setInterval(() =&gt; {
+        count++;
+        console.log('Iteration', count);
+        if (count === 5) {
+          clearInterval(intervalID2);
+          console.log('Interval cleared after 5 iterations');
+        }
+      }, 1000);
+            </code></pre>
+            </div>
+        </div>
+
+        <!-- Section 7: The Event Loop & Callback Queue (Extra Detail) -->
+        <div>
+            <h2 class="text-3xl font-semibold text-yellow-400">7. Event Loop &amp; Callback Queue</h2>
+            <p class="text-gray-200 mt-2">
+                JavaScript uses the <strong>Event Loop</strong> to manage the execution of multiple chunks of your code
+                asynchronously. Here’s how it works:
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-300">
+                <li>
+                    <strong>Call Stack:</strong> Where your code is executed line by line.
+                </li>
+                <li>
+                    <strong>Web APIs:</strong> Handle asynchronous functions like timers, HTTP requests, etc.
+                </li>
+                <li>
+                    <strong>Callback Queue:</strong> Stores callbacks after a Web API operation is completed.
+                </li>
+                <li>
+                    <strong>Event Loop:</strong> Continuously checks if the call stack is empty and moves functions from
+                    the callback queue to the call stack for execution.
+                </li>
+            </ul>
+            <p class="text-gray-200 mt-2">
+                This mechanism enables non-blocking behavior in JavaScript, making it responsive and efficient at
+                handling asynchronous operations.
+            </p>
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                <pre class="whitespace-pre-wrap text-sm"><code>
+      // Example: Demonstrating the event loop with setTimeout
+      console.log('Start');
+      
+      setTimeout(() =&gt; {
+        console.log('Inside timeout callback');
+      }, 0);
+      
+      console.log('End');
+      // Even with 0ms, the timeout callback waits until the current call stack is empty.
+            </code></pre>
+            </div>
+        </div>
+
+        <!-- Section 8: Summary & Best Practices -->
+        <div>
+            <h2 class="text-3xl font-semibold text-yellow-400">8. Summary &amp; Best Practices</h2>
+            <p class="text-gray-200 mt-2">
+                The topics above form the core of asynchronous JavaScript:
+            </p>
+            <ul class="list-disc ml-6 mt-2 text-gray-300">
+                <li><strong>Web APIs:</strong> Extend JavaScript with browser-provided functionalities.</li>
+                <li><strong>Callbacks:</strong> Enable asynchronous processing though they can lead to nested code.</li>
+                <li><strong>Memory Phases:</strong> Understand hoisting and the difference between memory allocation and
+                    execution.</li>
+                <li><strong>Window Object:</strong> Global scope provider for common methods and properties.</li>
+                <li><strong>Timer Functions:</strong> Use <code>setTimeout</code> and <code>setInterval</code> for
+                    scheduling, along with their cancellation methods.</li>
+                <li><strong>Event Loop:</strong> Bridges Web API callbacks with synchronous code execution in a
+                    non-blocking fashion.</li>
+            </ul>
+            <p class="text-gray-200 mt-2">
+                <strong>Tip:</strong> With modern constructs like Promises and async/await, you can manage asynchronous
+                logic more elegantly while keeping your code clean.
+            </p>
+        </div>
+    </div>
+
+
+
+    <script src="./view39.js"></script>
+
+</body>
+
+</html>

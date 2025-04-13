@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dual Game Zone</title>
+  <link rel="stylesheet" href="./view38.css">
+</head>
+<body>
+  <h1>🎮 Dual Game Zone</h1>
+
+<!-- Dice Game -->
+<section id="dice-game">
+    <h2>🎲 Dice Battle</h2>
+    <div class="players">
+      <div>
+        <h3>Player 1</h3>
+        <p id="player1-score">Score: 0</p>
+        <div class="dice" id="dice1"></div>
+      </div>
+      <div>
+        <h3>Player 2</h3>
+        <p id="player2-score">Score: 0</p>
+        <div class="dice" id="dice2"></div>
+      </div>
+    </div>
+    <button id="roll-btn">Roll Dice</button>
+    <button id="reset-dice">Reset Game</button>
+    <p id="dice-result"></p>
+  </section>
+  
+
+  <hr>
+
+<!-- IPL Team Picker -->
+<section id="ipl-picker">
+    <h2>🏏 IPL Team Picker</h2>
+    <button id="pick-team-btn">Pick a Random Team</button>
+    <button id="reset-team">Reset</button>
+    
+    <div id="team-details" class="hidden">
+      <div id="team-logo-placeholder"></div>
+      <h3 id="team-name"></h3>
+      <p><strong>Captain:</strong> <span id="team-captain"></span></p>
+      <p><strong>MVP:</strong> <span id="team-mvp"></span></p>
+      <p><strong>Titles Won:</strong> <span id="team-titles"></span></p>
+    </div>
+  </section>
+  
+
+  <script src="./view38.js"></script>
+</body>
+</html>

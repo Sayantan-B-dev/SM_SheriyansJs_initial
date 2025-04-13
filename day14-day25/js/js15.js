@@ -1,0 +1,6 @@
+console.warn("Basics of JavaScript")
+console.log("try concatenating strings,make variables by yourself")
+console.log("try taking input from prompt and convert it into number")
+console.log("hint var a=Number(prompt('enter number'))")
+console.log("var a=5.............var a=5n <-- this is big int")
+console.log("visit online js compiler and try conditional and loops")

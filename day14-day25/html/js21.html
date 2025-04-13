@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js21</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/alljs.css">
+    <style>
+        main {
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen p-6">
+    <h1 class="text-3xl md:text-4xl font-bold text-center mb-8 text-cyan-400">
+        Currently viewing "JavaScript Practice Session1"
+        <br class="hidden md:block">
+        <span class="text-base text-gray-400 font-normal">(Open Console by Right click &gt; Inspect &gt; Console or press F12)</span>
+    </h1>
+
+    <main class="max-w-5xl mx-auto space-y-12">
+        <!-- Problem 1 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem1:</h2>
+            <p class="text-gray-300">1. Log "Hello, JavaScript!" to the console in 3 different ways.</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                console.log("Hello, JavaScript!");
+                console.info("Hello, JavaScript!");
+                console.warn("Hello, JavaScript!");
+                console.error("Hello, JavaScript!");
+                console.table([{ Message: "Hello, JavaScript!" }]);
+            </code></pre>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem2:</h2>
+            <p class="text-gray-300">2. Perform 35 * 2 - (10 / 2) + 7 and log the result.</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                console.log(35 * 2 - (10 / 2) + 7);
+            </code></pre>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem3:</h2>
+            <p class="text-gray-300">3. Log the data type of "123", 123, true, and null using typeof.</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                console.log(typeof "123");  
+                console.log(typeof 123);  
+                console.log(typeof true);  
+                console.log(typeof null);
+            </code></pre>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem4:</h2>
+            <p class="text-gray-300">4. Write a program that swaps the values of two variables.</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                // Method 1: Using a temporary variable
+                let a = 5, b = 10;
+                let temp = a;
+                a = b;
+                b = temp;
+                console.log(a, b);
+                
+                // Method 2: Using destructuring assignment
+                let x = 5, y = 10;
+                [x, y] = [y, x];
+                console.log(x, y);
+                
+                // Method 3: Using arithmetic operations
+                let p = 5, q = 10;
+                p = p + q;
+                q = p - q;
+                p = p - q;
+                console.log(p, q);
+            </code></pre>
+        </div>
+
+        <!-- Problem 5 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem5:</h2>
+            <p class="text-gray-300">5. Use console.group() to organize logs into a group.</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                console.group("User Info");
+                console.log("Name: John Doe");
+                console.log("Age: 25");
+                console.log("Location: New York");
+                console.groupEnd();
+            </code></pre>
+        </div>
+
+        <!-- Problem 6 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem6:</h2>
+            <p class="text-gray-300">6. Declare a const object, modify its properties, and log the updated object.</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                const person = { name: "Alice", age: 30, city: "Paris" };
+                person.age = 31;
+                person.city = "London";
+                console.log(person); //{ name: "Alice", age: 31, city: "London" }
+            </code></pre>
+        </div>
+
+        <!-- Problem 7 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem7:</h2>
+            <p class="text-gray-300">7. Convert "50" (string) into a number using all different methods.</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                console.log(Number("50"));  
+                console.log(parseInt("50"));  
+                console.log(parseFloat("50"));  
+                console.log(+"50");  
+                console.log("50" * 1);  
+                console.log("50" / 1);  
+                console.log("50" - 0);  
+                console.log("50" | 0);  
+            </code></pre>
+        </div>
+
+        <!-- Problem 8 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem8:</h2>
+            <p class="text-gray-300">8. Check if "JavaScript" contains "Script" without using .includes().</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                console.log("JavaScript".indexOf("Script") !== -1); //true
+                console.log("JavaScript".search("Script") !== -1); //true
+                console.log(/Script/.test("JavaScript")); //true
+            </code></pre>
+        </div>
+
+        <!-- Problem 9 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem9:</h2>
+            <p class="text-gray-300">9. Create an array of 5 numbers and log the sum using .reduce().</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <pre><code class=" text-green-300 p-4 rounded">
+                const numbers = [10, 20, 30, 40, 50];  
+                const sum = numbers.reduce((acc, num) => acc + num, 0);  
+                console.log(sum); //150
+            </code></pre>
+        </div>
+
+        <!-- Problem 10 -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Problem10:</h2>
+            <p class="text-gray-300">10. Explain the difference between undefined, null, and NaN with examples.</p>
+            <h3 class="text-lg font-semibold text-yellow-300 mt-4">Solution:</h3>
+            <table class="table-auto w-full text-gray-300 border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Type</th>
+                        <th class="px-4 py-2">Description</th>
+                        <th class="px-4 py-2">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>undefined</b></td>
+                        <td>A variable declared but not assigned a value.</td>
+                        <td><code>let x; console.log(x); // undefined</code></td>
+                    </tr>
+                    <tr>
+                        <td><b>null</b></td>
+                        <td>An intentional absence of a value.</td>
+                        <td><code>let y = null; console.log(y); // null</code></td>
+                    </tr>
+                    <tr>
+                        <td><b>NaN</b></td>
+                        <td>"Not-a-Number", occurs in invalid math ops.</td>
+                        <td><code>console.log("abc" / 2); // NaN</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../js/js21.js"></script>
+</body>
+
+
+</html>

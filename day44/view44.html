@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D44</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./view44.css">
+</head>
+<body>
+    <div class="bg-gray-900 text-white p-8 rounded-3xl shadow-2xl space-y-10 text-sm lg:text-base leading-relaxed max-w-7xl mx-auto mt-10 font-mono">
+
+        <!-- Introduction -->
+        <section>
+          <h1 class="text-3xl font-bold text-teal-400 mb-4">Comprehensive DOM Methods &amp; Events Documentation</h1>
+          <p class="mb-4">This document covers many aspects of DOM manipulation and event handling including methods to get and set attributes, create and insert elements, and a vast range of events: mouse events, keyboard events, focus, drag and drop, touch, pointer, resize and more. Each section includes code examples for clarity.</p>
+        </section>
+      
+        <!-- DOM Methods and Properties -->
+        <section>
+          <h2 class="text-2xl font-bold text-cyan-400 border-b border-gray-700 pb-2 mb-4">🧰 DOM Methods &amp; Properties</h2>
+          
+          <div class="space-y-6">
+            <!-- getAttribute -->
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">getAttribute()</h3>
+              <p>Retrieves the value of a specified attribute on the element.</p>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>// Example: Getting the href attribute
+      const link = document.querySelector('a');
+      const hrefValue = link.getAttribute('href');</code></pre>
+            </div>
+      
+            <!-- setAttribute -->
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">setAttribute()</h3>
+              <p>Sets the value of an attribute on the specified element.</p>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>// Example: Setting a custom data attribute
+      const div = document.createElement('div');
+      div.setAttribute('data-role', 'admin');</code></pre>
+            </div>
+      
+            <!-- createElement -->
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">createElement()</h3>
+              <p>Creates a new HTML element of the given tag name.</p>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>// Creating a new paragraph element
+      const p = document.createElement('p');
+      p.innerText = 'Hello, world!';</code></pre>
+            </div>
+      
+            <!-- appendChild -->
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">appendChild()</h3>
+              <p>Adds a node to the end of the list of children of a specified parent node.</p>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>// Appending the paragraph to a container element
+      const container = document.getElementById('container');
+      container.appendChild(p);</code></pre>
+            </div>
+      
+            <!-- More DOM Methods -->
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">Other Useful Methods</h3>
+              <ul class="list-disc list-inside mb-3">
+                <li><code>querySelector()</code> &mdash; Selects the first element that matches a specified CSS selector.</li>
+                <li><code>querySelectorAll()</code> &mdash; Selects all elements that match a specified CSS selector.</li>
+                <li><code>remove()</code> &mdash; Removes the element from the DOM.</li>
+                <li><code>replaceChild()</code> &mdash; Replaces a child node with a new node.</li>
+                <li><code>cloneNode()</code> &mdash; Creates a copy of the node.</li>
+              </ul>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>// Example: Removing an element
+      const element = document.querySelector('.remove-me');
+      element.remove();</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Mouse Events -->
+        <section>
+          <h2 class="text-2xl font-bold text-yellow-400 border-b border-gray-700 pb-2 mb-4">🖱️ Mouse Events</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- click -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">click</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("click", () =&gt; {
+        console.log("Element clicked!");
+      });</code></pre>
+            </div>
+            <!-- dblclick -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">dblclick</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("dblclick", () =&gt; {
+        console.log("Element double-clicked!");
+      });</code></pre>
+            </div>
+            <!-- mouseenter -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">mouseenter</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("mouseenter", () =&gt; {
+        console.log("Mouse entered!");
+      });</code></pre>
+            </div>
+            <!-- mouseleave -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">mouseleave</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("mouseleave", () =&gt; {
+        console.log("Mouse left!");
+      });</code></pre>
+            </div>
+            <!-- mousemove -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">mousemove</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("mousemove", (e) =&gt; {
+        console.log("Mouse position:", e.clientX, e.clientY);
+      });</code></pre>
+            </div>
+            <!-- wheel -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">wheel</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("wheel", (e) =&gt; {
+        console.log("Mouse wheel used", e.deltaY);
+      });</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Keyboard Events -->
+        <section>
+          <h2 class="text-2xl font-bold text-green-400 border-b border-gray-700 pb-2 mb-4">⌨️ Keyboard Events</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- keydown -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">keydown</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>document.addEventListener("keydown", (e) =&gt; {
+        console.log("Key down:", e.key);
+      });</code></pre>
+            </div>
+            <!-- keypress -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">keypress</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>document.addEventListener("keypress", (e) =&gt; {
+        console.log("Key pressed:", e.key);
+      });</code></pre>
+            </div>
+            <!-- keyup -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">keyup</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>document.addEventListener("keyup", (e) =&gt; {
+        console.log("Key up:", e.key);
+      });</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Focus & Blur Events -->
+        <section>
+          <h2 class="text-2xl font-bold text-indigo-400 border-b border-gray-700 pb-2 mb-4">🔍 Focus &amp; Blur Events</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- focus -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">focus</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>input.addEventListener("focus", () =&gt; {
+        console.log("Input focused!");
+      });</code></pre>
+            </div>
+            <!-- blur -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">blur</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>input.addEventListener("blur", () =&gt; {
+        console.log("Input lost focus!");
+      });</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Scroll & Resize Events -->
+        <section>
+          <h2 class="text-2xl font-bold text-blue-400 border-b border-gray-700 pb-2 mb-4">🌀 Scroll &amp; Window Events</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- scroll -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">scroll</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>window.addEventListener("scroll", () =&gt; {
+        console.log("Scrolled to:", window.scrollY);
+      });</code></pre>
+            </div>
+            <!-- resize -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">resize</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>window.addEventListener("resize", () =&gt; {
+        console.log("Window size changed:", window.innerWidth, window.innerHeight);
+      });</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Drag and Drop Events -->
+        <section>
+          <h2 class="text-2xl font-bold text-red-400 border-b border-gray-700 pb-2 mb-4">🚚 Drag &amp; Drop Events</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- dragstart -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">dragstart</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("dragstart", (e) =&gt; {
+        e.dataTransfer.setData("text/plain", e.target.id);
+        console.log("Drag started");
+      });</code></pre>
+            </div>
+            <!-- dragover -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">dragover</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>dropZone.addEventListener("dragover", (e) =&gt; {
+        e.preventDefault();
+        console.log("Drag over");
+      });</code></pre>
+            </div>
+            <!-- drop -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">drop</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>dropZone.addEventListener("drop", (e) =&gt; {
+        e.preventDefault();
+        const data = e.dataTransfer.getData("text/plain");
+        console.log("Dropped element id:", data);
+      });</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Touch & Pointer Events -->
+        <section>
+          <h2 class="text-2xl font-bold text-orange-400 border-b border-gray-700 pb-2 mb-4">📱 Touch &amp; Pointer Events</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- touchstart -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">touchstart</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("touchstart", (e) =&gt; {
+        console.log("Touch started");
+      });</code></pre>
+            </div>
+            <!-- touchmove -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">touchmove</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("touchmove", (e) =&gt; {
+        console.log("Touch moving");
+      });</code></pre>
+            </div>
+            <!-- pointerdown -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">pointerdown</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("pointerdown", (e) =&gt; {
+        console.log("Pointer down event", e.pointerType);
+      });</code></pre>
+            </div>
+            <!-- pointerup -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">pointerup</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("pointerup", (e) =&gt; {
+        console.log("Pointer up event");
+      });</code></pre>
+            </div>
+            <!-- pointermove -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">pointermove</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("pointermove", (e) =&gt; {
+        console.log("Pointer moved:", e.clientX, e.clientY);
+      });</code></pre>
+            </div>
+            <!-- pointerenter & pointerleave -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">pointerenter / pointerleave</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("pointerenter", () =&gt; {
+        console.log("Pointer entered element");
+      });
+      element.addEventListener("pointerleave", () =&gt; {
+        console.log("Pointer left element");
+      });</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Transition & Animation Events -->
+        <section>
+          <h2 class="text-2xl font-bold text-violet-400 border-b border-gray-700 pb-2 mb-4">🎞️ Transition &amp; Animation Events</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- transitionend -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">transitionend</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("transitionend", () =&gt; {
+        console.log("Transition completed");
+      });</code></pre>
+            </div>
+            <!-- animationstart -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">animationstart</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("animationstart", () =&gt; {
+        console.log("Animation started");
+      });</code></pre>
+            </div>
+            <!-- animationend -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">animationend</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("animationend", () =&gt; {
+        console.log("Animation ended");
+      });</code></pre>
+            </div>
+            <!-- animationiteration -->
+            <div>
+              <h3 class="text-lg font-semibold text-pink-300">animationiteration</h3>
+              <pre class="bg-gray-800 p-3 rounded-xl overflow-x-auto"><code>element.addEventListener("animationiteration", () =&gt; {
+        console.log("Animation iteration");
+      });</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Extra DOM Utilities -->
+        <section>
+          <h2 class="text-2xl font-bold text-purple-400 border-b border-gray-700 pb-2 mb-4">🔧 Extra DOM Utilities &amp; Concepts</h2>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">classList</h3>
+              <p>Methods to add, remove or toggle classes on an element.</p>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>element.classList.add("new-class");
+      element.classList.remove("old-class");
+      element.classList.toggle("active-class");</code></pre>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">parentNode &amp; childNodes</h3>
+              <p>Accessing parent nodes, child nodes, firstChild, lastChild, etc.</p>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>const parent = element.parentNode;
+      const children = element.childNodes; // includes text nodes</code></pre>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">Event Bubbling &amp; Capturing</h3>
+              <p>Use <code>addEventListener</code> options to set event propagation. Use <code>e.stopPropagation()</code> to cancel bubbling.</p>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>parent.addEventListener("click", () =&gt; {
+        console.log("Parent handler");
+      }, true); // capturing phase</code></pre>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-pink-400">MutationObserver</h3>
+              <p>Monitor changes to the DOM tree.</p>
+              <pre class="bg-gray-800 p-4 rounded-xl overflow-x-auto"><code>const observer = new MutationObserver((mutations) =&gt; {
+        mutations.forEach(mutation =&gt; console.log(mutation));
+      });
+      observer.observe(document.body, { childList: true, subtree: true });</code></pre>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Additional Notes -->
+        <section>
+          <h2 class="text-2xl font-bold text-teal-300 border-b border-gray-700 pb-2 mb-4">📝 Additional Notes</h2>
+          <p>This document is designed as a quick reference for many common DOM methods and events. While it is comprehensive, keep in mind that the DOM is vast and many libraries and frameworks may extend these concepts further.</p>
+          <p>For more interactive examples, consider integrating this documentation with a live code editor or linking to a comprehensive guide on MDN.</p>
+        </section>
+      
+      </div>
+      
+      <div id="liveExamples" class="p-8 bg-gray-800 text-white space-y-8 mx-auto mt-10 rounded-3xl max-w-7xl">
+        <!-- getAttribute Example -->
+        <div id="live-getAttribute" class="p-4 bg-gray-700 rounded">
+          <a id="live-link" href="https://github.com/Sayantan-B-dev" class="underline text-teal-300">Visit github.com</a>
+          <button id="btn-getAttr" class="ml-4 px-2 py-1 bg-blue-500 rounded">Get href</button>
+          <span id="result-getAttr" class="ml-2"></span>
+        </div>
+      
+        <!-- setAttribute Example -->
+        <div id="live-setAttribute" class="p-4 bg-gray-700 rounded">
+          <div id="live-div" class="p-2 bg-blue-600">I am a div</div>
+          <button id="btn-setAttr" class="mt-2 px-2 py-1 bg-blue-500 rounded">Set data-role</button>
+        </div>
+      
+        <!-- createElement & appendChild Example -->
+        <div id="live-createAppend" class="p-4 bg-gray-700 rounded">
+          <button id="btn-createElement" class="px-2 py-1 bg-blue-500 rounded">Create Element</button>
+          <div id="container-createElement" class="mt-2"></div>
+        </div>
+      
+        <!-- Mouse Event: click -->
+        <div id="live-click" class="p-4 bg-gray-700 rounded">
+          <button id="btn-click" class="px-2 py-1 bg-blue-500 rounded">Click Me</button>
+          <span id="result-click" class="ml-2"></span>
+        </div>
+      
+        <!-- Mouse Event: dblclick -->
+        <div id="live-dblclick" class="p-4 bg-gray-700 rounded cursor-pointer">
+          Double Click Me
+        </div>
+      
+        <!-- Mouse Event: mouseenter & mouseleave -->
+        <div id="live-mouseenter" class="p-4 bg-gray-700 rounded">
+          Hover Over Me
+        </div>
+      
+        <!-- Mouse Event: mousemove -->
+        <div id="live-mousemove" class="p-4 bg-gray-700 rounded h-24 flex items-center justify-center">
+          Move Mouse Here: <span id="result-mousemove" class="ml-2"></span>
+        </div>
+      
+        <!-- Mouse Event: wheel -->
+        <div id="live-wheel" class="p-4 bg-gray-700 rounded h-24 overflow-auto">
+          Scroll with Mouse Wheel Here
+          <div style="height:200px;"></div>
+        </div>
+      
+        <!-- Keyboard Events: keydown, keypress, keyup -->
+        <div id="live-keyboard" class="p-4 bg-gray-700 rounded">
+          <input id="input-key" type="text" placeholder="Type here" class="p-2 rounded text-black">
+          <div id="result-key" class="mt-2"></div>
+        </div>
+      
+        <!-- Focus & Blur Events -->
+        <div id="live-focusBlur" class="p-4 bg-gray-700 rounded">
+          <input id="input-focus" type="text" placeholder="Focus/Blur me" class="p-2 rounded text-black">
+        </div>
+      
+        <!-- Scroll Event Example -->
+        <div id="live-scroll" class="p-4 bg-gray-700 rounded h-24 overflow-auto">
+          Scroll inside this box
+          <div style="height:150px;"></div>
+          <div id="result-scroll" class="mt-2"></div>
+        </div>
+      
+        <!-- Resize Event Example (window resize) -->
+        <div id="live-resize" class="p-4 bg-gray-700 rounded">
+          Window Resize: <span id="result-resize"></span>
+        </div>
+      
+        <!-- Drag & Drop Example -->
+        <div id="live-dragDrop" class="p-4 bg-gray-700 rounded">
+          <div id="drag-me" draggable="true" class="p-2 bg-green-500 inline-block">Drag Me</div>
+          <div id="drop-zone" class="mt-2 p-4 bg-red-500">Drop Here</div>
+          <div id="result-dragDrop" class="mt-2"></div>
+        </div>
+      
+        <!-- Touch Event Example -->
+        <div id="live-touch" class="p-4 bg-gray-700 rounded">
+          <div id="div-touch" class="p-4 bg-orange-500">Touch Here</div>
+        </div>
+      
+        <!-- Pointer Events Example -->
+        <div id="live-pointer" class="p-4 bg-gray-700 rounded h-24 flex items-center justify-center">
+          Pointer Events Area: <span id="result-pointer" class="ml-2"></span>
+        </div>
+      
+        <!-- Transition Event Example -->
+        <div id="live-transition" class="p-4 bg-gray-700 rounded">
+          <div id="div-transition" class="p-4 bg-purple-500 transition-all duration-500" style="width:100px;">Transition Box</div>
+          <button id="btn-transition" class="mt-2 px-2 py-1 bg-blue-500 rounded">Toggle Width</button>
+          <div id="result-transition" class="mt-2"></div>
+        </div>
+      
+        <!-- Animation Event Example -->
+        <div id="live-animation" class="p-4 bg-gray-700 rounded">
+          <div id="div-animation" class="p-4 bg-yellow-500" style="width:100px;">Animation Box</div>
+          <button id="btn-animation" class="mt-2 px-2 py-1 bg-blue-500 rounded">Animate</button>
+          <div id="result-animation" class="mt-2"></div>
+        </div>
+      
+        <!-- MutationObserver Example -->
+        <div id="live-mutation" class="p-4 bg-gray-700 rounded">
+          <button id="btn-mutate" class="px-2 py-1 bg-blue-500 rounded">Mutate DOM</button>
+          <div id="mutation-container" class="mt-2 border border-gray-500 p-2"></div>
+        </div>
+      
+
+      </div>
+
+      <script src="./view44.js"></script>
+</body>
+</html>

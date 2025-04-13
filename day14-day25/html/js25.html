@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js24</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/alljs.css">
+    <style>
+        main {
+            flex-direction: column;
+            width: 90%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <h1 class="text-4xl text-center py-8">Currently viewing "Advanced HOIFs, Callbacks, and Closures Questions", use dev tools for the js</h1>
+    <main class="container mx-auto p-6 space-y-8">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Create a function that takes another function as an argument and calls it after 3 seconds (HOF + Callback).</h2>
+            <p class="text-lg mb-4"><b>Explanation:</b> A higher-order function (HOF) is a function that takes another function as an argument. In this case, we use <code>setTimeout()</code> to delay the execution of the callback function by 3 seconds.</p>
+            <pre class="bg-gray-700 text-gray-300 p-4 rounded-lg"><code>
+                function delayedExecution(callback) {
+                    setTimeout(callback, 3000);
+                }
+                
+                // Example usage:
+                delayedExecution(() => console.log("Executed after 3 seconds"));
+            </code></pre>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Implement a function that returns a function with a preset greeting (Closure).</h2>
+            <p class="text-lg mb-4"><b>Explanation:</b> A closure allows a function to remember variables from its outer scope. Here, we return a function that keeps a predefined greeting message.</p>
+            <pre class="bg-gray-700 text-gray-300 p-4 rounded-lg"><code>
+                function greetingGenerator(greeting) {
+                    return function(name) {
+                        console.log(\`\${greeting}, \${name}!\`);
+                    };
+                }
+                
+                // Example usage:
+                let sayHello = greetingGenerator("Hello");
+                sayHello("Alice"); // "Hello, Alice!"
+                sayHello("Bob");   // "Hello, Bob!"
+                
+                let sayHi = greetingGenerator("Hi");
+                sayHi("Charlie");  // "Hi, Charlie!"
+            </code></pre>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Implement a function that takes a callback and only executes it once (HOF + Closure).</h2>
+            <p class="text-lg mb-4"><b>Explanation:</b> This function ensures that a callback function is executed only once, no matter how many times it is called. We use a closure to track whether the function has been called before.</p>
+            <pre class="bg-gray-700 text-gray-300 p-4 rounded-lg"><code>
+                function once(callback) {
+                    let executed = false;
+                    return function(...args) {
+                        if (!executed) {
+                            executed = true;
+                            return callback(...args);
+                        } else {
+                            console.log("Function can only be executed once");
+                        }
+                    };
+                }
+                
+                // Example usage:
+                let initialize = once(() => console.log("Initialized!"));
+                initialize(); // "Initialized!"
+                initialize(); // "Function can only be executed once"
+            </code></pre>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Implement a function that throttles another function (HOF + Closures).</h2>
+            <p class="text-lg mb-4"><b>Explanation:</b> Throttling ensures that a function is executed at most once in a given time interval, preventing excessive calls. This is useful for performance optimization, such as limiting API requests or controlling event listeners.</p>
+            <pre class="bg-gray-700 text-gray-300 p-4 rounded-lg"><code>
+                function throttle(func, delay) {
+                    let lastCall = 0;
+                    return function(...args) {
+                        let now = Date.now();
+                        if (now - lastCall >= delay) {
+                            lastCall = now;
+                            func(...args);
+                        }
+                    };
+                }
+                
+                // Example usage:
+                function logMessage() {
+                    console.log("Throttled function executed at", new Date().toLocaleTimeString());
+                }
+                
+                let throttledLog = throttle(logMessage, 2000);
+                
+                // Call multiple times, but only executes every 2 seconds
+                setInterval(throttledLog, 500);
+            </code></pre>
+        </div>
+    </main>
+
+    <script src="../js/js24.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js23</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/alljs.css">
+    <style>
+        main {
+            flex-direction: column;
+            width: 90%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <h1 class="text-4xl text-center py-8">Currently viewing "Callback and Closure in JavaScript", use dev tools for the js</h1>
+    <main class="container mx-auto p-6 space-y-8">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Create a function that takes another function as an argument and calls it after 3 seconds (HOF + Callback).</h2>
+            <p class="text-lg mb-4"><b>Explanation:</b> A higher-order function (HOF) is a function that takes another function as an argument or returns a function. Here, we use <code>setTimeout</code> to delay the execution of the callback function by 3 seconds.</p>
+            <pre class="bg-gray-700 text-gray-300 p-4 rounded-lg"><code>
+                // Higher-order function that accepts a callback
+                function delayedExecution(callback) {
+                    setTimeout(callback, 3000); // Call the function after 3 seconds
+                }
+
+                // Callback function
+                function greet() {
+                    console.log("Hello after 3 seconds!");
+                }
+
+                // Passing the callback function
+                delayedExecution(greet);
+            </code></pre>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Implement your own version of .map() as a higher-order function.</h2>
+            <p class="text-lg mb-4"><b>Explanation:</b> The <code>map()</code> method is a built-in JavaScript function that transforms each element of an array using a provided callback function and returns a new array. Here, we manually implement a custom <code>myMap</code> function.</p>
+            <pre class="bg-gray-700 text-gray-300 p-4 rounded-lg"><code>
+                // Custom implementation of map()
+                function myMap(array, callback) {
+                    let result = [];
+                    for (let i = 0; i < array.length; i++) {
+                        result.push(callback(array[i], i, array)); // Apply callback and push result
+                    }
+                    return result;
+                }
+
+                // Example usage
+                let numbers = [1, 2, 3, 4];
+                let squaredNumbers = myMap(numbers, num => num * num);
+                console.log(squaredNumbers); // [1, 4, 9, 16]
+            </code></pre>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Write a function that uses closures to create a counter.</h2>
+            <p class="text-lg mb-4"><b>Explanation:</b> Closures allow a function to maintain access to its lexical scope even after execution. Here, the <code>counter</code> function returns another function that increments and returns a count, preserving state across calls.</p>
+            <pre class="bg-gray-700 text-gray-300 p-4 rounded-lg"><code>
+                // Function that creates a counter using closure
+                function createCounter() {
+                    let count = 0; // Private variable
+                    return function() {
+                        count++; // Increment count
+                        return count;
+                    };
+                }
+
+                // Example usage
+                const counter = createCounter();
+                console.log(counter()); // 1
+                console.log(counter()); // 2
+                console.log(counter()); // 3
+            </code></pre>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-blue-400 mb-4">Implement a function that limits how many times another function can be called (Closure + HOF).</h2>
+            <p class="text-lg mb-4"><b>Explanation:</b> This function allows another function to be called a specified number of times before becoming inactive. We use a closure to keep track of the remaining calls.</p>
+            <pre class="bg-gray-700 text-gray-300 p-4 rounded-lg"><code>
+                // Function to limit calls
+                function limitFunction(fn, limit) {
+                    let count = 0; // Track calls
+                    return function(...args) {
+                        if (count < limit) {
+                            count++;
+                            return fn(...args);
+                        } else {
+                            console.log("Function call limit reached.");
+                        }
+                    };
+                }
+
+                // Example usage
+                function sayHello() {
+                    console.log("Hello!");
+                }
+
+                const limitedHello = limitFunction(sayHello, 3);
+                limitedHello(); // Hello!
+                limitedHello(); // Hello!
+                limitedHello(); // Hello!
+                limitedHello(); // Function call limit reached.
+            </code></pre>
+        </div>
+    </main>
+    <script src="../js/js23.js"></script>
+</body>
+
+</html>

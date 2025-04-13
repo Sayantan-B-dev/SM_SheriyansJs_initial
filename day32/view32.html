@@ -3,9 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Loop3</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
-<body>
-    
-</body>
+    <body class="max-w-5xl mx-auto my-10 p-8 bg-gray-900 text-gray-100 rounded-2xl shadow-[0_0_30px_5px_rgba(255,255,255,0.05)] space-y-10 text-sm sm:text-base leading-relaxed tracking-wide">
+        <!-- For Loop -->
+        <div>
+          <h2 class="text-xl font-bold text-pink-400">🔁 For Loop</h2>
+          <p class="mt-2">Used when the number of iterations is known in advance.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      for(let i = 0; i &lt; 5; i++) {
+        console.log("Count:", i);
+      }
+          </pre>
+          <p class="mt-2 font-medium">Problem:</p>
+          <p>Print all even numbers from 1 to 10.</p>
+          <p class="font-medium mt-1">Solution:</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      for(let i = 1; i &lt;= 10; i++) {
+        if(i % 2 === 0) console.log(i);
+      }
+          </pre>
+        </div>
+      
+        <!-- While Loop -->
+        <div>
+          <h2 class="text-xl font-bold text-blue-400">🔄 While Loop</h2>
+          <p class="mt-2">Best when you don't know how many times you'll loop.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      let i = 0;
+      while(i &lt; 5) {
+        console.log("i is:", i);
+        i++;
+      }
+          </pre>
+          <p class="mt-2 font-medium">Use Case:</p>
+          <p>Keep asking user input until a valid number is entered.</p>
+        </div>
+      
+        <!-- Do...While Loop -->
+        <div>
+          <h2 class="text-xl font-bold text-purple-400">♻️ Do...While Loop</h2>
+          <p class="mt-2">Similar to while loop, but executes at least once.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      let count = 0;
+      do {
+        console.log("count:", count);
+        count++;
+      } while(count &lt; 3);
+          </pre>
+          <p class="mt-2 font-medium">Problem:</p>
+          <p>Print numbers until a randomly generated number is more than 0.7</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      let rand;
+      do {
+        rand = Math.random();
+        console.log(rand);
+      } while(rand &lt;= 0.7);
+          </pre>
+        </div>
+      
+        <!-- For...of Loop -->
+        <div>
+          <h2 class="text-xl font-bold text-yellow-400">📦 For...of Loop</h2>
+          <p class="mt-2">Used to iterate over iterable values like arrays or strings.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      const fruits = ["🍎", "🍌", "🍇"];
+      for (const fruit of fruits) {
+        console.log(fruit);
+      }
+          </pre>
+          <p class="mt-2 font-medium">Use Case:</p>
+          <p>Loop through characters in a password string to check if it includes digits.</p>
+        </div>
+      
+        <!-- For...in Loop -->
+        <div>
+          <h2 class="text-xl font-bold text-orange-400">📂 For...in Loop</h2>
+          <p class="mt-2">Used to iterate over object keys.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      const person = { name: "Alice", age: 25, city: "Paris" };
+      for (let key in person) {
+        console.log(key + ":", person[key]);
+      }
+          </pre>
+          <p class="mt-2 font-medium">Use Case:</p>
+          <p>List all properties of a user object for display on a profile page.</p>
+        </div>
+      
+        <!-- forEach Loop -->
+        <div>
+          <h2 class="text-xl font-bold text-cyan-400">🧪 Array.forEach()</h2>
+          <p class="mt-2">Simplifies array iteration with a callback function.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      const scores = [90, 85, 77];
+      scores.forEach((score, index) =&gt; {
+        console.log(`Score ${index + 1}:`, score);
+      });
+          </pre>
+          <p class="mt-2 font-medium">Use Case:</p>
+          <p>Logging order items and their prices in an e-commerce app.</p>
+        </div>
+      
+        <!-- map Loop -->
+        <div>
+          <h2 class="text-xl font-bold text-teal-400">🧭 Array.map()</h2>
+          <p class="mt-2">Returns a new array by transforming each element.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <pre class="bg-gray-800 p-4 rounded-md text-green-300 overflow-x-auto">
+      const prices = [100, 200, 300];
+      const withTax = prices.map(p =&gt; p * 1.18);
+      console.log(withTax);
+          </pre>
+          <p class="mt-2 font-medium">Use Case:</p>
+          <p>Apply a transformation (like currency conversion or tax addition).</p>
+        </div>
+      
+        <!-- Summary -->
+        <div class="border-t border-gray-700 pt-6">
+          <h3 class="text-lg font-semibold text-white">📝 Summary</h3>
+          <ul class="list-disc list-inside text-gray-300 space-y-1 mt-2">
+            <li><span class="text-pink-400 font-medium">for</span>: when count is known</li>
+            <li><span class="text-blue-400 font-medium">while</span>: when unsure of iteration count</li>
+            <li><span class="text-purple-400 font-medium">do...while</span>: guaranteed at least once</li>
+            <li><span class="text-yellow-400 font-medium">for...of</span>: for arrays, strings</li>
+            <li><span class="text-orange-400 font-medium">for...in</span>: for objects</li>
+            <li><span class="text-cyan-400 font-medium">forEach</span>: for clean iteration</li>
+            <li><span class="text-teal-400 font-medium">map</span>: for transforming arrays</li>
+          </ul>
+        </div>
+      </body>
 </html>

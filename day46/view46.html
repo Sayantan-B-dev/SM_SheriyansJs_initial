@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Bubbling with Modal</title>
+    <script src="./view46.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-black text-white min-h-screen p-10 relative">
+
+    <h1 class="text-3xl font-bold mb-6 text-center">Event Bubbling + Modal(Everything's random here BTW)</h1>
+
+    <div id="cardContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Cards will be inserted here -->
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
+        <div class="bg-gray-800 rounded-xl max-w-md w-full p-6 relative">
+            <button id="closeModal"
+                class="absolute top-3 right-3 text-gray-300 hover:text-white text-2xl">&times;</button>
+            <img id="modalImg" src="" alt="Modal Image" class="w-full h-60 object-cover rounded-md mb-4">
+            <h2 id="modalTitle" class="text-xl font-semibold mb-2">Title</h2>
+            <p id="modalDesc" class="text-gray-300 text-sm">Description goes here...</p>
+        </div>
+    </div>
+
+    <div class="bg-[rgb(0,0,0)] mx-auto mt-10 p-8 bg-gray-900 text-gray-100 rounded-2xl shadow-2xl shadow-gray-700 space-y-6">
+        <h1 class="text-3xl font-bold text-yellow-400 border-b border-yellow-500 pb-2">🧠 Event Bubbling in JavaScript
+        </h1>
+
+        <p class="text-lg leading-relaxed">
+            <strong class="text-yellow-300">Event Bubbling</strong> is one of the core concepts of the DOM Event Model
+            in JavaScript. It describes how events propagate (travel) through the DOM tree when an event is triggered.
+        </p>
+
+        <h2 class="text-2xl font-semibold text-cyan-300">🔁 What is Event Bubbling?</h2>
+        <p class="text-base leading-loose">
+            When an event occurs on a nested element (like a button inside a div), it first runs the event handler on
+            the target element, and then it "bubbles up" the DOM tree to its ancestors — triggering any matching event
+            handlers on parent elements, all the way up to the root.
+        </p>
+
+        <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-sm text-gray-300">
+            <p><strong>Example:</strong></p>
+            <pre><code>
+  &lt;div id="parent"&gt;
+    &lt;button id="child"&gt;Click Me&lt;/button&gt;
+  &lt;/div&gt;
+  
+  document.getElementById('parent').addEventListener('click', () =&gt; {
+    console.log('Parent clicked');
+  });
+  
+  document.getElementById('child').addEventListener('click', () =&gt; {
+    console.log('Child clicked');
+  });
+      </code></pre>
+            <p>Clicking the button logs:</p>
+            <ul class="list-disc list-inside">
+                <li><code>Child clicked</code></li>
+                <li><code>Parent clicked</code></li>
+            </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold text-cyan-300">🌳 Event Propagation Phases</h2>
+        <ol class="list-decimal list-inside space-y-2">
+            <li><strong>Capturing Phase</strong>: The event travels from the root down to the target element (rarely
+                used).</li>
+            <li><strong>Target Phase</strong>: The event reaches the actual element where it occurred.</li>
+            <li><strong>Bubbling Phase</strong>: The event bubbles back up to the root, calling handlers along the way.
+            </li>
+        </ol>
+
+        <h2 class="text-2xl font-semibold text-cyan-300">✋ How to Stop Event Bubbling</h2>
+        <p>You can stop the bubbling using the <code
+                class="bg-gray-700 px-1 py-0.5 rounded text-pink-400">event.stopPropagation()</code> method:</p>
+        <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-sm text-gray-300">
+            <pre><code>
+  document.getElementById('child').addEventListener('click', (e) =&gt; {
+    e.stopPropagation();
+    console.log('Child clicked (no bubbling)');
+  });
+      </code></pre>
+        </div>
+
+        <h2 class="text-2xl font-semibold text-cyan-300">🧪 Use Cases of Event Bubbling</h2>
+        <ul class="list-disc list-inside space-y-1">
+            <li><strong>Event Delegation:</strong> Attach one handler on a parent to manage events on many child
+                elements dynamically.</li>
+            <li><strong>Performance:</strong> Reduces memory usage by minimizing the number of event listeners.</li>
+            <li><strong>Dynamic UI:</strong> Handle events for elements added later to the DOM.</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold text-cyan-300">⚠️ Things to Remember</h2>
+        <ul class="list-disc list-inside space-y-1">
+            <li>By default, most event listeners use the <strong>bubbling phase</strong>.</li>
+            <li>To use the capturing phase, pass <code>{ capture: true }</code> as the third argument.</li>
+            <li>Use <code>stopPropagation()</code> carefully, as it can break functionality if overused.</li>
+        </ul>
+
+        <div class="mt-6 p-4 bg-yellow-100 text-gray-800 rounded-xl">
+            <strong>💡 Tip:</strong> Try clicking nested elements and logging from multiple levels to understand how
+            bubbling works in action!
+        </div>
+    </div>
+
+</body>
+
+</html>

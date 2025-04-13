@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Math Functions</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
 <body>
     <main>
@@ -215,38 +217,38 @@ console.log((0.123456).toFixed(4));// "0.1235"
                 </tr>
             </table>
         </section>
-        <section>
-            <div>
-                <h2>Compound Interest Calculation(Check console)</h2>
-                <pre>
-            function calculateCompoundInterest(P, r, t, n) {
-                let a = P * Math.pow(1 + r / n, n * t);
-                return (a - P).toFixed(2);
-            }
-                </pre>
+        <section id="problems">
+            <div id="compound-interest">
+                <h2>Compound Interest Calculation (Check console)</h2>
+                <pre><code>
+        function calculateCompoundInterest(P, r, t, n) {
+            let a = P * Math.pow(1 + r / n, n * t);
+            return (a - P).toFixed(2);
+        }
+                </code></pre>
             </div>
             
-            <div>
-                <h2>Triangle Area Calculation(Check console)</h2>
-                <pre>
-            function calculateTriangleArea(a, b, c) {
-                let s = (a + b + c) / 2;
-                let area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
-                return area.toFixed(2);
-            }
-                </pre>
+            <div id="triangle-area">
+                <h2>Triangle Area Calculation (Check console)</h2>
+                <pre><code>
+        function calculateTriangleArea(a, b, c) {
+            let s = (a + b + c) / 2;
+            let area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+            return area.toFixed(2);
+        }
+                </code></pre>
             </div>
             
-            <div>
-                <h2>Circle Properties Calculation(Check console)</h2>
-                <pre>
-            function calculateCircleProperties(r) {
-                return [(2 * Math.PI * r).toFixed(2), (Math.PI * r * r).toFixed(2)];
-            }
-                </pre>
+            <div id="circle-properties">
+                <h2>Circle Properties Calculation (Check console)</h2>
+                <pre><code>
+        function calculateCircleProperties(r) {
+            return [(2 * Math.PI * r).toFixed(2), (Math.PI * r * r).toFixed(2)];
+        }
+                </code></pre>
             </div>
-            
         </section>
+        
         
     </main>
     <script src="./day28.js"></script>

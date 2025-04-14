@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>48</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body{
+            background-color: black;
+        }
+        .container{
+            background-color: #1e1e2f;
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container mx-auto p-6 text-gray-900 font-sans">
+    <!-- Title Section -->
+    <header class="mb-8">
+        <h1 class="text-4xl font-bold mb-2 text-center">Comprehensive Web API & JavaScript Environment Documentation
+        </h1>
+        <p class="text-center text-lg text-gray-700">
+            Detailed guide covering execution contexts, Web APIs, and the Browser Object Model. Includes examples
+            and MDN references.
+        </p>
+    </header>
+
+    <!-- 1. JavaScript Execution Contexts -->
+    <section id="execution-contexts" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">1. JavaScript Execution Contexts</h2>
+
+        <!-- Call Stack -->
+        <article class="mb-6">
+            <h3 class="text-2xl font-medium mb-2">Call Stack</h3>
+            <p class="mb-2">
+                The call stack is a LIFO (last in, first out) data structure that manages execution contexts created
+                during a program's run. Each time a function is invoked, a new execution context is created and
+                placed on the call stack.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    <span class="text-yellow-300">// Example: Simple Call Stack</span>
+    function first() {
+    second();
+    console.log('Returning to first');
+    }
+    
+    function second() {
+    third();
+    console.log('Returning to second');
+    }
+    
+    function third() {
+    console.log('In third function');
+    }
+    
+    first();
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Glossary/Call_stack" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: Call Stack</a>
+            </p>
+        </article>
+
+        <!-- Global Execution Context -->
+        <article class="mb-6">
+            <h3 class="text-2xl font-medium mb-2">Global Execution Context</h3>
+            <p class="mb-2">
+                The global execution context is the default context where the JavaScript code runs. It creates a
+                global object (window in browsers) and defines the outer scope.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    console.log(window); // In browsers, window is the global object.
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Glossary/Execution_context" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: Execution Context</a>
+            </p>
+        </article>
+
+        <!-- Functional Execution Context -->
+        <article>
+            <h3 class="text-2xl font-medium mb-2">Functional Execution Context</h3>
+            <p class="mb-2">
+                Every time a function is invoked, a new execution context is created for that function. This context
+                includes its own variable environment, scope chain, and a reference to the global object.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    function greet(name) {
+    let greeting = 'Hello, ' + name;
+    return greeting;
+    }
+    console.log(greet('World'));
+        </pre>
+        </article>
+    </section>
+
+    <!-- 2. Web API: Location Object -->
+    <section id="location" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">2. The Location Object</h2>
+
+        <article class="mb-6">
+            <h3 class="text-2xl font-medium mb-2">location.href</h3>
+            <p class="mb-2">
+                <code>location.href</code> returns the full URL of the current page. It can also be used to redirect
+                the browser.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    console.log(window.location.href); // Get current URL
+    // Redirect to a new URL:
+    window.location.href = 'https://www.example.com';
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/href" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: location.href</a>
+            </p>
+        </article>
+
+        <article class="mb-6">
+            <h3 class="text-2xl font-medium mb-2">location.reload()</h3>
+            <p class="mb-2">
+                The <code>location.reload()</code> method reloads the current URL. Passing <code>true</code> forces
+                a reload from the server.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    // Simple reload
+    location.reload();
+    
+    // Force reload from server
+    location.reload(true);
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/reload" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: location.reload()</a>
+            </p>
+        </article>
+
+        <article>
+            <h3 class="text-2xl font-medium mb-2">Other Location Methods</h3>
+            <ul class="list-disc ml-6 mb-2">
+                <li>
+                    <code>location.assign(url)</code>: Loads the document at the new URL.
+                </li>
+                <li>
+                    <code>location.replace(url)</code>: Replaces the current document with the new one without
+                    saving the current page in session history.
+                </li>
+            </ul>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    // Example using assign():
+    location.assign("https://www.example.com");
+    
+    // Example using replace():
+    location.replace("https://www.example.com");
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: The Location interface</a>
+            </p>
+        </article>
+    </section>
+
+    <!-- 3. Web API: History Object -->
+    <section id="history" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">3. The History Object</h2>
+
+        <article class="mb-6">
+            <h3 class="text-2xl font-medium mb-2">Methods</h3>
+            <ul class="list-disc ml-6 mb-2">
+                <li>
+                    <code>history.back()</code>: Navigates to the previous page in session history.
+                </li>
+                <li>
+                    <code>history.forward()</code>: Navigates to the next page in session history.
+                </li>
+                <li>
+                    <code>history.go(n)</code>: Loads a specific page in the session history relative to the current
+                    page (negative numbers go backward, positive go forward).
+                </li>
+            </ul>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    // Navigate back:
+    history.back();
+    
+    // Navigate forward:
+    history.forward();
+    
+    // Navigate two pages back:
+    history.go(-2);
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/History" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: History</a>
+            </p>
+        </article>
+    </section>
+
+    <!-- 4. Web API: Navigator -->
+    <section id="navigator" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">4. The Navigator Object</h2>
+
+        <article>
+            <h3 class="text-2xl font-medium mb-2">navigator.online</h3>
+            <p class="mb-2">
+                <code>navigator.onLine</code> returns a Boolean indicating whether the browser is working online.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    if (navigator.onLine) {
+    console.log("You are online!");
+    } else {
+    console.log("You are offline!");
+    }
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: navigator.onLine</a>
+            </p>
+        </article>
+    </section>
+
+    <!-- 5. Web API: Local Storage -->
+    <section id="localstorage" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">5. Local Storage</h2>
+
+        <article>
+            <h3 class="text-2xl font-medium mb-2">Overview and Methods</h3>
+            <p class="mb-2">
+                The <code>localStorage</code> object allows you to store key/value pairs in a web browser. Data
+                stored here persists even when the browser is closed.
+            </p>
+            <ul class="list-disc ml-6 mb-2">
+                <li><code>setItem(key, value)</code></li>
+                <li><code>getItem(key)</code></li>
+                <li><code>removeItem(key)</code></li>
+                <li><code>clear()</code></li>
+                <li>Access: <code>localStorage.user</code> can be used as a shortcut to store user data if you
+                    choose to define it.</li>
+            </ul>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    // Storing data
+    localStorage.setItem('user', JSON.stringify({ name: 'Alice', age: 30 }));
+    
+    // Retrieving data
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+    
+    // Removing data
+    localStorage.removeItem('user');
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: localStorage</a>
+            </p>
+        </article>
+    </section>
+
+    <!-- 6. Browser Object Model (BOM) -->
+    <section id="bom" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">6. Browser Object Model (BOM)</h2>
+
+        <article>
+            <p class="mb-2">
+                The BOM represents objects provided by the browser (such as <code>window</code>,
+                <code>navigator</code>, <code>screen</code>, and <code>location</code>) that enable interaction with
+                the browser. It is not standardized like the DOM, but most browsers implement a similar set of
+                objects.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    // Accessing the BOM's window object
+    console.log(window.innerWidth, window.innerHeight);
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Glossary/BOM" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: Browser Object Model</a>
+            </p>
+        </article>
+    </section>
+
+    <!-- 7. JSON API -->
+    <section id="json" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">7. JSON API</h2>
+
+        <article>
+            <h3 class="text-2xl font-medium mb-2">JSON.stringify() & JSON.parse()</h3>
+            <p class="mb-2">
+                The <code>JSON</code> object provides methods to work with JSON data. <code>JSON.stringify()</code>
+                converts JavaScript objects to a JSON string, whereas <code>JSON.parse()</code> converts a JSON
+                string back into a JavaScript object.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    // Convert an object to JSON
+    const obj = { name: "Bob", age: 25 };
+    const jsonString = JSON.stringify(obj);
+    console.log(jsonString);
+    
+    // Convert JSON back to an object
+    const parsedObj = JSON.parse(jsonString);
+    console.log(parsedObj);
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"
+                    target="_blank" class="text-blue-600 hover:underline">MDN: JSON.stringify()</a> |
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse"
+                    target="_blank" class="text-blue-600 hover:underline">MDN: JSON.parse()</a>
+            </p>
+        </article>
+    </section>
+
+    <!-- 8. Session & Session Storage -->
+    <section id="session" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">8. Session & Session Storage</h2>
+
+        <article>
+            <h3 class="text-2xl font-medium mb-2">Session Storage</h3>
+            <p class="mb-2">
+                <code>sessionStorage</code> is similar to localStorage but the data persists only for the duration
+                of the page session (until the browser or tab is closed).
+            </p>
+            <ul class="list-disc ml-6 mb-2">
+                <li><code>setItem(key, value)</code></li>
+                <li><code>getItem(key)</code></li>
+                <li><code>removeItem(key)</code></li>
+                <li><code>clear()</code></li>
+            </ul>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    // Store session data
+    sessionStorage.setItem('sessionName', 'SessionValue');
+    
+    // Retrieve session data
+    const sessionData = sessionStorage.getItem('sessionName');
+    console.log(sessionData);
+    
+    // Remove session data
+    sessionStorage.removeItem('sessionName');
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: sessionStorage</a>
+            </p>
+        </article>
+        <article>
+            <h3 class="text-2xl font-medium mb-2">Session (Server-Side Context)</h3>
+            <p class="mb-2">
+                While JavaScript in the browser does not manage server-side sessions directly, sessions are
+                typically maintained on the server side (e.g., using cookies or tokens) and used in tandem with
+                client-side storage.
+            </p>
+        </article>
+    </section>
+
+    <!-- 9. Cookies -->
+    <section id="cookies" class="mb-12">
+        <h2 class="text-3xl font-semibold border-b pb-2 mb-4">9. Cookies</h2>
+
+        <article>
+            <h3 class="text-2xl font-medium mb-2">Using Document.cookie</h3>
+            <p class="mb-2">
+                Cookies are small pieces of data stored on the client side. They are accessed and set via
+                <code>document.cookie</code>. Note that the cookie API is somewhat limited and manually parsing
+                cookies is common.
+            </p>
+            <pre class="bg-gray-800 text-green-400 p-3 rounded shadow my-2 overflow-auto">
+    // Set a cookie
+    document.cookie = "username=JohnDoe; expires=Fri, 31 Dec 2025 23:59:59 GMT; path=/";
+    
+    // Read cookies
+    console.log(document.cookie);
+    
+    // Delete a cookie (set expiry date to the past)
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+        </pre>
+            <p>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: Document.cookie</a>
+            </p>
+        </article>
+    </section>
+
+    <!-- References Section -->
+    <footer class="border-t pt-4">
+        <h2 class="text-2xl font-bold mb-2">Additional References</h2>
+        <ul class="list-disc ml-6">
+            <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: Functions & Execution Context</a>
+            </li>
+            <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: Web APIs</a>
+            </li>
+            <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Glossary/BOM" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: Browser Object Model</a>
+            </li>
+            <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON"
+                    target="_blank" class="text-blue-600 hover:underline">MDN: JSON Global Object</a>
+            </li>
+            <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window" target="_blank"
+                    class="text-blue-600 hover:underline">MDN: The Window Object</a>
+            </li>
+        </ul>
+    </footer>
+</div>
+
+</body>
+
+</html>

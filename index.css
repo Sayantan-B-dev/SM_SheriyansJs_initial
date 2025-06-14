@@ -1,19 +1,23 @@
-body {
-  background-color: black;
-  height: 100vh;
+@font-face {
+  font-family: 'candy';
+  src: url('./Candy\ Season.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-section {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  padding: 20px;
-  background-color: #3a3a3a;
-  border-radius: 30px;
-  margin: auto;
-  margin-top: 20px;
-  width: 70%;
+html, body {
+  background-color: black;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'candy', sans-serif;
 }
+body {
+  flex: 1;
+}
+
 @media (max-width: 720px) {
   body {
     padding: 10px;
@@ -25,7 +29,7 @@ section {
     padding: 15px;
   }
 
-  button {
+  .button {
     font-size: 14px;
     height: fit-content;
   }
@@ -50,29 +54,36 @@ section {
     font-size: 1rem;
   }
 }
-button {
+section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px;
+  background-color: #3a3a3a;
+  border-radius: 30px;
+  margin: auto;
+  margin-top: 20px;
+  width: 70%;
+}
+.button {
   background-color: #5a7037;
   color: black;
   padding: 10px 20px;
   border: none;
   border-radius: 25px;
   font-size: 16px;
-  width: 100%;
-  height: 50px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
   box-shadow: 0px 5px 5px black;
 }
 
-button:hover {
+.button:hover {
   background-color: #93cfb1;
-  /* Darker Blue */
   transform: scale(1.02);
 }
 
-button:active {
+.button:active {
   background-color: #848586;
-  /* Even Darker Blue */
   transform: scale(0.98);
 }
 
@@ -112,6 +123,7 @@ a {
   width: 50px;
   height: 50px;
   border-radius: 8px;
+  background-color: aqua;
 }
 
 .box1,.DSA {
@@ -124,7 +136,6 @@ a {
 .box3, .JS {
   background-color: #6e9235;
 }
-
 .label {
   font-size: 1.2rem;
   color: #f9f9f9;
@@ -133,6 +144,9 @@ a {
 }
 
 footer {
+  bottom: 0;
+  left: 0;
+  width: 100%;
   color: #9a9a92;
   text-align: center;
   padding: 20px;

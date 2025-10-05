@@ -29,6 +29,8 @@
 
     </div>
 
+
+
     <section class="section">
         <a href="./day14/view14.html" target="_blank" class="JS button">Frontend14(Introduction to JavaScript)</a>
         <a href="./day15/view15.html" target="_blank" class="JS button">Frontend15(Basics of JavaScript)</a>
@@ -36,14 +38,18 @@
         <a href="./day17/view17.html" target="_blank" class="JS button">Frontend17(Functions in JavaScript)</a>
         <a href="./day18/view18.html" target="_blank" class="JS button">Frontend18(Advanced Functions in JavaScript)</a>
         <a href="./day19/view19.html" target="_blank" class="JS button">Frontend19(Lv1_Frontend-Projects)</a>
-        <a href="./day20/view20.html" target="_blank" class="JS button">Frontend20(Introduction to Arrays and Objects)</a>
+        <a href="./day20/view20.html" target="_blank" class="JS button">Frontend20(Introduction to Arrays and
+            Objects)</a>
         <a href="./day21/view21.html" target="_blank" class="JS button">Frontend21(JavaScript Practice Session1)</a>
         <a href="./day22/view22.html" target="_blank" class="JS button">Frontend22(JavaScript Practice Session2)</a>
         <a href="./day23/view23.html" target="_blank" class="JS button">Frontend23(JavaScript Practice Session3)</a>
-        <a href="./day24/view24.html" target="_blank" class="JS button">Frontend24(Callback and Closure in JavaScript)</a>
-        <a href="./day25/view25.html" target="_blank" class="JS button">Frontend25(Advance HOIFs,Callbacks,Closure Qns)</a>
+        <a href="./day24/view24.html" target="_blank" class="JS button">Frontend24(Callback and Closure in
+            JavaScript)</a>
+        <a href="./day25/view25.html" target="_blank" class="JS button">Frontend25(Advance HOIFs,Callbacks,Closure
+            Qns)</a>
         <a href="./day37/view37.html" target="_blank" class="JS button">Frontend26(DOM manipulation)</a>
-        <a href="./day38/view38.html" target="_blank" class="JS button">Frontend27(DOM manipulation &amp; Application)</a>
+        <a href="./day38/view38.html" target="_blank" class="JS button">Frontend27(DOM manipulation &amp;
+            Application)</a>
         <a href="./day39/view39.html" target="_blank" class="JS button">Frontend28(Web API)</a>
         <a href="./day44/view44.html" target="_blank" class="JS button">Frontend29(Advance DOM)</a>
         <a href="./day46/view46.html" target="_blank" class="JS button">Frontend30(Event Bubbling)</a>
@@ -72,50 +78,18 @@
         <a href="./day51/view51.html" target="_blank" class="DSA button">DSA_18(String related Qns 1)</a>
         <a href="./day52/view52.html" target="_blank" class="DSA button">DSA_19(Sets)</a>
     </section>
+
+    <section id="md-container">
+        <h1 style="color:white;text-align:center;">Frontend 34-69</h1>
+        <zero-md src="./Day34-Day69/test.md"></zero-md>
+        <zero-md src="./Day34-Day69/test1.md"></zero-md>
+        <zero-md src="./Day34-Day69/test2.md"></zero-md>
+    </section>
     <footer>
         <p>Created by Sayantan-B-dev @2025</p>
     </footer>
-    <script>
-        const all = document.getElementById("All");
-
-        const js = document.getElementById("JavaScript")
-        const dsa = document.getElementById("DSA")
-        const dev = document.getElementById("Development")
-
-        const jsClass = document.querySelectorAll(".JS");
-        const dsaClass = document.querySelectorAll(".DSA");
-        const devClass = document.querySelectorAll(".DEV");
-
-        const section = document.querySelector(".section");
-
-        all.addEventListener("click", () => {
-            section.innerHTML = "";
-            [...jsClass, ...dsaClass, ...devClass].forEach((item) => {
-                section.appendChild(item);
-            });
-        });
-
-        js.addEventListener("click", () => {
-            section.innerHTML = "";
-            [...jsClass].forEach((item) => {
-                section.appendChild(item);
-            });
-        })
-
-        dsa.addEventListener("click", () => {
-            section.innerHTML = "";
-            [...dsaClass].forEach((item) => {
-                section.appendChild(item);
-            });
-        })
-        dev.addEventListener("click", () => {
-            section.innerHTML = "";
-            [...devClass].forEach((item) => {
-                section.appendChild(item);
-            });
-        })
-
-    </script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@latest/dist/zero-md.min.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 

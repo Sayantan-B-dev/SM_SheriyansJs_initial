@@ -1,18 +1,19 @@
 @font-face {
-  font-family: 'candy';
-  src: url('./Candy\ Season.otf') format('opentype');
+  font-family: "candy";
+  src: url("./Candy\ Season.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-html, body {
+html,
+body {
   background-color: black;
   height: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  font-family: 'candy', sans-serif;
+  font-family: "candy", sans-serif;
 }
 body {
   flex: 1;
@@ -126,14 +127,17 @@ a {
   background-color: aqua;
 }
 
-.box1,.DSA {
+.box1,
+.DSA {
   background-color: #5a7037;
 }
 
-.box2,.DEV {
+.box2,
+.DEV {
   background-color: #90af5d;
 }
-.box3, .JS {
+.box3,
+.JS {
   background-color: #6e9235;
 }
 .label {
@@ -150,4 +154,36 @@ footer {
   color: #9a9a92;
   text-align: center;
   padding: 20px;
+}
+
+#md-container{
+  display: flex;
+  flex-direction: column;
+}
+.mdDiv {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+.mdDiv h2 {
+    margin-top: 0;
+}
+zero-md {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: auto;
+    border-radius: 8px;
+    background-color: #e7c7c7;
+    width: 70%;
+}
+@media screen and (max-width: 768px) {
+    zero-md {
+        width: 90%;
+        padding: 10px;
+    }
+    section{
+  grid-template-columns: repeat(1, 1fr);
+    }
 }

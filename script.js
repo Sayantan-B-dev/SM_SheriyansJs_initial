@@ -4,6 +4,7 @@ const all = document.getElementById("All");
 const js = document.getElementById("JavaScript")
 const dsa = document.getElementById("DSA")
 const dev = document.getElementById("Development")
+const next = document.getElementById("NextJS")
 
 const jsClass = document.querySelectorAll(".JS");
 const dsaClass = document.querySelectorAll(".DSA");
@@ -37,6 +38,5 @@ dev.addEventListener("click", () => {
         section.appendChild(item);
     });
 })
-
 
 

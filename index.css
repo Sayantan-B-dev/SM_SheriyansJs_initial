@@ -13,48 +13,14 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-family: "candy", sans-serif;
 }
 body {
   flex: 1;
 }
 
-@media (max-width: 720px) {
-  body {
-    padding: 10px;
-  }
 
-  section {
-    grid-template-columns: 1fr;
-    width: 90%;
-    padding: 15px;
-  }
-
-  .button {
-    font-size: 14px;
-    height: fit-content;
-  }
-
-  .options {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .eachbox {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .label {
-    font-size: 1rem;
-  }
-}
 section {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -94,7 +60,8 @@ a {
 }
 
 .options {
-  margin-top: 20px;
+  margin-top: 10px;
+  width: 80%;
   display: flex;
   gap: 30px;
   justify-content: center;
@@ -108,23 +75,16 @@ a {
   align-items: center;
   gap: 15px;
   background-color: #2c2c2c;
-  padding: 12px 20px;
+  padding: 5px;
   border-radius: 10px;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .eachbox:hover {
-  background-color: #3a3a3a;
+  background-color: #a5a3a3;
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-}
-
-.icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
-  background-color: aqua;
 }
 
 .box1,
@@ -156,34 +116,64 @@ footer {
   padding: 20px;
 }
 
-#md-container{
+.md-container {
   display: flex;
   flex-direction: column;
 }
 .mdDiv {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
 .mdDiv h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
 zero-md {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin: auto;
-    border-radius: 8px;
-    background-color: #e7c7c7;
-    width: 70%;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: auto;
+  border-radius: 8px;
+  background-color: #e7c7c7;
+  width: 70%;
 }
-@media screen and (max-width: 768px) {
-    zero-md {
-        width: 90%;
-        padding: 10px;
-    }
-    section{
-  grid-template-columns: repeat(1, 1fr);
-    }
+@media (max-width: 720px) {
+  body {
+    padding: 10px;
+  }
+
+  section {
+    grid-template-columns: 1fr;
+    width: 90%;
+    padding: 15px;
+  }
+
+  .button {
+    font-size: 14px;
+    height: fit-content;
+  }
+
+  .eachbox {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  zero-md {
+    width: 90%;
+    padding: 10px;
+  }
+  section {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .options {
+    flex-direction: column;
+    align-items:stretch;
+    margin:auto;
+    gap:2px;
+    width: 80%;
+  }
+  .eachbox:hover {
+    transform: translateX(5px);
+  }
 }

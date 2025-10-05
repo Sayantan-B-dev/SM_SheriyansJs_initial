@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>NextJS 70-74</title>
+  <style>
+    body {
+      background-color: #1e1e2f;
+      color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .md-container {
+      background-color: rgb(212, 201, 186);
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .md-container h1 {
+      text-align: center;
+      color: #a78bfa;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    zero-md {
+      display: block;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+    }
+
+    zero-md:hover {
+      transform: translateY(-3px);
+    }
+
+    @media screen and (max-width: 768px) {
+      .md-container {
+        padding: 15px;
+      }
+
+      zero-md {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="md-container nextjs-section">
+    <h1 style="color:black;text-align:center;">NextJS intro 70-73</h1>
+    <zero-md src="../NextJS(day70-73)/NextJS_1.md"></zero-md>
+    <zero-md src="../NextJS(day70-73)/NextJS_2.md"></zero-md>
+    <zero-md src="../NextJS(day70-73)/NextJS_3.md"></zero-md>
+    <zero-md src="../NextJS(day70-73)/NextJS_4.md"></zero-md>
+  </section>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@latest/dist/zero-md.min.js"></script>
+  <script>
+      const backButton = document.createElement('button');
+      backButton.textContent = 'Back';
+      Object.assign(backButton.style, { position: 'fixed', top: '20px', right: '20px', padding: '10px 10px', backgroundColor: 'tomato', color: '#fff', border: 'none', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)', cursor: 'pointer', fontSize: '16px', zIndex: 1000 });
+      backButton.addEventListener('mouseover', () => { backButton.style.backgroundColor = 'red'; });
+      backButton.addEventListener('mouseout', () => { backButton.style.backgroundColor = 'tomato'; });
+      backButton.addEventListener('click', () => { window.history.back(); });
+      document.body.appendChild(backButton);
+  </script>
+</body>
+
+</html>

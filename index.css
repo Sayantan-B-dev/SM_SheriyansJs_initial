@@ -159,10 +159,6 @@ zero-md {
     align-items: flex-start;
     gap: 10px;
   }
-  zero-md {
-    width: 90%;
-    padding: 10px;
-  }
   section {
     grid-template-columns: repeat(1, 1fr);
   }

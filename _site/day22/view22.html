@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js22</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/alljs.css">
+    <style>
+        main {
+            flex-direction: column;
+        }
+
+        #s1 {
+            width: 90%;
+            display: flex;
+            gap: 10px;
+        }
+        body{
+             background-color: rgb(46, 45, 80);
+             color: white;
+        }
+        pre{
+            color: black;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width:500px) {
+            #s1 {
+                flex-direction: column;
+            }
+
+            #m1,
+            #m2 {
+                width: 90%;
+            }
+        }
+
+        #m1,
+        #m2 {
+            width: 50%;
+        }
+
+        code {
+            text-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <h1 class="text-2xl font-bold text-center my-4">
+        Currently viewing "JavaScript Practice Session2", <br>
+        open Console by Right-click &gt; Inspect &gt; Console or press F12</h1>
+    <section id="s1" class="flex flex-wrap justify-center items-start gap-4  m-auto">
+        <main id="m1" class="flex flex-col gap-6">
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">When to use map in js?</h2>
+            <p class="text-sm text-black-700">
+                    In JavaScript, you should use .map() when you need to transform each element of an array and return a
+                    new array of the same length.
+                    <hr>
+                    Use .map() when:
+                    <br>You need a new array – .map() always returns a new array without modifying the original one.
+                    <br>You want to transform each element – Apply a function to each element and get a modified version.
+                    <br>You need the same array length – Unlike .filter(), which removes elements, .map() keeps the array
+                    <br>length the same.
+            </p>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                1. Convert an array of numbers to their squares
+                const numbers = [1, 2, 3, 4];
+                const squares = numbers.map(num =&gt; num * num);
+                console.log(squares); // [1, 4, 9, 16]
+
+                2. Extract specific properties from an array of objects
+                const users = [{ name: "Alice" }, { name: "Bob" }, { name: "Charlie" }];
+                const names = users.map(user =&gt; user.name);
+                console.log(names); // ["Alice", "Bob", "Charlie"]
+
+                3. Modify elements while keeping structure
+                const prices = [10, 20, 30];
+                const discounted = prices.map(price =&gt; price * 0.9);
+                console.log(discounted); // [9, 18, 27]
+
+                📌 Don't use .map() if you are not returning a new array. If you only want to iterate, use .forEach() instead.
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Why not copy like let arr = arr2?</h2>
+            <p class="text-sm text-black-700">In JavaScript, doing <code class="bg-gray-200 px-1 rounded">let arr = arr2;</code> does not create a
+                new array. Instead, it assigns a reference to the same array in memory. Any changes made to <code class="bg-gray-200 px-1 rounded">arr</code> will also affect
+                <code class="bg-gray-200 px-1 rounded">arr2</code>, since they both point to the same object.</p>
+            <h3 class="text-md font-medium">Example:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let arr1 = [1, 2, 3];
+                let arr2 = arr1;  // Both arr1 and arr2 refer to the same array
+                
+                arr2.push(4);  // Modifying arr2 also affects arr1
+                
+                console.log(arr1); // Output: [1, 2, 3, 4]
+                console.log(arr2); // Output: [1, 2, 3, 4]
+            </code></pre>
+
+            <h3 class="text-md font-medium">Correct Way to Copy an Array:</h3>
+            <p class="text-sm text-black-700">To create a new independent copy, use <code class="bg-gray-200 px-1 rounded">slice()</code>, <code class="bg-gray-200 px-1 rounded">spread operator</code>, or
+                <code class="bg-gray-200 px-1 rounded">Array.from()</code>.</p>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                // Using slice()
+                let arr3 = arr1.slice();
+                
+                // Using spread operator
+                let arr4 = [...arr1];
+                
+                // Using Array.from()
+                let arr5 = Array.from(arr1);
+            </code></pre>
+            </div>
+
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"
+                target="_blank" class="text-yellow-500 underline ">forEach</a></li>
+            <p class="text-sm text-black-700"><b>Definition:</b> The <code class="bg-gray-200 px-1 rounded">forEach()</code> method executes a provided function once for each array
+                element. It does not return a new array but is useful for performing actions on elements.</p>
+            <p class="text-sm text-black-700"><b>Use Case:</b> When you need to iterate over an array but don't need to transform it or return a
+                new array.</p>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                const numbers = [1, 2, 3, 4, 5];
+                numbers.forEach(num =&gt; console.log(num * 2)); 
+                // Output: 2, 4, 6, 8, 10
+            </code></pre>
+
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
+                target="_blank" class="text-yellow-500 underline ">map</a></li>
+            <p class="text-sm text-black-700"><b>Definition:</b> The <code class="bg-gray-200 px-1 rounded">map()</code> method creates a new array by applying a function to each
+                element of the original array. It is used for transforming array data.</p>
+            <p class="text-sm text-black-700"><b>Use Case:</b> When you need to modify each element and return a new array without altering the
+                original one.</p>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                const numbers = [1, 2, 3, 4, 5];
+                const squaredNumbers = numbers.map(num =&gt; num * num);
+                console.log(squaredNumbers); 
+                // Output: [1, 4, 9, 16, 25]
+            </code></pre>
+
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
+                target="_blank" class="text-yellow-500 underline ">filter</a></li>
+            <p class="text-sm text-black-700"><b>Definition:</b> The <code class="bg-gray-200 px-1 rounded">filter()</code> method creates a new array containing only the elements
+                that meet a specified condition.</p>
+            <p class="text-sm text-black-700"><b>Use Case:</b> When you need to extract specific elements from an array based on a condition.</p>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                const numbers = [1, 2, 3, 4, 5];
+                const evenNumbers = numbers.filter(num =&gt; num % 2 === 0);
+                console.log(evenNumbers); 
+                // Output: [2, 4]
+            </code></pre>
+
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce"
+                target="_blank" class="text-yellow-500 underline ">reduce</a></li>
+            <p class="text-sm text-black-700"><b>Definition:</b> The <code class="bg-gray-200 px-1 rounded">reduce()</code> method applies a function to an array, reducing it to a
+                single value (such as a sum or product).</p>
+            <p class="text-sm text-black-700"><b>Use Case:</b> When you need to compute a single value from an array, such as summing elements.</p>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                const numbers = [1, 2, 3, 4, 5];
+                const sum = numbers.reduce((acc, num) =&gt; acc + num, 0);
+                console.log(sum); 
+                // Output: 15
+            </code></pre>
+
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set"
+                target="_blank" class="text-yellow-500 underline ">set()</a></li>
+            <p class="text-sm text-black-700"><b>Definition:</b> The <code class="bg-gray-200 px-1 rounded">Set</code> object in JavaScript is a collection of unique values. It
+                allows only distinct elements, meaning duplicate values are automatically removed.</p>
+            <p class="text-sm text-black-700"><b>Use Case:</b> Use <code class="bg-gray-200 px-1 rounded">Set</code> when you need to store unique values, remove duplicates from an
+                array, or efficiently check for the existence of a value.</p>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                // Creating a Set
+                let mySet = new Set([1, 2, 3, 3, 4, 4, 5]); 
+
+                console.log(mySet); // Output: Set(5) { 1, 2, 3, 4, 5 }
+
+                // Adding values
+                mySet.add(6);
+                console.log(mySet); // Output: Set(6) { 1, 2, 3, 4, 5, 6 }
+
+                // Checking existence
+                console.log(mySet.has(3)); // Output: true
+                console.log(mySet.has(10)); // Output: false
+
+                // Removing a value
+                mySet.delete(2);
+                console.log(mySet); // Output: Set(5) { 1, 3, 4, 5, 6 }
+
+                // Converting Set to Array
+                let uniqueArray = [...mySet];
+                console.log(uniqueArray); // Output: [1, 3, 4, 5, 6]
+            </code></pre>
+
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"
+                target="_blank" class="text-yellow-500 underline ">sort()</a></li>
+            <p class="text-sm text-black-700"><b>Definition:</b> The <code class="bg-gray-200 px-1 rounded">sort()</code> method sorts the elements of an array in place and returns
+                the sorted array. By default, it sorts elements as strings in ascending order.</p>
+            <p class="text-sm text-black-700"><b>Use Case:</b> Used for sorting arrays of numbers, strings, or objects based on specific criteria.
+            </p>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                // Sorting an array of strings
+                let fruits = ["Banana", "Apple", "Mango"];
+                fruits.sort();
+                console.log(fruits); // ["Apple", "Banana", "Mango"]
+
+                // Sorting an array of numbers (ascending order)
+                let numbers = [4, 2, 10, 1];
+                numbers.sort((a, b) =&gt; a - b);
+                console.log(numbers); // [1, 2, 4, 10]
+
+                // Sorting an array of objects by a property
+                let people = [{ name: "Alice", age: 25 }, { name: "Bob", age: 20 }];
+                people.sort((a, b) =&gt; a.age - b.age);
+                console.log(people); // [{ name: "Bob", age: 20 }, { name: "Alice", age: 25 }]
+            </code></pre>
+
+            </div>
+        </main>
+        <main id="m2" class="flex flex-col gap-6">
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 1:</h2>
+            <p class="text-sm text-black-700">11. Write a for loop to print numbers from 10 to 1 in reverse.</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                for (let i = 10; i &gt;= 1; i--) {
+                console.log(i);
+                }
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 2:</h2>
+            <p class="text-sm text-black-700">12. Use a while loop to print multiples of 3 from 3 to 30.</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let i = 3;
+                while (i &lt;= 30) {
+                console.log(i);
+                i += 3;
+                }
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 3:</h2>
+            <p class="text-sm text-black-700">13. Write a program to calculate the sum of numbers from 1 to 100 using a loop.</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let sum = 0;
+                for (let i = 1; i &lt;= 100; i++) {
+                sum += i;
+                }
+                console.log(sum);
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 4:</h2>
+            <p class="text-sm text-black-700">14. Create a nested loop to print a star pattern.</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let n = 5;
+                for (let i = 1; i &lt;= n; i++) {
+                let row = "";
+                for (let j = 1; j &lt;= i; j++) {
+                    row += "* ";
+                }
+                console.log(row);
+                }
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 5:</h2>
+            <p class="text-sm text-black-700">15. Use a for...of loop to iterate over the string "JavaScript"</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let str = "JavaScript";
+                for (let char of str) {
+                console.log(char);
+                }
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 6:</h2>
+            <p class="text-sm text-black-700">16. Remove duplicate values from an array.</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let arr = [1, 2, 3, 4, 2, 3, 5, 6, 1];
+                let uniqueArr = [...new Set(arr)];
+                console.log(uniqueArr);
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 7:</h2>
+            <p class="text-sm text-black-700">17. Find the second largest number in an array.</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let arr = [10, 20, 4, 45, 99, 99];
+                let uniqueSorted = [...new Set(arr)].sort((a, b) =&gt; b - a);
+                console.log(uniqueSorted[1]);
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 8:</h2>
+            <p class="text-sm text-black-700">18. Sort an array in descending order.</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let arr = [3, 1, 4, 1, 5, 9, 2, 6];
+                arr.sort((a, b) =&gt; b - a);
+                console.log(arr);
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 9:</h2>
+            <p class="text-sm text-black-700">19. Reverse an array without using .reverse().</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let arr = [1, 2, 3, 4, 5];
+                let reversed = [];
+                for (let i = arr.length - 1; i &gt;= 0; i--) {
+                reversed.push(arr[i]);
+                }
+                console.log(reversed);
+            </code></pre>
+            </div>
+            <div class="p-4 border border-gray-300 rounded-md shadow-md">
+            <h2 class="text-lg font-semibold">Problem 10:</h2>
+            <p class="text-sm text-black-700">20. Find the most frequent element in an array.</p>
+            <h3 class="text-md font-medium">Solution:</h3>
+            <pre class="bg-gray-100 p-2 rounded-md overflow-x-auto"><code class="text-sm">
+                let arr = [1, 3, 2, 3, 4, 3, 5, 1, 3, 4];
+                let freqMap = {};
+                let maxCount = 0, mostFrequent;
+                for (let num of arr) {
+                freqMap[num] = (freqMap[num] || 0) + 1;
+                if (freqMap[num] &gt; maxCount) {
+                    maxCount = freqMap[num];
+                    mostFrequent = num;
+                }
+                }
+                console.log(mostFrequent);
+
+                ////////////////////////
+                let arr=[1,3,24,5,3,3,2,24,5,2,62,62,62,62,223,3,34,4,21,1,12,34,4,345,2]
+                let obj={}
+                arr.forEach(val=&gt;obj[val]===undefined ? obj[val]=1 : obj[val]++)
+                console.log(obj)
+            </code></pre>
+            </div>
+        </main>
+
+    </section>
+
+
+    <script src="../js/js21.js"></script>
+</body>
+
+</html>

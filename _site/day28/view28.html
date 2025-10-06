@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Math Functions</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body>
+    <main>
+        <section>
+        <h1>JavaScript Math Functions</h1>
+        </section>
+        <section class="content">
+            <div class="function-container" id="floor">
+                <h2>1. Math.floor(x)</h2>
+                <p>Rounds a number down to the nearest integer.</p>
+                <pre>
+console.log(Math.floor(4.9));  // 4
+console.log(Math.floor(4.1));  // 4
+console.log(Math.floor(-4.9)); // -5
+console.log(Math.floor(-4.1)); // -5
+console.log(Math.floor(0.99)); // 0
+                </pre>
+                    
+            </div>
+            
+            <div class="function-container" id="ceil">
+                <h2>2. Math.ceil(x)</h2>
+                <p>Rounds a number up to the nearest integer.</p>
+                <pre>
+console.log(Math.ceil(4.1));  // 5
+console.log(Math.ceil(4.9));  // 5
+console.log(Math.ceil(-4.1)); // -4
+console.log(Math.ceil(-4.9)); // -4
+console.log(Math.ceil(0.01)); // 1
+                </pre>
+            </div>
+            
+            <div class="function-container" id="round">
+                <h2>3. Math.round(x)</h2>
+                <p>Rounds a number to the nearest integer.</p>
+                <pre>
+console.log(Math.round(4.4));  // 4
+console.log(Math.round(4.5));  // 5
+console.log(Math.round(4.6));  // 5
+console.log(Math.round(-4.4)); // -4
+console.log(Math.round(-4.5)); // -4
+console.log(Math.round(-4.6)); // -5
+                </pre>
+            </div>
+            
+            <div class="function-container" id="trunc">
+                <h2>4. Math.trunc(x)</h2>
+                <p>Removes the decimal part of a number.</p>
+                <pre>
+console.log(Math.trunc(4.9));  // 4
+console.log(Math.trunc(4.1));  // 4
+console.log(Math.trunc(-4.9)); // -4
+console.log(Math.trunc(-4.1)); // -4
+console.log(Math.trunc(0.99)); // 0
+                </pre>
+            </div>
+            
+            <div class="function-container" id="abs">
+                <h2>5. Math.abs(x)</h2>
+                <p>Returns the absolute value of a number.</p>
+                <pre>
+console.log(Math.abs(4));   // 4
+console.log(Math.abs(-4));  // 4
+console.log(Math.abs(0));   // 0
+console.log(Math.abs(-4.9));// 4.9
+console.log(Math.abs(4.9)); // 4.9
+                </pre>
+            </div>
+            
+            <div class="function-container" id="pow">
+                <h2>6. Math.pow(base, exponent)</h2>
+                <p>Calculates the power of a number (base^exponent).</p>
+                <pre>
+console.log(Math.pow(2, 3));  // 8
+console.log(Math.pow(5, 2));  // 25
+console.log(Math.pow(7, 0));  // 1
+console.log(Math.pow(-2, 3)); // -8
+console.log(Math.pow(2, -2)); // 0.25
+                </pre>
+            </div>
+            
+            <div class="function-container" id="sqrt">
+                <h2>7. Math.sqrt(x)</h2>
+                <p>Finds the square root of a number.</p>
+                <pre>
+console.log(Math.sqrt(25));  // 5
+console.log(Math.sqrt(9));   // 3
+console.log(Math.sqrt(2));   // 1.414
+console.log(Math.sqrt(0));   // 0
+console.log(Math.sqrt(-4));  // NaN
+                </pre>
+            </div>
+            
+            <div class="function-container" id="cbrt">
+                <h2>8. Math.cbrt(x)</h2>
+                <p>Finds the cube root of a number.</p>
+                <pre>
+console.log(Math.cbrt(27));   // 3
+console.log(Math.cbrt(8));    // 2
+console.log(Math.cbrt(1));    // 1
+console.log(Math.cbrt(-27));  // -3
+console.log(Math.cbrt(125));  // 5
+                </pre>
+            </div>
+            
+            <div class="function-container" id="max">
+                <h2>9. Math.max(x1, x2, ..., xn)</h2>
+                <p>Returns the largest number from a given set of numbers.</p>
+                <pre>
+console.log(Math.max(4, 7, 1, 9, 12)); // 12
+console.log(Math.max(-1, -7, -5));     // -1
+console.log(Math.max(3.5, 2.8, 3.9));  // 3.9
+console.log(Math.max(100, 200, 50));   // 200
+console.log(Math.max());               // -Infinity
+                </pre>
+            </div>
+            
+            <div class="function-container" id="min">
+                <h2>10. Math.min(x1, x2, ..., xn)</h2>
+                <p>Returns the smallest number from a given set of numbers.</p>
+                <pre>
+console.log(Math.min(4, 7, 1, 9, 12)); // 1
+console.log(Math.min(-1, -7, -5));     // -7
+console.log(Math.min(3.5, 2.8, 3.9));  // 2.8
+console.log(Math.min(100, 200, 50));   // 50
+console.log(Math.min());               // Infinity
+                </pre>
+            </div>
+            
+            <div class="function-container" id="random">
+                <h2>11. Math.random()</h2>
+                <p>Generates a random decimal number between 0 (inclusive) and 1 (exclusive).</p>
+                <pre>
+console.log(Math.random());     
+console.log(Math.random() * 10);
+console.log(Math.floor(Math.random() * 100));
+console.log(Math.ceil(Math.random() * 50));
+console.log(Math.random() * 5 + 1);
+                </pre>
+            </div>
+            
+            <div class="function-container" id="toFixed">
+                <h2>12. .toFixed(n)</h2>
+                <p>Rounds a number to n decimal places and returns it as a string.</p>
+                <pre>
+console.log((5.6789).toFixed(2));  // "5.68"
+console.log((3.14159).toFixed(3)); // "3.142"
+console.log((100.567).toFixed(1)); // "100.6"
+console.log((0.123456).toFixed(4));// "0.1235"
+                </pre>
+            </div>
+        </section>
+        
+        <section class="table">
+            <h2>Summary Table</h2>
+            <table>
+                <tr>
+                    <th>Function</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><a href="#floor">Math.floor(x)</a></td>
+                    <td><a href="#floor">Rounds down to the nearest integer</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#ceil">Math.ceil(x)</a></td>
+                    <td><a href="#ceil">Rounds up to the nearest integer</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#round">Math.round(x)</a></td>
+                    <td><a href="#round">Rounds to the nearest integer</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#trunc">Math.trunc(x)</a></td>
+                    <td><a href="#trunc">Removes the decimal part, returning only the integer part</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#abs">Math.abs(x)</a></td>
+                    <td><a href="#abs">Returns the absolute value of x</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#pow">Math.pow(x, y)</a></td>
+                    <td><a href="#pow">Returns x raised to the power of y</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#sqrt">Math.sqrt(x)</a></td>
+                    <td><a href="#sqrt">Returns the square root of x</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#cbrt">Math.cbrt(x)</a></td>
+                    <td><a href="#cbrt">Returns the cube root of x</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#max">Math.max(x, y, ...)</a></td>
+                    <td><a href="#max">Returns the largest value from the given numbers</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#min">Math.min(x, y, ...)</a></td>
+                    <td><a href="#min">Returns the smallest value from the given numbers</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#random">Math.random()</a></td>
+                    <td><a href="#random">Returns a random floating-point number between 0 and 1</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#toFixed">x.toFixed(n)</a></td>
+                    <td><a href="#toFixed">Formats a number with n decimal places</a></td>
+                </tr>
+            </table>
+        </section>
+        <section id="problems">
+            <div id="compound-interest">
+                <h2>Compound Interest Calculation (Check console)</h2>
+                <pre><code>
+        function calculateCompoundInterest(P, r, t, n) {
+            let a = P * Math.pow(1 + r / n, n * t);
+            return (a - P).toFixed(2);
+        }
+                </code></pre>
+            </div>
+            
+            <div id="triangle-area">
+                <h2>Triangle Area Calculation (Check console)</h2>
+                <pre><code>
+        function calculateTriangleArea(a, b, c) {
+            let s = (a + b + c) / 2;
+            let area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+            return area.toFixed(2);
+        }
+                </code></pre>
+            </div>
+            
+            <div id="circle-properties">
+                <h2>Circle Properties Calculation (Check console)</h2>
+                <pre><code>
+        function calculateCircleProperties(r) {
+            return [(2 * Math.PI * r).toFixed(2), (Math.PI * r * r).toFixed(2)];
+        }
+                </code></pre>
+            </div>
+        </section>
+        
+        
+    </main>
+    <script src="./day28.js"></script>
+</body>
+</html>

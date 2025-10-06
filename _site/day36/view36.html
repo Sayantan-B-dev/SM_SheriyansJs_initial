@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations Playground</title>
+    <link rel="stylesheet" href="./view36.css">
+</head>
+
+<body>
+
+    <h1>🚀 Array Operations Playground</h1>
+
+    <div class="box">
+        <h2>🔁 Reverse Array</h2>
+        <input type="text" id="inputReverse" placeholder="Enter array elements, e.g. 1,2,3">
+        <button onclick="reverseArray()">Reverse Using Extra Array</button>
+        <button onclick="reverseArrayInPlace()">Reverse In-Place</button>
+        <pre id="outputReverse"></pre>
+    </div>
+
+    <div class="box">
+        <h2>🔎 Second Largest Element</h2>
+        <input type="text" id="inputSecondLargest" placeholder="Enter array elements, e.g. 1,2,3">
+        <button onclick="secondLargest()">Find Second Largest</button>
+        <pre id="outputSecondLargest"></pre>
+    </div>
+
+    <div class="box">
+        <h2>🧹 Move All 0's to Left, 1's to Right</h2>
+        <input type="text" id="inputZeroOne" placeholder="Enter 0s and 1s, e.g. 0,1,1,0">
+        <button onclick="Left0right1()">Sort 0s and 1s</button>
+        <pre id="outputZeroOne"></pre>
+    </div>
+
+    <div class="code-box">
+        <pre><code>
+      const secondLargest = () =&gt; {
+          let arr = [1, 5, 2, 45, 23, 66, 232, 324]
+          let max = Math.max(arr[0], arr[1])
+          let sMax = Math.min(arr[0], arr[1])
+          for (let i = 2; i &lt; arr.length; i++) {
+              if (arr[i] &gt; max) {
+                  sMax = max
+                  max = arr[i]
+              } else if (arr[i] &gt; sMax) {
+                  sMax = arr[i]
+              }
+          }
+          process.stdout.write(String(sMax))
+      }
+      secondLargest()
+        </code></pre>
+
+        <p>---------------------------------------------------------</p>
+
+        <pre><code>
+      const reverseArray = () =&gt; {
+          let arr = [1, 5, 2, 45, 23, 66, 232, 324]
+          let nArr = []
+          for (let j = arr.length; j &gt;= 0; j--) {
+              nArr.push(arr[j])
+          }
+          process.stdout.write(nArr.join(' '))
+      }
+      reverseArray()
+        </code></pre>
+
+        <p>---------------------------------------------------------</p>
+
+        <pre><code>
+      const reverseArray2 = () =&gt; {
+          let arr = [1, 5, 2, 45, 23, 66, 232, 324]
+          let i = 0, j = arr.length - 1
+          while (i &lt; j) {
+              let temp = arr[i]
+              arr[i] = arr[j]
+              arr[j] = temp
+              i++
+              j--
+          }
+          process.stdout.write(arr.join(' '))
+      }
+      reverseArray2()
+        </code></pre>
+
+        <p>---------------------------------------------------------</p>
+
+        <pre><code>
+      const Left0right1 = () =&gt; {
+          let arr = [0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1]
+          let i = 0, j = 0
+          while (i &lt; arr.length) {
+              if (arr[i] == 0) {
+                  let temp = arr[i]
+                  arr[i] = arr[j]
+                  arr[j] = temp
+                  j++
+              }
+              i++
+          }
+          process.stdout.write(arr.join(' '))
+      }
+      Left0right1()
+        </code></pre>
+    </div>
+
+
+    <script src="./view36.js"></script>
+
+</body>
+
+</html>

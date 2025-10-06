@@ -1,0 +1,63 @@
+/* Base body styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: wheat;
+    min-height: 100vh;
+    padding: 10px;
+    margin: 0;
+    flex-direction: column; /* Ensuring it stacks elements vertically on small screens */
+}
+
+/* Fixed position for the heading (Help) */
+h5 {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(182, 182, 177);
+    border-radius: 10px;
+    border: 1px black solid;
+    padding: 10px;
+    z-index: 10;
+    font-size: 0.9rem; /* Smaller font for mobile devices */
+}
+
+/* Preformatted text styling (code blocks) */
+pre {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: "Courier New", monospace;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: pre-wrap; /* Allow wrapping of long lines */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; /* Stack content vertically */
+        padding: 20px; /* Increase padding on small screens */
+    }
+
+    h5 {
+        font-size: 1rem; /* Slightly larger font for mobile screens */
+        top: 15px; /* Adjust positioning for small screens */
+        right: 15px;
+    }
+
+    pre {
+        font-size: 0.85rem; /* Make the font size slightly smaller */
+        padding: 15px; /* Slight padding increase for mobile */
+    }
+}
+
+/* Additional styles for very small screens (mobile devices under 400px width) */
+@media (max-width: 400px) {
+    body {
+        padding: 15px; /* Ensure there's enough space on the sides */
+    }

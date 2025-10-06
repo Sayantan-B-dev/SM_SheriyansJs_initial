@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>DSA</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="DSA" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/ReactJS(day34-69)/test2.html" />
+<meta property="og:url" content="http://localhost:4000/ReactJS(day34-69)/test2.html" />
+<meta property="og:site_name" content="DSA" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="DSA" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"DSA","url":"http://localhost:4000/ReactJS(day34-69)/test2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=eb851b6aaa504547164c33929306bfda94528571">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">DSA</a></h1>
+      
+
+      <p>Perfect 👌 — you’re <strong>combining filtering logic</strong> (All / JS / DSA / Dev buttons) <strong>with global styling for all <code class="language-plaintext highlighter-rouge">&lt;zero-md&gt;</code></strong> — that’s exactly how a modular Markdown dashboard should be structured.</p>
+
+<p>You’re already 95% there.
+Here are a few <strong>important improvements and explanations</strong> so it works smoothly and avoids subtle bugs 👇</p>
+
+<hr />
+
+<h2 id="-1-make-sure-you-re-append-elements-safely">✅ 1. Make Sure You Re-Append Elements Safely</h2>
+
+<p>When you do:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">section</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+<span class="nx">section</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>you’re <strong>removing elements from the DOM</strong> and re-inserting them, which can sometimes <strong>break <code class="language-plaintext highlighter-rouge">&lt;zero-md&gt;</code> re-rendering</strong>, since it’s a web component that fetches its markdown asynchronously.</p>
+
+<p>✅ <strong>Better:</strong>
+Clone the elements instead of moving them, so the originals stay in memory with styles intact:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showItems</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">section</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="nx">items</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">section</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">)));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then just call:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">all</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showItems</span><span class="p">([...</span><span class="nx">jsClass</span><span class="p">,</span> <span class="p">...</span><span class="nx">dsaClass</span><span class="p">,</span> <span class="p">...</span><span class="nx">devClass</span><span class="p">]));</span>
+<span class="nx">js</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showItems</span><span class="p">([...</span><span class="nx">jsClass</span><span class="p">]));</span>
+<span class="nx">dsa</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showItems</span><span class="p">([...</span><span class="nx">dsaClass</span><span class="p">]));</span>
+<span class="nx">dev</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showItems</span><span class="p">([...</span><span class="nx">devClass</span><span class="p">]));</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-2-your-global-markdown-style-logic-is-perfect-just-tweak-placement">✅ 2. Your Global Markdown Style Logic Is Perfect, Just Tweak Placement</h2>
+
+<p>Move the <strong><code class="language-plaintext highlighter-rouge">DOMContentLoaded</code></strong> listener for style injection <strong>above</strong> the filter logic, so that when you clone or re-render elements later, the <code class="language-plaintext highlighter-rouge">&lt;template&gt;&lt;style&gt;</code> block already exists inside each <code class="language-plaintext highlighter-rouge">&lt;zero-md&gt;</code>.
+Otherwise, newly created <code class="language-plaintext highlighter-rouge">&lt;zero-md&gt;</code> elements might appear unstyled until reloaded.</p>
+
+<p>Here’s the recommended order:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 1️⃣ Inject global markdown style first</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">DOMContentLoaded</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">"</span><span class="s2">zero-md</span><span class="dl">"</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">md</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">template</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">template</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">template</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">globalMdStyle</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+    <span class="nx">md</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// 2️⃣ Then handle filtering</span>
+<span class="kd">const</span> <span class="nx">section</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">.section</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">all</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">All</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">js</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">JavaScript</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">dsa</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">DSA</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">dev</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">Development</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">jsClass</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">"</span><span class="s2">.JS</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">dsaClass</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">"</span><span class="s2">.DSA</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">devClass</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">"</span><span class="s2">.DEV</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">showItems</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">section</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="nx">items</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">section</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">)));</span>
+<span class="p">}</span>
+
+<span class="nx">all</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showItems</span><span class="p">([...</span><span class="nx">jsClass</span><span class="p">,</span> <span class="p">...</span><span class="nx">dsaClass</span><span class="p">,</span> <span class="p">...</span><span class="nx">devClass</span><span class="p">]));</span>
+<span class="nx">js</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showItems</span><span class="p">([...</span><span class="nx">jsClass</span><span class="p">]));</span>
+<span class="nx">dsa</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showItems</span><span class="p">([...</span><span class="nx">dsaClass</span><span class="p">]));</span>
+<span class="nx">dev</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">showItems</span><span class="p">([...</span><span class="nx">devClass</span><span class="p">]));</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-3-optional-re-apply-the-markdown-styles-after-filtering">✅ 3. (Optional) Re-apply the Markdown Styles After Filtering</h2>
+
+<p>If you <strong>clone</strong> nodes, they’ll already carry your injected <code class="language-plaintext highlighter-rouge">&lt;template&gt;&lt;style&gt;</code>, but if you <strong>create new <code class="language-plaintext highlighter-rouge">&lt;zero-md&gt;</code></strong> dynamically in the future, just re-run:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">applyZeroMdStyles</span><span class="p">();</span>
+
+<span class="kd">function</span> <span class="nx">applyZeroMdStyles</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">"</span><span class="s2">zero-md</span><span class="dl">"</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">md</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">md</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">template</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">template</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">template</span><span class="dl">"</span><span class="p">);</span>
+      <span class="nx">template</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">globalMdStyle</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+      <span class="nx">md</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then after changing the section:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">showItems</span><span class="p">([...</span><span class="nx">someClass</span><span class="p">]);</span>
+<span class="nx">applyZeroMdStyles</span><span class="p">();</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="-tldr--best-practices">🔥 TL;DR — Best Practices</h3>
+
+<p>✅ Inject <code class="language-plaintext highlighter-rouge">&lt;template&gt;&lt;style&gt;</code> globally once.
+✅ Use <code class="language-plaintext highlighter-rouge">.cloneNode(true)</code> when switching content.
+✅ Optionally call a helper (<code class="language-plaintext highlighter-rouge">applyZeroMdStyles()</code>) if you ever create <code class="language-plaintext highlighter-rouge">&lt;zero-md&gt;</code> dynamically.</p>
+
+<hr />
+
+<p>Would you like me to show a version where clicking each category button <strong>animates the cards smoothly (fade or slide)</strong> when switching between markdown sets? It’ll make your dashboard feel much more dynamic.</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

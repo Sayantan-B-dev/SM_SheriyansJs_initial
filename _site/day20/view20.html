@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js20</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        main {
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen p-6">
+    <h1 class="text-3xl md:text-4xl font-bold text-center mb-8 text-cyan-400">
+        Currently viewing "Introduction to Arrays and Objects"
+        <br class="hidden md:block">
+        <span class="text-base text-gray-400 font-normal">(Open Console by Right click &gt; Inspect &gt; Console or press F12)</span>
+    </h1>
+
+    <main class="max-w-5xl mx-auto space-y-12">
+        <!-- Arrays Section -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-pink-400 mb-4">Arrays</h2>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">What is Array:</h4>
+                <p class="text-gray-300">
+                    An array is a data structure that stores multiple values in a single variable.
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" class="text-blue-400 underline ml-2">Learn more</a>
+                </p>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">Why use Array:</h4>
+                <p class="text-gray-300">
+                    Arrays allow storing and managing multiple values efficiently, reducing the need for separate variables.
+                    <a href="https://www.w3schools.com/js/js_arrays.asp" target="_blank" class="text-blue-400 underline ml-2">Read more</a>
+                </p>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">Where to use Array:</h4>
+                <p class="text-gray-300">
+                    Arrays are used in data storage, iteration, and manipulation, such as storing user lists or handling game data.
+                </p>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">How to create and access members of an Array:</h4>
+                <p class="text-gray-300">
+                    <code class="bg-gray-700 text-green-300 px-2 py-1 rounded">let arr = [1, 2, 3]; console.log(arr[0]); // Output: 1</code>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors" target="_blank" class="text-blue-400 underline ml-2">More on Accessing Arrays</a>
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold text-yellow-300">When to use new Array();</h4>
+                <p class="text-gray-300">
+                    Use <code class="bg-gray-700 text-green-300 px-2 py-1 rounded">new Array()</code> for dynamic array creation or predefined size initialization.
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Array" target="_blank" class="text-blue-400 underline ml-2">More details</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Objects Section -->
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h2 class="text-2xl font-semibold text-green-400 mb-4">Objects</h2>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">What is object:</h4>
+                <p class="text-gray-300">
+                    Objects are collections of key-value pairs used to store structured data.
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" class="text-blue-400 underline ml-2">Learn more</a>
+                </p>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">How to write Object:</h4>
+                <p class="text-gray-300">
+                    <code class="bg-gray-700 text-green-300 px-2 py-1 rounded">let person = { name: "Alice", age: 25 };</code>
+                    <a href="https://www.w3schools.com/js/js_objects.asp" target="_blank" class="text-blue-400 underline ml-2">Object Syntax</a>
+                </p>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">Why and when to use Object:</h4>
+                <p class="text-gray-300">
+                    Objects are used for storing structured data like user profiles, configurations, or API responses.
+                </p>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">How to access Object:</h4>
+                <p class="text-gray-300">
+                    <code class="bg-gray-700 text-green-300 px-2 py-1 rounded">console.log(person.name); // Output: Alice</code>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects" target="_blank" class="text-blue-400 underline ml-2">Guide to Objects</a>
+                </p>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-yellow-300">When to use new Object():</h4>
+                <p class="text-gray-300">
+                    Use <code class="bg-gray-700 text-green-300 px-2 py-1 rounded">new Object()</code> for dynamic object creation when keys and values are unknown at initialization.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold text-yellow-300">Nested object:</h4>
+                <p class="text-gray-300">
+                    <code class="bg-gray-700 text-green-300 px-2 py-1 rounded">let user = { profile: { name: "John", age: 30 } };</code>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors" target="_blank" class="text-blue-400 underline ml-2">Nested Objects</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/js20.js"></script>
+</body>
+
+
+</html>

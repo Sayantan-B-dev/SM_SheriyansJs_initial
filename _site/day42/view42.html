@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Algorithm Complexity Guide</title>
+    <link rel="stylesheet" href="./view42.css">
+</head>
+<body>
+
+  <h1>🚀 Algorithm Complexity: Full Guide</h1>
+
+  <h2>1. What is Algorithmic Complexity?</h2>
+  <p>Algorithmic complexity refers to how the performance (in terms of <strong>time</strong> and <strong>space</strong>) of an algorithm scales with input size <code>n</code>.</p>
+
+  <h2>2. Time Complexity</h2>
+  <p>Time complexity indicates the number of basic operations an algorithm performs. It is expressed using Big-O notation.</p>
+
+  <h3>Common Time Complexities</h3>
+  <table>
+    <tr><th>Notation</th><th>Name</th><th>Example</th></tr>
+    <tr><td>O(1)</td><td>Constant</td><td>Accessing array element</td></tr>
+    <tr><td>O(log n)</td><td>Logarithmic</td><td>Binary Search</td></tr>
+    <tr><td>O(n)</td><td>Linear</td><td>Loop through array</td></tr>
+    <tr><td>O(n log n)</td><td>Linearithmic</td><td>Merge Sort</td></tr>
+    <tr><td>O(n²)</td><td>Quadratic</td><td>Nested loops</td></tr>
+    <tr><td>O(2ⁿ)</td><td>Exponential</td><td>Recursive subset generation</td></tr>
+  </table>
+
+  <h3>Example:</h3>
+  <pre><code>
+for (let i = 0; i &lt; n; i++) {
+  for (let j = 0; j &lt; n; j++) {
+    console.log(i, j);
+  }
+}
+// Time Complexity = O(n²)
+  </code></pre>
+
+  <h2>3. Space Complexity</h2>
+  <p>Space complexity refers to the memory used by the algorithm (excluding input size). It includes variables, function call stack, and data structures.</p>
+
+  <pre><code>
+function sum(a, b) {
+  let result = a + b;
+  return result;
+}
+// Space Complexity: O(1)
+  </code></pre>
+
+  <div class="note"><strong>Note:</strong> Recursive calls add to stack space.</div>
+
+  <h2>4. Complexity Notations</h2>
+  <ul>
+    <li><strong>Big-O (O):</strong> Worst case</li>
+    <li><strong>Big-Ω (Omega):</strong> Best case</li>
+    <li><strong>Big-Θ (Theta):</strong> Average case</li>
+  </ul>
+
+  <h2>5. How to Handle Large Inputs Efficiently</h2>
+  <ul>
+    <li>Use faster algorithms (e.g. O(n log n) instead of O(n²))</li>
+    <li>Choose optimal data structures (e.g., Set for lookup)</li>
+    <li>Use memoization/dynamic programming</li>
+    <li>Avoid unnecessary computations inside loops</li>
+    <li>In-place operations reduce space complexity</li>
+  </ul>
+
+  <h2>6. TLE (Time Limit Exceeded)</h2>
+  <p>If your code exceeds the time limit of the online judge, it results in TLE. This often means the logic is right but inefficient.</p>
+  <div class="note"><strong>Tip:</strong> Replace nested loops with prefix sums, binary search, or hash maps where possible.</div>
+
+  <h2>7. Complexity Graph Behavior</h2>
+  <ul>
+    <li><strong>O(1):</strong> Flat line</li>
+    <li><strong>O(log n):</strong> Grows slowly and flattens</li>
+    <li><strong>O(n):</strong> Straight diagonal</li>
+    <li><strong>O(n²):</strong> Curved line (steeper)</li>
+    <li><strong>O(2ⁿ):</strong> Grows explosively</li>
+  </ul>
+
+  <h2>8. How to Calculate Time Complexity (Step-by-Step)</h2>
+  <ol>
+    <li>Break code into blocks (loops, recursions)</li>
+    <li>Calculate time for each block</li>
+    <li>Add or multiply depending on nesting</li>
+  </ol>
+
+  <pre><code>
+for (let i = 0; i &lt; n; i++) {
+  console.log(i);        // O(1)
+}
+// Total = O(n * 1) = O(n)
+  </code></pre>
+
+  <h2>9. Types of Interview/Contest Questions</h2>
+  <table>
+    <tr><th>Category</th><th>Example Question</th><th>Difficulty</th></tr>
+    <tr><td>Loop Analysis</td><td>Find complexity of nested loops</td><td>Easy</td></tr>
+    <tr><td>Recursion</td><td>Fibonacci recursion complexity</td><td>Medium</td></tr>
+    <tr><td>Sorting</td><td>Compare Merge and Bubble sort</td><td>Medium</td></tr>
+    <tr><td>Optimization</td><td>Reduce TLE using prefix sum</td><td>Hard</td></tr>
+    <tr><td>Space Analysis</td><td>Recursive vs iterative space</td><td>Medium</td></tr>
+  </table>
+
+  <h2>10. Practice Examples</h2>
+
+  <h3>🔹 Example 1: Binary Search</h3>
+  <pre><code>
+function binarySearch(arr, target) {
+  let left = 0, right = arr.length - 1;
+  while (left &lt;= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] &lt; target) left = mid + 1;
+    else right = mid - 1;
+  }
+  return -1;
+}
+// Time: O(log n), Space: O(1)
+  </code></pre>
+
+  <h3>🔹 Example 2: Brute Force Subarray Sum</h3>
+  <pre><code>
+let sum = 0;
+for (let i = 0; i &lt; n; i++) {
+  for (let j = i; j &lt; n; j++) {
+    for (let k = i; k &lt;= j; k++) {
+      sum += arr[k];
+    }
+  }
+}
+// Time: O(n³) — highly inefficient
+  </code></pre>
+
+  <h3>🔹 Optimized: Prefix Sum</h3>
+  <pre><code>
+// Preprocess
+let prefix = Array(n+1).fill(0);
+for (let i = 0; i &lt; n; i++) {
+  prefix[i+1] = prefix[i] + arr[i];
+}
+
+// Query sum of [i..j] = prefix[j+1] - prefix[i]
+  </code></pre>
+
+
+</body>
+</html>
+

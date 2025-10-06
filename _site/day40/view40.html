@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Array Utilities</title>
+    <link rel="stylesheet" href="./view40.css">
+</head>
+<body>
+
+  <h1>Array Utility Functions</h1>
+
+  <div class="section">
+    <h3>User Step Rotate</h3>
+    <input type="text" id="rotateArray1" placeholder="e.g 3,4,5,2,59,22,55,6,7,37,643,39">
+    <input type="number" id="rotateK1" placeholder="Enter k">
+    <button onclick="userStepRotate()">Rotate</button>
+    <div class="output" id="rotateOutput1"></div>
+  </div>
+
+  <div class="section">
+    <h3>Optimized Rotate</h3>
+    <input type="text" id="rotateArray2" placeholder="e.g 3,4,5,2,59,22,55,6,7,37,643,39">
+    <input type="number" id="rotateK2" placeholder="Enter k">
+    <button onclick="userStepRotateOptimized()">Rotate</button>
+    <div class="output" id="rotateOutput2"></div>
+  </div>
+
+  <div class="section">
+    <h3>Block Swap Rotate</h3>
+    <input type="text" id="rotateArray3" placeholder="e.g 3,4,5,2,59,22,55,6,7,37,643,39">
+    <input type="number" id="rotateK3" placeholder="Enter k">
+    <button onclick="blockSwapRotate()">Rotate</button>
+    <div class="output" id="rotateOutput3"></div>
+  </div>
+
+  <div class="section">
+    <h3>Linear Search</h3>
+    <input type="text" id="linearArray" placeholder="e.g 3,4,5,2,59,22,55,6,7,37,643,39">
+    <input type="number" id="linearTarget" placeholder="Enter number to search">
+    <button onclick="linearSearch()">Search</button>
+    <div class="output" id="linearOutput"></div>
+  </div>
+
+  <div class="section">
+    <h3>Binary Search</h3>
+    <input type="text" id="binaryArray" placeholder="e.g 3,4,5,2,59,22,55,6,7,37,643,39">
+    <input type="number" id="binaryTarget" placeholder="Enter number to search">
+    <button onclick="binarySearch()">Search</button>
+    <div class="output" id="binaryOutput"></div>
+  </div>
+
+  <div>
+    <pre><code>
+  const prompt = require("prompt-sync")()
+  
+  const userStepRotate=()=&gt;{
+      let arr=[3,4,5,2,59,22,55,6,7,37,643,39]
+      let k=4
+      k=k%arr.length
+      for(let i=1;i&lt;=k;i++){
+          let copy=arr[0]
+          for(let i=0;i&lt;arr.length-1;i++){
+              arr[i]=arr[i+1]
+          }
+          arr[arr.length-1]=copy
+      }
+      process.stdout.write(arr.join(', '))
+  }
+  userStepRotate()
+    </code></pre>
+  
+    <p>-----------------------------------------------------------</p>
+  
+    <pre><code>
+  const userStepRotateOptimized=()=&gt;{
+      let arr=[3,4,5,2,59,22,55,6,7,37,643,39]
+      let nArr=[]
+      let k=4
+      k=k%arr.length
+      for(let i=0;i&lt;arr.length;i++){
+          nArr[i]=arr[(i+k)%arr.length]
+      }
+      process.stdout.write(nArr.join(', '))
+  }
+  userStepRotateOptimized()
+    </code></pre>
+  
+    <p>-----------------------------------------------------------</p>
+  
+    <pre><code>
+  const userStepRotateMoreOptimizedWithBlockSwapReverseAlgorithm=()=&gt;{
+      let arr=[3,4,5,2,59,22,55,6,7,37,643,39]
+      let nArr=[]
+      let k=4
+      k=k%arr.length
+      function reverse(arr,i,j){
+          while(i&lt;j){
+              let temp=arr[i]
+              arr[i]=arr[j]
+              arr[j]=temp
+              i++
+              j--
+          }
+      }
+      reverse(arr,0,k-1)
+      reverse(arr,k,arr.length-1)
+      reverse(arr,0,arr.length-1)
+      process.stdout.write(arr.join(', '))
+  }
+  userStepRotateMoreOptimizedWithBlockSwapReverseAlgorithm()
+    </code></pre>
+  
+    <p>-----------------------------------------------------------</p>
+  
+    <pre><code>
+  const LinearSearch=()=&gt;{
+      let arr=[3,4,5,2,59,22,55,6,7,37,643,39]
+      let n = prompt('Enter number: ')
+      let index=-1
+      for(let i=0;i&lt;arr.length;i++){
+          if(arr[i]==n){
+              index=i
+          }
+      }
+      if(index==-1){
+          process.stdout.write('Not found')
+      }else{
+          process.stdout.write(`Element found in ${index}th index`)
+      }
+  }
+  LinearSearch()
+    </code></pre>
+  
+    <p>-----------------------------------------------------------</p>
+  
+    <pre><code>
+  const BinarySearch=()=&gt;{
+      let arr=[3,4,5,2,59,22,55,6,7,37,643,39]
+      arr=arr.sort((a,b)=&gt;a-b)
+      let n = prompt('Enter number: ')
+      process.stdout.write(`Sorted array: ${arr.join(', ')} \n`)
+      const binary=(arr,n)=&gt;{
+          let s=0,e=arr.length-1;
+          while(s&lt;=e){
+              let mid=Math.floor((s+e)/2)
+              if(arr[mid]==n)return mid
+              else if(arr[mid]&gt;n) e=mid-1
+              else s=mid+1
+          }
+          return -1
+      }
+  
+      if(binary(arr,n)==-1) process.stdout.write('Not found')
+      else process.stdout.write(`Found element found in ${binary(arr,n)}th index`)
+  }
+  BinarySearch()
+    </code></pre>
+  </div>
+
+<script src="./view40.js"></script>
+
+</body>
+</html>

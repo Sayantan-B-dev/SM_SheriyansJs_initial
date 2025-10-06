@@ -1,0 +1,118 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #00ffc8;
+  }
+  
+  h2 {
+    color: #ffd700;
+  }
+  
+  section {
+    margin: 40px 0;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 15px;
+    background: #1e1e1e;
+    box-shadow: 0 0 15px rgba(0, 255, 200, 0.2);
+  }
+  
+  .players {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  .players div {
+    flex: 1;
+  }
+  
+  img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #00ffc8;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #00cfa0;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #team-details img {
+    width: 120px;
+    margin-top: 20px;
+  }
+  .dice {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 15px;
+    margin: 10px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px #00ffc8;
+    position: relative;
+  }
+  
+  .dot {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    justify-self: center;
+    align-self: center;
+  }
+  .dice.rolling {
+    animation: roll 0.5s ease-in-out;
+  }
+  
+  @keyframes roll {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(90deg); }
+    50% { transform: rotate(180deg); }
+    75% { transform: rotate(270deg); }
+    100% { transform: rotate(360deg); }
+  }
+  #team-logo-placeholder {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    border-radius: 50%;
+    background-color: #ccc;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px black;
+  }
+  .hidden {
+    display: none;
+  }
+  

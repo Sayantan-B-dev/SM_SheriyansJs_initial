@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day30</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h5>Check browser console for the use of these functions <br>
+        (f12 or rightclick--inspect--console)</h5>
+    <main>
+        <div>
+            <h2>Raw code:</h2>
+            <pre><code>
+function guessNumber() {
+    let num = Math.floor(Math.random() * 100) + 1, userInput;
+    do {
+        userInput = Number(prompt("Guess a number between 1-100"));
+        if (isNaN(userInput) || userInput &lt; 0 || userInput &gt; 100) {
+            alert("Invalid input");
+        }
+        if (userInput &lt; num) console.log("too low");
+        else if (userInput &gt; num) console.log("too high");
+        else console.log("Congrats!! the number was" + num);
+    } while (userInput !== num);
+}
+
+function calculator() {
+    let userInput;
+    do {
+        let num1 = Number(prompt("Enter first number"));
+        let num2 = Number(prompt("Enter second number"));
+        let operator = prompt("Choose a valid operator +,-,*,/");
+
+        switch (operator) {
+            case '+':
+                alert(`Addition of ${num1} and ${num2} is ${num1 + num2}`);
+                break;
+            case '-':
+                alert(`Subtraction of ${num1} and ${num2} is ${num1 - num2}`);
+                break;
+            case '*':
+                alert(`Multiplication of ${num1} and ${num2} is ${num1 * num2}`);
+                break;
+            case '/':
+                if (num2 == 0) alert(Infinity);
+                else alert(`Division of ${num1} and ${num2} is ${num1 / num2}`);
+                break;
+            default:
+                alert("Enter a valid operator");
+                break;
+        }
+        userInput = prompt("Do you want to try the calculator again? (yes/no)").toLowerCase();
+    } while (userInput === "yes");
+}
+            </code></pre>
+        </div>
+        <div>
+            <h2>Optimized code</h2>
+            <pre><code>
+function guessNumber() {
+    let num = Math.floor(Math.random() * 100) + 1, userInput;
+    do {
+        userInput = Number(prompt("Guess a number between 1-100"));
+        if (isNaN(userInput) || userInput &lt; 1 || userInput &gt; 100) alert("Invalid input");
+        else if (userInput &lt; num) console.log("Too low");
+        else if (userInput &gt; num) console.log("Too high");
+        else console.log(`Congrats!! The number was ${num}`);
+    } while (userInput !== num);
+}
+
+function calculator() {
+    let userInput;
+    do {
+        let num1 = Number(prompt("Enter first number")), num2 = Number(prompt("Enter second number"));
+        let operator = prompt("Choose a valid operator (+, -, *, /)");
+
+        let result = operator === '+' ? num1 + num2 :
+                    operator === '-' ? num1 - num2 :
+                    operator === '*' ? num1 * num2 :
+                    operator === '/' ? (num2 === 0 ? "Infinity" : num1 / num2) :
+                    "Invalid operator";
+
+        alert(result !== "Invalid operator" ? `${num1} ${operator} ${num2} = ${result}` : result);
+        userInput = prompt("Do you want to try the calculator again? (yes/no)").toLowerCase();
+    } while (userInput === "yes");
+}
+            </code></pre>
+        </div>
+    </main>
+    <script src="./day31.js"></script>
+</body>
+
+</html>

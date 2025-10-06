@@ -1,0 +1,10 @@
+console.warn("Revision of JavaScript")
+let str="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+console.log("Theres a string variable 'str'")
+console.log("you can use `${}` as string literals ")
+console.log("try .splice() method on str ...should be error because it only work on arrays")
+console.log("try .slice() method on str")
+console.log("try .split() method on str")
+console.log("try .replace() method on str")
+console.log("try .replaceAll() method on str")
+console.log("try .includes() method on str")

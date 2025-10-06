@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Utility App</title>
+    <link rel="stylesheet" href="./view51.css">
+</head>
+<body>
+  <h1>🧠 String Utility Playground</h1>
+  <input type="text" id="userInput" placeholder="Enter a string here...">
+
+  <div class="button-group">
+    <button class="button" onclick="isPalindrome()">Check Palindrome</button>
+    <button class="button" onclick="toggleAlphabet()">Toggle Alphabet Case</button>
+    <button class="button" onclick="startsWith()">Starts With (Array Check)</button>
+    <button class="button" onclick="capStartEnd()">Capitalize Start &amp; End</button>
+    <button class="button" onclick="characterFrequency()">Character Frequency</button>
+    <button class="button" onclick="isAnagram()">Anagram Check</button>
+  </div>
+
+  <div id="output"></div>
+
+  <h2>📜 Original Code</h2>
+  <div class="code-blocks">
+
+    <div>
+      <h2>Main Input Prompt</h2>
+      <pre><code class="language-js">const prompt = require('prompt-sync')()
+    let str = prompt("Enter a string: ")</code></pre>
+    </div>
+  
+    <div>
+      <h2>isPalindrome</h2>
+      <pre><code class="language-js">const isPalindrome = (str) =&gt; {
+      let i = 0, j = str.length - 1, Palindrome = true
+      while (i &lt; j) {
+          if (str[i] != str[j]) {
+              Palindrome = false
+              break
+          }
+          i++
+          j--
+      }
+      if (Palindrome) process.stdout.write("Palindrome")
+      else process.stdout.write("Not Palindrome")
+  }
+  //isPalindrome(str)</code></pre>
+    </div>
+  
+    <div>
+      <h2>toggleAlphabet</h2>
+      <pre><code class="language-js">const toggleAlphabet = (str) =&gt; {
+      let res = ""
+      for (let i = 0; i &lt; str.length; i++) {
+          if (str[i] === str[i].toUpperCase()) res += str[i].toLowerCase()
+          else res += str[i].toUpperCase()
+      }
+      process.stdout.write(res)
+  }
+  //toggleAlphabet(str)</code></pre>
+    </div>
+  
+    <div>
+      <h2>startsWIth</h2>
+      <pre><code class="language-js">const startsWIth = (str) =&gt; {
+      const stringList = [
+          "Apple juice",
+          "Application form",
+          "Banana bread",
+          "Blue sky",
+          "Cat tower",
+          "Dance floor",
+          "Elephant ride",
+          "Fast car",
+          "Game night",
+          "Happy hour"
+      ];
+      let num = 0
+      for (let i = 0; i &lt; stringList.length; i++) {
+          if (stringList[i].startsWith(str)) num++
+      }
+      process.stdout.write(`${str} appears ${num} times in array`)
+  }
+  //startsWIth(str)</code></pre>
+    </div>
+  
+    <div>
+      <h2>capStartEnd</h2>
+      <pre><code class="language-js">const capStartEnd = (str) =&gt; {
+      let arr = str.split(' ')
+      for (let i = 0; i &lt; arr.length; i++) {
+          if (arr[i].length === 1) {
+              arr[i] = arr[i].toUpperCase();
+          } else if (arr[i].length === 2) {
+              arr[i] = arr[i][0].toUpperCase() + arr[i][1].toUpperCase();
+          } else {
+              let temp = arr[i].slice(1, arr[i].length - 1)
+              let c1 = arr[i][0].toUpperCase()
+              let c2 = arr[i].slice(-1).toUpperCase()
+              arr[i] = c1.concat(temp, c2)
+          }
+      }
+      console.log(arr.join(' '))
+  }
+  //capStartEnd(str)</code></pre>
+    </div>
+  
+    <div>
+      <h2>characterFrequency</h2>
+      <pre><code class="language-js">const characterFrequency = (str) =&gt; {
+      let alphabets = "abcdefghijklmnopqrstuvwxyz"
+      str = str.toLowerCase()
+      let ans = {}
+      for (let i = 0; i &lt; str.length; i++) {
+          if (alphabets.includes(str[i])) {
+              ans[str[i]] = (ans[str[i]] || 0) + 1;
+          }
+      }
+      const sortedAns = Object.keys(ans).sort();
+      for (let key of sortedAns) {
+          console.log(`${key}: ${ans[key]}`);
+      }
+  }
+  //characterFrequency(str)</code></pre>
+    </div>
+  
+    <div>
+      <h2>isAnagram</h2>
+      <pre><code class="language-js">const isAnagram = () =&gt; {
+      let s1 = prompt("Enter 1st string: ")
+      let s2 = prompt("Enter 2nd string: ")
+  
+      let n = 0
+      if (s1.length != s2.length) {
+          console.log("Not Anagram")
+          return
+      }
+      for (let i = 0; i &lt; s1.length; i++) {
+          if (s2.includes(s1[i])) {
+              n++
+          }
+      }
+      if (n == s1.length) console.log("Anagram")
+      else console.log("Not Anagram")
+  }
+  //isAnagram()</code></pre>
+    </div>
+  </div>
+  
+<script src="./view51.js"></script>
+</body>
+</html>

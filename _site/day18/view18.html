@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js18</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/alljs.css">
+    <style>
+        main{
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans px-4 py-6 min-h-screen">
+    <h1 class="text-2xl md:text-3xl font-bold text-yellow-400 text-center mb-8">
+      Currently viewing "Advanced Functions in JavaScript", <br>
+      <span class="text-sm text-gray-300 font-normal">Open Console by Right click &gt; Inspect &gt; Console or F12</span>
+    </h1>
+  
+    <main class="max-w-5xl mx-auto space-y-10">
+      
+      <!-- Each Concept Box -->
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" target="_blank" class="hover:underline">Rest Parameters</a>
+        </h3>
+        <p>Rest parameters allow a function to accept an indefinite number of arguments as an array.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>function sum(...numbers) {
+    return numbers.reduce((acc, curr) =&gt; acc + curr, 0);
+  }
+  
+  console.log(sum(1, 2, 3, 4)); // Output: 10</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://www.freecodecamp.org/news/scope-closures-and-hoisting-in-javascript/" target="_blank" class="hover:underline">Hoisting</a>
+        </h3>
+        <p>Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>console.log(x); // Output: undefined
+  var x = 5;</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression" target="_blank" class="hover:underline">Immediately Invoked Function Expression (IIFE)</a>
+        </h3>
+        <p>An IIFE is a function that runs as soon as it is defined.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>(function() {
+    console.log('IIFE executed');
+  })();</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://www.freecodecamp.org/news/higher-order-functions-in-javascript-explained/" target="_blank" class="hover:underline">Higher-Order Functions (HOFs)</a>
+        </h3>
+        <p>Higher-order functions are functions that take other functions as arguments or return functions as their result.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>function greet() {
+    return function(name) {
+      console.log('Hello, ' + name);
+    };
+  }
+  
+  const greetPerson = greet();
+  greetPerson('Alice'); // Output: Hello, Alice</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://www.freecodecamp.org/news/scope-closures-and-hoisting-in-javascript/" target="_blank" class="hover:underline">Callback Functions</a>
+        </h3>
+        <p>A callback function is a function passed into another function as an argument, which is then invoked inside the outer function.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>function fetchData(callback) {
+    setTimeout(() =&gt; {
+      callback('Data fetched');
+    }, 1000);
+  }
+  
+  fetchData((message) =&gt; {
+    console.log(message); // Output: Data fetched
+  });</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://www.geeksforgeeks.org/difference-between-first-class-and-higher-order-functions-in-javascript/" target="_blank" class="hover:underline">First-Class Functions</a>
+        </h3>
+        <p>In JavaScript, functions are treated as first-class citizens, meaning they can be assigned to variables, passed as arguments, and returned from other functions.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>const sayHello = function() {
+    console.log('Hello!');
+  };
+  
+  sayHello(); // Output: Hello!</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://www.freecodecamp.org/news/scope-closures-and-hoisting-in-javascript/" target="_blank" class="hover:underline">Pure Functions</a>
+        </h3>
+        <p>A pure function is a function that, given the same inputs, will always return the same output and does not have any side effects.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>function add(a, b) {
+    return a + b;
+  }
+  
+  console.log(add(2, 3)); // Output: 5</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">Impure Functions</h3>
+        <p>An impure function is a function that may produce different outputs for the same inputs or has side effects.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>let counter = 0;
+  
+  function increment() {
+    counter++;
+  }
+  
+  increment();
+  console.log(counter); // Output: 1</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://www.freecodecamp.org/news/scope-closures-and-hoisting-in-javascript/" target="_blank" class="hover:underline">Global Scope</a>
+        </h3>
+        <p>Variables declared in the global scope are accessible from anywhere in the code.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>var globalVar = 'I am global';
+  
+  function displayGlobalVar() {
+    console.log(globalVar);
+  }
+  
+  displayGlobalVar(); // Output: I am global</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://www.freecodecamp.org/news/scope-closures-and-hoisting-in-javascript/" target="_blank" class="hover:underline">Local Scope</a>
+        </h3>
+        <p>Variables declared within a function are in the local scope and are not accessible outside that function.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>function localScopeExample() {
+    var localVar = 'I am local';
+    console.log(localVar);
+  }
+  
+  localScopeExample(); // Output: I am local
+  console.log(localVar); // Error: localVar is not defined</code></pre>
+      </div>
+  
+      <div class="bg-gray-800 rounded-xl p-6 shadow-lg space-y-4">
+        <h3 class="text-xl font-semibold text-cyan-300">
+          <a href="https://www.freecodecamp.org/news/scope-closures-and-hoisting-in-javascript/" target="_blank" class="hover:underline">Closures</a>
+        </h3>
+        <p>A closure is the combination of a function and the lexical environment within which that function was declared.</p>
+        <pre class="bg-gray-950 p-4 rounded text-sm overflow-auto"><code>function outerFunction() {
+    let outerVariable = 'I am outside!';
+    
+    function innerFunction() {
+      console.log(outerVariable);
+    }
+  
+    return innerFunction;
+  }
+  
+  const closureExample = outerFunction();
+  closureExample(); // Output: I am outside!</code></pre>
+      </div>
+  
+    </main>
+  
+    <script src="/js/js18.js"></script>
+  </body>
+  
+
+</html>

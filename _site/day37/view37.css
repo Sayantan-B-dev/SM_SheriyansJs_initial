@@ -1,0 +1,59 @@
+
+/* CSS for styling the page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: #333;
+}
+
+
+.container {
+    padding: 2rem;
+    width: 70%;
+    margin: auto
+}
+
+.box {
+    background-color: #1e1e2f;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    text-align: center;
+    color: #00ffcc;
+}
+
+.box:hover {
+    background-color: #d1c4e9;
+    color: #1e1e2f;
+
+}
+
+button {
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3700b3;
+}
+
+.hidden {
+    display: none;
+}
+
+.highlight {
+    background-color: #ffeb3b;
+}
+
+#dom-manipulation-info ,#event-listeners-details{
+    text-wrap: wrap;
+    width: 70%;
+    margin: auto;
+    margin-top: 50px;
+}

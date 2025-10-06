@@ -1,0 +1,266 @@
+/* Base layout styles */
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+main {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid black;
+    gap: 20px;
+    background-color: rgb(167, 167, 154);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+/* Content scroll section */
+.content {
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    overflow-x: auto;
+    border: 1px solid black;
+    padding: 10px;
+    gap: 10px;
+    scroll-behavior: smooth;
+}
+
+.content::-webkit-scrollbar:vertical {
+    display: none;
+}
+
+.content::-webkit-scrollbar {
+    width: 4px;
+    height: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Function content box */
+.function-container {
+    background-color: wheat;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+/* Headers */
+h1, h2, h3 {
+    text-align: center;
+    word-wrap: break-word;
+}
+
+h3 {
+    position: sticky;
+    top: 10px;
+    background-color: rgb(182, 182, 177);
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    z-index: 100;
+}
+
+/* Code blocks */
+pre {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+}
+
+/* Table section */
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #2c2b2b;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+.table h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Table structure */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: wheat;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #2c2b2b;
+    box-sizing: border-box;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tr:hover {
+    background: #ffabab;
+}
+
+tr:first-child th {
+    border-right: 1px solid #2c2b2b;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .content {
+        width: 95%;
+        flex-wrap: nowrap;
+    }
+
+    .function-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .table h2 {
+        font-size: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    pre {
+        font-size: 0.85rem;
+    }
+
+    main {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .table {
+        padding: 15px;
+    }
+}
+/* General section styling */
+#problems {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e2f;
+    color: #e0e0f0;
+}
+
+/* Card-style for each problem */
+#compound-interest,
+#triangle-area,
+#circle-properties {
+    background-color: #2c2c3e;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#compound-interest:hover,
+#triangle-area:hover,
+#circle-properties:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* Heading style */
+#compound-interest h2,
+#triangle-area h2,
+#circle-properties h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #00d4ff;
+}
+
+/* Code block styling */
+pre {
+    background-color: #1a1a2e;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    color: #f8f8f8;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {
+    #problems {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    #compound-interest,
+    #triangle-area,
+    #circle-properties {
+        flex: 1 1 calc(48% - 10px);
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    #compound-interest,
+    #triangle-area,
+    #circle-properties {
+        width: 100%;
+    }
+}

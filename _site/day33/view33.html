@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star Pattern Generator</title>
+<link rel="stylesheet" href="./view33.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🌟 Star Pattern Generator</h1>
+    <p>Enter a number and click any button to generate the pattern!</p>
+    <input type="number" id="inputNumber" placeholder="Enter a number" />
+    <div class="pattern-box">
+      <button onclick="LeftPyramidStar()">Left Pyramid</button>
+      <button onclick="LeftPyramidStarReversed()">Left Pyramid Reversed</button>
+      <button onclick="RightPyramidOneToN()">Right Pyramid 1 to n</button>
+      <button onclick="PerfectPyramid()">Perfect Pyramid</button>
+      <button onclick="X()">X Pattern</button>
+      <button onclick="BigV()">Big V Pattern</button>
+  </div>
+  </div>
+
+
+
+
+    <h2>🔍 Output:</h2>
+    <pre id="outputArea"></pre>
+
+    <pre><code>
+    const LeftPyramidStar = () => {
+        const prompt = require("prompt-sync")()//This is important
+        let n = prompt('Enter number: ')
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < i; j++) {
+                process.stdout.write('*')//This is important
+            }
+            process.stdout.write('\n')//This is important
+        }
+    }
+    LeftPyramidStar()
+  </code></pre>
+    ------------------------------------------------------------
+    <pre><code>
+    const LeftPyramidStarReversed = () => {
+        const prompt = require("prompt-sync")()//This is important
+        let n = prompt('Enter number: ')
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n - i; j++) {
+                process.stdout.write('*')//This is important
+            }
+            process.stdout.write('\n')//This is important
+        }
+    }
+    LeftPyramidStarReversed()
+  </code></pre>
+    ------------------------------------------------------------
+    <pre><code>
+    const RightPyramidOneToN = () => {
+        const prompt = require("prompt-sync")()//This is important
+        let n = prompt('Enter number: ')
+        for (let i = 0; i < n; i++) {
+            for (let j = n; j > i; j--) {
+                process.stdout.write(' ')//This is important
+            }
+            for (let j = 0; j < i; j++) {
+                process.stdout.write((j + 1).toString())//This is important
+            }
+            process.stdout.write('\n')//This is important
+        }
+    }
+    RightPyramidOneToN()
+  </code></pre>
+    ------------------------------------------------------------
+    <pre><code>
+    const PerfectPyramid = () => {
+        const prompt = require("prompt-sync")()//This is important
+        let n = prompt('Enter number: ')
+        for (let i = 1; i <= n; i++) {
+            for (let j = 1; j <= n - i; j++) {
+                process.stdout.write(' ')//This is important
+            }
+            for (let j = 1; j <= 2 * i - 1; j++) {
+                process.stdout.write('*')//This is important
+            }
+            process.stdout.write('\n')//This is important
+        }
+    }
+    PerfectPyramid()
+  </code></pre>
+    ------------------------------------------------------------
+    <pre><code>
+    const X = () => {
+        const prompt = require("prompt-sync")()//This is important
+        let n = parseInt(prompt('Enter number: '))//need parseInt
+        for (let i = 1; i <= n; i++) {
+            for (let j = 1; j <= n; j++) {
+                if (i === j || i + j === n + 1) {
+                    process.stdout.write('*')//This is important
+                } else {
+                    process.stdout.write(' ')
+                }
+            }
+            process.stdout.write('\n')//This is important
+        }
+    }
+    X()
+  </code></pre>
+    ------------------------------------------------------------
+    <pre><code>
+    const BigV= () => {
+        const prompt = require("prompt-sync")()//This is important
+        let n = parseInt(prompt('Enter number: '))//need parseInt
+        for (let i = 1; i <= n; i++) {
+            for (let j = 1; j <= 2*n-i; j++) {
+                if (i === j || i + j === 2*n) {
+                    process.stdout.write('*')//This is important
+                } else {
+                    process.stdout.write(' ')
+                }
+            }
+            process.stdout.write('\n')//This is important
+        }
+    }
+    //BigV()
+    </code></pre>
+    <script src="./view33.js">
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>DSA</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="DSA" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/NextJS(day70-73)/NextJS_2.html" />
+<meta property="og:url" content="http://localhost:4000/NextJS(day70-73)/NextJS_2.html" />
+<meta property="og:site_name" content="DSA" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="DSA" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"DSA","url":"http://localhost:4000/NextJS(day70-73)/NextJS_2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=eb851b6aaa504547164c33929306bfda94528571">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">DSA</a></h1>
+      
+
+      <p>Here’s a <strong>well-organized, professional Next.js <code class="language-plaintext highlighter-rouge">src/</code> folder structure</strong> using <strong>components, hooks, context, and pages</strong>, optimized for scalability, maintainability, and clarity. I’ll explain the reasoning for each folder/file in detail.</p>
+
+<hr />
+
+<h2 id="1-proposed-src-folder-structure"><strong>1. Proposed <code class="language-plaintext highlighter-rouge">src/</code> Folder Structure</strong></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/
+├── app/
+│   ├── layout.js
+│   ├── globals.css
+│   ├── page.js
+│   └── [routes...]
+├── components/
+│   ├── ui/
+│   │   ├── Button.js
+│   │   ├── Card.js
+│   │   └── Navbar.js
+│   ├── forms/
+│   │   └── Input.js
+│   └── modals/
+│       └── Modal.js
+├── context/
+│   ├── AuthContext.js
+│   ├── ThemeContext.js
+│   └── index.js
+├── hooks/
+│   ├── useAuth.js
+│   ├── useLocalStorage.js
+│   └── useFetch.js
+├── pages/             # Optional for Pages Router or legacy
+│   └── api/
+│       └── hello.js
+├── utils/
+│   ├── api.js
+│   ├── constants.js
+│   └── helpers.js
+├── styles/
+│   ├── variables.css
+│   └── tailwind.css
+└── assets/
+    ├── images/
+    └── fonts/
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="2-folder-explanation"><strong>2. Folder Explanation</strong></h2>
+
+<h3 id="app"><strong><code class="language-plaintext highlighter-rouge">app/</code></strong></h3>
+
+<ul>
+  <li><strong>Purpose:</strong> App Router pages and layouts (new Next.js convention).</li>
+  <li>
+    <p><strong>Files:</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">layout.js</code> → Root layout wrapping all pages; imports global CSS; persistent components like Navbar/Footer.</li>
+      <li><code class="language-plaintext highlighter-rouge">page.js</code> → Root home page.</li>
+      <li>Subfolders (like <code class="language-plaintext highlighter-rouge">about/</code>, <code class="language-plaintext highlighter-rouge">dashboard/</code>) → Each folder can have <code class="language-plaintext highlighter-rouge">page.js</code>, <code class="language-plaintext highlighter-rouge">layout.js</code>, and route-specific components.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/
+└── dashboard/
+    ├── layout.js  # Persistent sidebar
+    └── page.js    # Dashboard home
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="components"><strong><code class="language-plaintext highlighter-rouge">components/</code></strong></h3>
+
+<ul>
+  <li><strong>Purpose:</strong> Reusable UI components across pages.</li>
+  <li>
+    <p><strong>Subfolders:</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ui/</code> → Buttons, Cards, Typography, Navbar</li>
+      <li><code class="language-plaintext highlighter-rouge">forms/</code> → Input, Select, Textarea, Checkbox</li>
+      <li><code class="language-plaintext highlighter-rouge">modals/</code> → Dialogs and popups</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Usage:</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/ui/Button</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">&lt;</span><span class="nc">Button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">handleClick</span><span class="si">}</span><span class="p">&gt;</span>Submit<span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Why this separation:</strong> Keeps components modular and discoverable; easier for new developers to find UI parts.</li>
+</ul>
+
+<hr />
+
+<h3 id="context"><strong><code class="language-plaintext highlighter-rouge">context/</code></strong></h3>
+
+<ul>
+  <li><strong>Purpose:</strong> Global state management using React Context.</li>
+  <li>
+    <p><strong>Files:</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">AuthContext.js</code> → User authentication state</li>
+      <li><code class="language-plaintext highlighter-rouge">ThemeContext.js</code> → Theme (dark/light) toggler</li>
+      <li><code class="language-plaintext highlighter-rouge">index.js</code> → Exports all contexts for simpler imports</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Example usage:</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">AuthProvider</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/context/AuthContext</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">&lt;</span><span class="nc">AuthProvider</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">App</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nc">AuthProvider</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="hooks"><strong><code class="language-plaintext highlighter-rouge">hooks/</code></strong></h3>
+
+<ul>
+  <li><strong>Purpose:</strong> Custom React hooks for reusable logic.</li>
+  <li>
+    <p><strong>Examples:</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">useAuth.js</code> → Custom auth logic</li>
+      <li><code class="language-plaintext highlighter-rouge">useLocalStorage.js</code> → Local storage abstraction</li>
+      <li><code class="language-plaintext highlighter-rouge">useFetch.js</code> → Fetch data from APIs</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">login</span><span class="p">,</span> <span class="nx">logout</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useAuth</span><span class="p">();</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Why separate:</strong> Hooks are <strong>logic-only</strong>, reusable, and must not contain JSX. Makes code DRY and readable.</li>
+</ul>
+
+<hr />
+
+<h3 id="pages"><strong><code class="language-plaintext highlighter-rouge">pages/</code></strong></h3>
+
+<ul>
+  <li>Only needed if using <strong>Pages Router</strong> or <strong>API routes</strong>.</li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pages/api/hello.js
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">200</span><span class="p">).</span><span class="nx">json</span><span class="p">({</span> <span class="na">message</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span> <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>API routes serve backend logic inside the Next.js project.</li>
+</ul>
+
+<hr />
+
+<h3 id="utils"><strong><code class="language-plaintext highlighter-rouge">utils/</code></strong></h3>
+
+<ul>
+  <li><strong>Purpose:</strong> Helper functions, constants, API abstraction.</li>
+  <li>
+    <p>Examples:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">api.js</code> → Axios or fetch wrapper</li>
+      <li><code class="language-plaintext highlighter-rouge">helpers.js</code> → Utility functions (formatDate, capitalize)</li>
+      <li><code class="language-plaintext highlighter-rouge">constants.js</code> → App-wide constants (colors, URLs, enums)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Example usage:</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">API_URL</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/utils/constants</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">API_URL</span><span class="p">}</span><span class="s2">/users`</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="styles"><strong><code class="language-plaintext highlighter-rouge">styles/</code></strong></h3>
+
+<ul>
+  <li>
+    <p><strong>Purpose:</strong> CSS files separate from components.</p>
+  </li>
+  <li>
+    <p><strong>Files:</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">variables.css</code> → Color variables, font sizes, spacing</li>
+      <li><code class="language-plaintext highlighter-rouge">tailwind.css</code> → Tailwind imports if used</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Global styles:</strong> <code class="language-plaintext highlighter-rouge">globals.css</code> in <code class="language-plaintext highlighter-rouge">app/</code> imports these files.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="assets"><strong><code class="language-plaintext highlighter-rouge">assets/</code></strong></h3>
+
+<ul>
+  <li><strong>Purpose:</strong> Static assets like images and fonts.</li>
+  <li><strong>Structure:</strong></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>assets/
+├── images/
+│   └── logo.png
+└── fonts/
+    └── Inter.woff2
+</code></pre></div></div>
+
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">next/image</code> for optimized images:</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/image</span><span class="dl">'</span><span class="p">;</span>
+<span class="p">&lt;</span><span class="nc">Image</span> <span class="na">src</span><span class="p">=</span><span class="s">"/assets/images/logo.png"</span> <span class="na">alt</span><span class="p">=</span><span class="s">"Logo"</span> <span class="na">width</span><span class="p">=</span><span class="si">{</span><span class="mi">100</span><span class="si">}</span> <span class="na">height</span><span class="p">=</span><span class="si">{</span><span class="mi">50</span><span class="si">}</span> <span class="p">/&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="3-how-everything-works-together"><strong>3. How Everything Works Together</strong></h2>
+
+<ul>
+  <li><strong>Pages</strong> (<code class="language-plaintext highlighter-rouge">app/page.js</code>) render the content.</li>
+  <li><strong>Layout</strong> (<code class="language-plaintext highlighter-rouge">app/layout.js</code>) wraps pages with Navbar, Footer, global CSS.</li>
+  <li><strong>Components</strong> are imported in pages or layouts for UI.</li>
+  <li><strong>Hooks</strong> manage reusable client-side logic.</li>
+  <li><strong>Context</strong> provides global state (theme, auth, cart).</li>
+  <li><strong>Utils</strong> handle helper functions, API calls, constants.</li>
+  <li><strong>Assets &amp; Styles</strong> are globally available for UI consistency.</li>
+</ul>
+
+<hr />
+
+<h2 id="4-example-import-structure-in-a-page"><strong>4. Example Import Structure in a Page</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Button</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/ui/Button</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useAuth</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/hooks/useAuth</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">formatDate</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/utils/helpers</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Dashboard</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">user</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useAuth</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welcome, <span class="si">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Today: <span class="si">{</span><span class="nx">formatDate</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">())</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Clicks: <span class="si">{</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Shows <strong>how all layers (hooks, components, utils) come together</strong> in a clean way.</li>
+</ul>
+
+<hr />
+
+<p>This structure is <strong>scalable</strong>, works well with <strong>team projects</strong>, and keeps <strong>server vs client components, hooks, and contexts organized</strong>, while allowing <strong>Next.js App Router features like layouts, nested routes, and static/server components</strong> to be fully leveraged.</p>
+
+<hr />
+
+<p>Here’s a <strong>clean, practical way to create a Navbar and Footer in Next.js</strong> inside the <code class="language-plaintext highlighter-rouge">components</code> folder, fully modular and reusable across pages. I’ll also include <strong>layout integration</strong> so you can use them in every page without repeating code.</p>
+
+<hr />
+
+<h2 id="1-folder-structure"><strong>1. Folder Structure</strong></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/
+├── components/
+│   ├── ui/
+│   │   ├── Navbar.js
+│   │   └── Footer.js
+├── app/
+│   ├── layout.js
+│   └── page.js
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="2-navbar-component"><strong>2. Navbar Component</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/components/ui/Navbar.js</span>
+<span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// Because Navbar may use state or interactive links</span>
+
+<span class="k">import</span> <span class="nx">Link</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/link</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Navbar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isOpen</span><span class="p">,</span> <span class="nx">setIsOpen</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">className</span><span class="p">=</span><span class="s">"bg-gray-800 text-white p-4 flex justify-between items-center"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"text-xl font-bold"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/"</span><span class="p">&gt;</span>MyApp<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"hidden md:flex space-x-4"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/"</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/about"</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/contact"</span><span class="p">&gt;</span>Contact<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+      <span class="si">{</span><span class="cm">/* Mobile menu toggle */</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="p">=</span><span class="s">"md:hidden"</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setIsOpen</span><span class="p">(</span><span class="o">!</span><span class="nx">isOpen</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">isOpen</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Close</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Menu</span><span class="dl">"</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+      <span class="si">{</span><span class="nx">isOpen</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex flex-col md:hidden mt-2 space-y-2"</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/"</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/about"</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/contact"</span><span class="p">&gt;</span>Contact<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">)</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Key Points:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">"use client"</code> is needed because of <code class="language-plaintext highlighter-rouge">useState</code>.</li>
+  <li>Supports <strong>desktop &amp; mobile</strong> menu toggle.</li>
+  <li>Can be reused on every page via layout.</li>
+</ul>
+
+<hr />
+
+<h2 id="3-footer-component"><strong>3. Footer Component</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/components/ui/Footer.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Footer</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">footer</span> <span class="na">className</span><span class="p">=</span><span class="s">"bg-gray-900 text-gray-300 p-6 mt-10 text-center"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>© <span class="si">{</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getFullYear</span><span class="p">()</span><span class="si">}</span> MyApp. All rights reserved.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex justify-center space-x-4 mt-2"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="p">=</span><span class="s">"https://twitter.com"</span> <span class="na">target</span><span class="p">=</span><span class="s">"_blank"</span> <span class="na">rel</span><span class="p">=</span><span class="s">"noopener noreferrer"</span><span class="p">&gt;</span>Twitter<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="p">=</span><span class="s">"https://github.com"</span> <span class="na">target</span><span class="p">=</span><span class="s">"_blank"</span> <span class="na">rel</span><span class="p">=</span><span class="s">"noopener noreferrer"</span><span class="p">&gt;</span>GitHub<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="p">=</span><span class="s">"https://linkedin.com"</span> <span class="na">target</span><span class="p">=</span><span class="s">"_blank"</span> <span class="na">rel</span><span class="p">=</span><span class="s">"noopener noreferrer"</span><span class="p">&gt;</span>LinkedIn<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Key Points:</strong></p>
+
+<ul>
+  <li>Purely presentational — no <code class="language-plaintext highlighter-rouge">"use client"</code> required.</li>
+  <li>Dynamic year using <code class="language-plaintext highlighter-rouge">new Date().getFullYear()</code>.</li>
+</ul>
+
+<hr />
+
+<h2 id="4-integrating-navbar--footer-in-layout"><strong>4. Integrating Navbar &amp; Footer in Layout</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/app/layout.js</span>
+<span class="k">import</span> <span class="nx">Navbar</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/ui/Navbar</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Footer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/ui/Footer</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">./globals.css</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">MyApp</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">description</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Example Next.js App</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">RootLayout</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="p">=</span><span class="s">"en"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">body</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex flex-col min-h-screen"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Navbar</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">main</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex-1 container mx-auto p-4"</span><span class="p">&gt;</span>
+          <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+        <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Footer</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Key Points:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Navbar</code> at top, <code class="language-plaintext highlighter-rouge">Footer</code> at bottom.</li>
+  <li><code class="language-plaintext highlighter-rouge">main</code> uses <code class="language-plaintext highlighter-rouge">flex-1</code> to push footer to bottom for any content length.</li>
+  <li><code class="language-plaintext highlighter-rouge">children</code> renders the page content dynamically.</li>
+  <li>Layout wraps <strong>all pages automatically</strong> in the App Router.</li>
+</ul>
+
+<hr />
+
+<h2 id="5-example-home-page-using-layout"><strong>5. Example Home Page Using Layout</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/app/page.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">HomePage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">className</span><span class="p">=</span><span class="s">"text-3xl font-bold mb-4"</span><span class="p">&gt;</span>Welcome to MyApp<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is a fully reusable layout with Navbar and Footer!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>No need to import Navbar or Footer here — handled by <code class="language-plaintext highlighter-rouge">layout.js</code>.</li>
+</ul>
+
+<hr />
+
+<h2 id="6-optional-enhancements"><strong>6. Optional Enhancements</strong></h2>
+
+<ul>
+  <li>Add <strong>active link styling</strong> in Navbar using <code class="language-plaintext highlighter-rouge">usePathname()</code> from <code class="language-plaintext highlighter-rouge">next/navigation</code>:</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">usePathname</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">pathname</span> <span class="o">=</span> <span class="nx">usePathname</span><span class="p">();</span>
+<span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/about"</span> <span class="na">className</span><span class="p">=</span><span class="si">{</span><span class="nx">pathname</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">/about</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">font-bold</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">''</span><span class="si">}</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Move menu items into a <strong>separate array</strong> for scalability:</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">navLinks</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Home</span><span class="dl">'</span><span class="p">,</span> <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">About</span><span class="dl">'</span><span class="p">,</span> <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/about</span><span class="dl">'</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Contact</span><span class="dl">'</span><span class="p">,</span> <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/contact</span><span class="dl">'</span> <span class="p">},</span>
+<span class="p">];</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Add <strong>theme toggle</strong> or <strong>context-based login status</strong> in Navbar.</li>
+</ul>
+
+<hr />
+
+<p>This pattern ensures:</p>
+
+<ul>
+  <li><strong>Clean separation</strong> between UI components and pages.</li>
+  <li>Navbar &amp; Footer are <strong>always consistent</strong> across routes.</li>
+  <li>Flexible for <strong>mobile responsiveness</strong>, hooks, and dynamic data.</li>
+</ul>
+
+<hr />
+
+<hr />
+
+<h1 id="routing-in-nextjs-app-router"><strong>Routing in Next.js (App Router)</strong></h1>
+
+<p>Next.js uses <strong>file-based routing</strong>. Every file inside the <code class="language-plaintext highlighter-rouge">app/</code> folder (or <code class="language-plaintext highlighter-rouge">pages/</code> for the old Pages Router) automatically becomes a route. You <strong>do not need <code class="language-plaintext highlighter-rouge">react-router-dom</code></strong> like in standard React.</p>
+
+<hr />
+
+<h2 id="1-file-structure-example"><strong>1. File Structure Example</strong></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/
+└── app/
+    ├── layout.js
+    ├── page.js         // renders '/'
+    ├── about/
+    │   └── page.js     // renders '/about'
+    └── contact/
+        └── page.js     // renders '/contact'
+</code></pre></div></div>
+
+<p><strong>Explanation:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">app/page.js</code> → <code class="language-plaintext highlighter-rouge">/</code> route</li>
+  <li><code class="language-plaintext highlighter-rouge">app/about/page.js</code> → <code class="language-plaintext highlighter-rouge">/about</code> route</li>
+  <li><code class="language-plaintext highlighter-rouge">app/contact/page.js</code> → <code class="language-plaintext highlighter-rouge">/contact</code> route</li>
+</ul>
+
+<p><strong>Nested Routes:</strong></p>
+
+<ul>
+  <li>Create a folder and put <code class="language-plaintext highlighter-rouge">page.js</code> inside.</li>
+  <li>Example:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/dashboard/settings/page.js → /dashboard/settings
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="2-linking-between-routes"><strong>2. Linking Between Routes</strong></h2>
+
+<p>Next.js provides <strong><code class="language-plaintext highlighter-rouge">Link</code></strong> component from <code class="language-plaintext highlighter-rouge">next/link</code>.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/components/ui/Navbar.js</span>
+<span class="k">import</span> <span class="nx">Link</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/link</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Navbar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">nav</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/"</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/about"</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/contact"</span><span class="p">&gt;</span>Contact<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Key Points:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">href</code> is the route path (<code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">/about</code>, <code class="language-plaintext highlighter-rouge">/contact</code>).</li>
+  <li>No need for <code class="language-plaintext highlighter-rouge">BrowserRouter</code> or <code class="language-plaintext highlighter-rouge">Routes</code>.</li>
+  <li>Supports <strong>client-side navigation</strong> by default (fast).</li>
+</ul>
+
+<p><strong>Optional: Active link styling</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">usePathname</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">pathname</span> <span class="o">=</span> <span class="nx">usePathname</span><span class="p">();</span>
+
+<span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/about"</span> <span class="na">className</span><span class="p">=</span><span class="si">{</span><span class="nx">pathname</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">/about</span><span class="dl">'</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">font-bold</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">''</span><span class="si">}</span><span class="p">&gt;</span>
+  About
+<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="3-dynamic-routes"><strong>3. Dynamic Routes</strong></h2>
+
+<ul>
+  <li>Use <strong>square brackets</strong> in folder/file names.</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/blog/[id]/page.js → /blog/1, /blog/2, etc.
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/app/blog/[id]/page.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">BlogPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="nx">useParams</span><span class="p">();</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Blog Post ID: <span class="si">{</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="4-programmatic-navigation"><strong>4. Programmatic Navigation</strong></h2>
+
+<ul>
+  <li>Use <code class="language-plaintext highlighter-rouge">useRouter</code> from <code class="language-plaintext highlighter-rouge">next/navigation</code>:</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useRouter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">MyButton</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">useRouter</span><span class="p">();</span>
+
+  <span class="kd">const</span> <span class="nx">goToAbout</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">'</span><span class="s1">/about</span><span class="dl">'</span><span class="p">);</span> <span class="c1">// navigate programmatically</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">goToAbout</span><span class="si">}</span><span class="p">&gt;</span>Go to About<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">router.push()</code> → Navigate</li>
+  <li><code class="language-plaintext highlighter-rouge">router.replace()</code> → Navigate without adding history</li>
+  <li><code class="language-plaintext highlighter-rouge">router.back()</code> → Go back</li>
+</ul>
+
+<hr />
+
+<h2 id="5-difference-between-react-and-nextjs-routing"><strong>5. Difference Between React and Next.js Routing</strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>React (<code class="language-plaintext highlighter-rouge">react-router-dom</code>)</th>
+      <th>Next.js (App Router)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Router Setup</strong></td>
+      <td>Must wrap app with <code class="language-plaintext highlighter-rouge">&lt;BrowserRouter&gt;</code></td>
+      <td>No router wrapper needed</td>
+    </tr>
+    <tr>
+      <td><strong>Route Definition</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;Route path="/about" element={&lt;About/&gt;} /&gt;</code></td>
+      <td>Files in <code class="language-plaintext highlighter-rouge">app/</code> folder define routes automatically</td>
+    </tr>
+    <tr>
+      <td><strong>Navigation</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;Link to="/about"&gt;About&lt;/Link&gt;</code></td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;Link href="/about"&gt;About&lt;/Link&gt;</code></td>
+    </tr>
+    <tr>
+      <td><strong>Dynamic Routes</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">/blog/:id</code></td>
+      <td><code class="language-plaintext highlighter-rouge">/blog/[id]/page.js</code></td>
+    </tr>
+    <tr>
+      <td><strong>Nested Routes</strong></td>
+      <td>Wrap <code class="language-plaintext highlighter-rouge">&lt;Routes&gt;</code> inside parent <code class="language-plaintext highlighter-rouge">&lt;Route&gt;</code></td>
+      <td>Nested folders with <code class="language-plaintext highlighter-rouge">layout.js</code> and <code class="language-plaintext highlighter-rouge">page.js</code></td>
+    </tr>
+    <tr>
+      <td><strong>SSR / SSG</strong></td>
+      <td>Manual setup with frameworks</td>
+      <td>Automatic support with server components, fetch, static generation</td>
+    </tr>
+    <tr>
+      <td><strong>Client-side Navigation</strong></td>
+      <td>Handled by <code class="language-plaintext highlighter-rouge">Link</code></td>
+      <td>Handled by Next.js <code class="language-plaintext highlighter-rouge">&lt;Link&gt;</code> and prefetching by default</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Summary:</strong></p>
+
+<ul>
+  <li><strong>React Router</strong> is <strong>manual and runtime-based</strong>.</li>
+  <li><strong>Next.js App Router</strong> is <strong>file-based, automatic, and SSR/SSG friendly</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="6-example-complete-routing"><strong>6. Example: Complete Routing</strong></h2>
+
+<h3 id="file-structure">File structure</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/
+├── layout.js
+├── page.js
+├── about/page.js
+└── contact/page.js
+</code></pre></div></div>
+
+<h3 id="navbar">Navbar</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Link</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/link</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Navbar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">nav</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/"</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/about"</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="s">"/contact"</span><span class="p">&gt;</span>Contact<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="layout">Layout</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Navbar</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/ui/Navbar</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">RootLayout</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="p">=</span><span class="s">"en"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Navbar</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="pages-1">Pages</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// page.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Home</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Home Page<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+
+<span class="c1">// about/page.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">About</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>About Page<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+
+<span class="c1">// contact/page.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Contact</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Contact Page<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Navigate to <code class="language-plaintext highlighter-rouge">/about</code> → About page loads</li>
+  <li>Navigate to <code class="language-plaintext highlighter-rouge">/contact</code> → Contact page loads</li>
+</ul>
+
+<hr />
+
+<p>This setup <strong>eliminates the need for manual routers</strong> and is fully <strong>SEO-friendly</strong>, <strong>supports SSR/SSG</strong>, and <strong>prefetches pages for instant client-side navigation</strong>.</p>
+
+<hr />
+
+<hr />
+
+<h1 id="deeply-nested-dynamic-routes-in-nextjs-app-router"><strong>Deeply Nested Dynamic Routes in Next.js (App Router)</strong></h1>
+
+<p>Next.js can handle <strong>multiple layers of dynamic routing</strong>, meaning you can have <strong>dynamic segments inside other dynamic segments</strong>, combined with nested folders. This is extremely useful for apps like <strong>e-commerce dashboards, CMS, multi-level blogs, or admin panels</strong>.</p>
+
+<hr />
+
+<h2 id="1-example-deeply-nested-dynamic-routes"><strong>1. Example: Deeply Nested Dynamic Routes</strong></h2>
+
+<h3 id="folder-structure"><strong>Folder Structure</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/
+└── dashboard/
+    └── [userId]/
+        └── projects/
+            └── [projectId]/
+                └── tasks/
+                    └── [taskId]/page.js
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">/dashboard/123/projects/456/tasks/789</code></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">userId = 123</code></li>
+      <li><code class="language-plaintext highlighter-rouge">projectId = 456</code></li>
+      <li><code class="language-plaintext highlighter-rouge">taskId = 789</code></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="2-accessing-dynamic-params"><strong>2. Accessing Dynamic Params</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">TaskPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="nx">useParams</span><span class="p">();</span>
+  <span class="c1">// params = { userId: '123', projectId: '456', taskId: '789' }</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>User ID: <span class="si">{</span><span class="nx">params</span><span class="p">.</span><span class="nx">userId</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Project ID: <span class="si">{</span><span class="nx">params</span><span class="p">.</span><span class="nx">projectId</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Task ID: <span class="si">{</span><span class="nx">params</span><span class="p">.</span><span class="nx">taskId</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">useParams()</code> <strong>returns an object</strong> with keys corresponding to the dynamic folder names.</li>
+  <li><strong>Must use <code class="language-plaintext highlighter-rouge">"use client"</code></strong> if you want to use React hooks (<code class="language-plaintext highlighter-rouge">useState</code>, <code class="language-plaintext highlighter-rouge">useEffect</code>) along with <code class="language-plaintext highlighter-rouge">useParams()</code>.</li>
+</ul>
+
+<hr />
+
+<h2 id="3-programmatic-navigation-between-dynamic-routes"><strong>3. Programmatic Navigation Between Dynamic Routes</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useRouter</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">TaskLinkButton</span><span class="p">({</span> <span class="nx">userId</span><span class="p">,</span> <span class="nx">projectId</span><span class="p">,</span> <span class="nx">taskId</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">useRouter</span><span class="p">();</span>
+
+  <span class="kd">const</span> <span class="nx">goToTask</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">`/dashboard/</span><span class="p">${</span><span class="nx">userId</span><span class="p">}</span><span class="s2">/projects/</span><span class="p">${</span><span class="nx">projectId</span><span class="p">}</span><span class="s2">/tasks/</span><span class="p">${</span><span class="nx">taskId</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">goToTask</span><span class="si">}</span><span class="p">&gt;</span>Go to Task<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="4-using-link-component-for-nested-dynamic-routes"><strong>4. Using <code class="language-plaintext highlighter-rouge">Link</code> Component for Nested Dynamic Routes</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Link</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/link</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="p">&lt;</span><span class="nc">Link</span> <span class="na">href</span><span class="p">=</span><span class="si">{</span><span class="s2">`/dashboard/</span><span class="p">${</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/projects/</span><span class="p">${</span><span class="nx">project</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/tasks/</span><span class="p">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="si">}</span><span class="p">&gt;</span>
+  View Task
+<span class="p">&lt;/</span><span class="nc">Link</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Next.js prefetches pages automatically for <strong>fast client-side navigation</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="5-catch-all-nested-dynamic-routes-optional"><strong>5. Catch-All Nested Dynamic Routes (Optional)</strong></h2>
+
+<p>If you have <strong>unpredictable depth</strong>, you can use a <strong>catch-all route</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/dashboard/[[...params]]/page.js
+</code></pre></div></div>
+
+<ul>
+  <li>URL: <code class="language-plaintext highlighter-rouge">/dashboard/123/projects/456/tasks/789</code></li>
+  <li><code class="language-plaintext highlighter-rouge">params = ['123', 'projects', '456', 'tasks', '789']</code></li>
+</ul>
+
+<p><strong>Example Page:</strong></p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">CatchAllPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="nx">useParams</span><span class="p">();</span> <span class="c1">// params.params = ['123','projects','456','tasks','789']</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">pre</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">params</span><span class="p">)</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">pre</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Advantages:</strong></p>
+
+<ul>
+  <li>Handles <strong>arbitrary nesting depth</strong>.</li>
+  <li>Useful for <strong>CMS, blogs, or multi-level dashboards</strong> where folder depth is unknown.</li>
+</ul>
+
+<hr />
+
+<h2 id="6-layouts-with-deeply-nested-dynamic-routes"><strong>6. Layouts with Deeply Nested Dynamic Routes</strong></h2>
+
+<ul>
+  <li>Each folder can have its <strong>own layout.js</strong>:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/dashboard/layout.js       -&gt; wraps all dashboard pages
+app/dashboard/[userId]/layout.js  -&gt; wraps pages for a specific user
+app/dashboard/[userId]/projects/layout.js -&gt; wraps all projects pages
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Example: app/dashboard/[userId]/layout.js</span>
+<span class="k">import</span> <span class="nx">Sidebar</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/ui/Sidebar</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">UserLayout</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Sidebar</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">main</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex-1 p-4"</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Layouts are hierarchical</strong>: deeper layouts wrap their children, while outer layouts wrap everything above them.</li>
+</ul>
+
+<hr />
+
+<h2 id="7-best-practices-for-deep-dynamic-routes"><strong>7. Best Practices for Deep Dynamic Routes</strong></h2>
+
+<ol>
+  <li>
+    <p><strong>Use descriptive folder names</strong> for clarity:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[userId]/projects/[projectId]/tasks/[taskId]/page.js
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Use <code class="language-plaintext highlighter-rouge">useParams()</code> only in client components</strong> if you want to combine with hooks.</li>
+  <li>
+    <p><strong>Avoid too much nesting</strong> if possible:</p>
+
+    <ul>
+      <li>Consider flattening with query params: <code class="language-plaintext highlighter-rouge">/task?user=123&amp;project=456&amp;id=789</code></li>
+      <li>Use <strong>catch-all routes</strong> for arbitrary depth.</li>
+    </ul>
+  </li>
+  <li><strong>Combine with layouts</strong> for reusable UI like Navbar, Sidebar, or Tabs.</li>
+  <li><strong>Keep folder structure predictable</strong> for easier maintainability.</li>
+</ol>
+
+<hr />
+
+<p>This approach allows creating <strong>very dynamic, deeply nested routes</strong> like:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/dashboard/123/projects/456/tasks/789</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/dashboard/123/projects/456/tasks/101</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/dashboard/456/projects/999/tasks/1</code></li>
+</ul>
+
+<p>All handled automatically by <strong>file-based routing</strong>.</p>
+
+<hr />
+
+<p>Here’s a <strong>visual diagram of deeply nested dynamic routes in Next.js</strong>, showing how <strong>folders, <code class="language-plaintext highlighter-rouge">page.js</code>, dynamic parameters, and layouts</strong> map to URLs. This will make multi-level routing much easier to understand.</p>
+
+<hr />
+
+<h2 id="folder-structure-example"><strong>Folder Structure Example</strong></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/
+├── layout.js                  ← Root layout (wraps everything)
+├── page.js                    ← "/" route
+├── dashboard/
+│   ├── layout.js              ← Dashboard layout (sidebar, header)
+│   ├── page.js                ← "/dashboard"
+│   └── [userId]/
+│       ├── layout.js          ← User layout (for specific user)
+│       ├── page.js            ← "/dashboard/:userId"
+│       └── projects/
+│           ├── layout.js      ← Projects layout (tabs maybe)
+│           ├── page.js        ← "/dashboard/:userId/projects"
+│           └── [projectId]/
+│               ├── layout.js  ← Project layout
+│               ├── page.js    ← "/dashboard/:userId/projects/:projectId"
+│               └── tasks/
+│                   ├── layout.js ← Tasks layout
+│                   └── [taskId]/page.js ← "/dashboard/:userId/projects/:projectId/tasks/:taskId"
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="url-to-file-mapping"><strong>URL to File Mapping</strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>File That Renders</th>
+      <th>Params</th>
+      <th>Layouts Applied</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">app/page.js</code></td>
+      <td>—</td>
+      <td><code class="language-plaintext highlighter-rouge">app/layout.js</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/dashboard</code></td>
+      <td><code class="language-plaintext highlighter-rouge">app/dashboard/page.js</code></td>
+      <td>—</td>
+      <td><code class="language-plaintext highlighter-rouge">app/layout.js</code> → <code class="language-plaintext highlighter-rouge">app/dashboard/layout.js</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/dashboard/123</code></td>
+      <td><code class="language-plaintext highlighter-rouge">app/dashboard/[userId]/page.js</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{ userId: "123" }</code></td>
+      <td>Root → Dashboard → User layout</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/dashboard/123/projects</code></td>
+      <td><code class="language-plaintext highlighter-rouge">app/dashboard/[userId]/projects/page.js</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{ userId: "123" }</code></td>
+      <td>Root → Dashboard → User → Projects layout</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/dashboard/123/projects/456</code></td>
+      <td><code class="language-plaintext highlighter-rouge">app/dashboard/[userId]/projects/[projectId]/page.js</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{ userId: "123", projectId: "456" }</code></td>
+      <td>Root → Dashboard → User → Projects → Project layout</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/dashboard/123/projects/456/tasks/789</code></td>
+      <td><code class="language-plaintext highlighter-rouge">app/dashboard/[userId]/projects/[projectId]/tasks/[taskId]/page.js</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{ userId: "123", projectId: "456", taskId: "789" }</code></td>
+      <td>Root → Dashboard → User → Projects → Project → Tasks layout</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="visual-flow-diagram"><strong>Visual Flow Diagram</strong></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ app/layout.js ] (Root Layout)
+        │
+        └─&gt; [ app/page.js ] ("/")
+        │
+        └─&gt; [ app/dashboard/layout.js ] (Dashboard Layout)
+               │
+               └─&gt; [ app/dashboard/page.js ] ("/dashboard")
+               │
+               └─&gt; [ app/dashboard/[userId]/layout.js ] (User Layout)
+                      │
+                      └─&gt; [ app/dashboard/[userId]/page.js ] ("/dashboard/:userId")
+                      │
+                      └─&gt; [ app/dashboard/[userId]/projects/layout.js ] (Projects Layout)
+                             │
+                             └─&gt; [ app/dashboard/[userId]/projects/page.js ] ("/dashboard/:userId/projects")
+                             │
+                             └─&gt; [ app/dashboard/[userId]/projects/[projectId]/layout.js ] (Project Layout)
+                                    │
+                                    └─&gt; [ app/dashboard/[userId]/projects/[projectId]/page.js ] ("/dashboard/:userId/projects/:projectId")
+                                    │
+                                    └─&gt; [ app/dashboard/[userId]/projects/[projectId]/tasks/[taskId]/page.js ] ("/dashboard/:userId/projects/:projectId/tasks/:taskId")
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="explanation"><strong>Explanation</strong></h2>
+
+<ol>
+  <li>
+    <p><strong>Layouts cascade</strong>: Outer layouts wrap inner layouts and finally the <code class="language-plaintext highlighter-rouge">page.js</code>.</p>
+
+    <ul>
+      <li>
+        <p>Example: <code class="language-plaintext highlighter-rouge">/dashboard/123/projects/456/tasks/789</code> renders <strong>all layouts</strong> in order:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/layout.js → dashboard/layout.js → [userId]/layout.js → projects/layout.js → [projectId]/layout.js → tasks/[taskId]/page.js
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Dynamic params</strong> are derived from <strong>folder names</strong>:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">[userId]</code> → <code class="language-plaintext highlighter-rouge">params.userId</code></li>
+      <li><code class="language-plaintext highlighter-rouge">[projectId]</code> → <code class="language-plaintext highlighter-rouge">params.projectId</code></li>
+      <li><code class="language-plaintext highlighter-rouge">[taskId]</code> → <code class="language-plaintext highlighter-rouge">params.taskId</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Deep nesting works seamlessly</strong>:</p>
+
+    <ul>
+      <li>You don’t need manual router configuration.</li>
+      <li>Each <code class="language-plaintext highlighter-rouge">page.js</code> represents a single route at that level.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Reusability</strong>:</p>
+
+    <ul>
+      <li>Layouts allow <strong>persistent UI components</strong> (Navbar, Sidebar, Tabs) across multiple pages.</li>
+      <li>Only <code class="language-plaintext highlighter-rouge">page.js</code> changes depending on the route.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<p>This structure is perfect for <strong>multi-level dashboards, CMSs, or admin panels</strong> with lots of nested content and dynamic IDs.</p>
+
+<hr />
+
+<h1 id="why-nextjs-uses-only-pagejs-for-routing"><strong>Why Next.js Uses Only <code class="language-plaintext highlighter-rouge">page.js</code> for Routing</strong></h1>
+
+<p>Next.js (App Router) follows a <strong>file-based routing system</strong>, and in this system, <strong>every <code class="language-plaintext highlighter-rouge">page.js</code> file represents a route</strong>. Here’s an in-depth explanation of why we use <strong>only <code class="language-plaintext highlighter-rouge">page.js</code> for all routes</strong>, and how it works in combination with folders and layouts.</p>
+
+<hr />
+
+<h2 id="1-file-based-routing-philosophy"><strong>1. File-Based Routing Philosophy</strong></h2>
+
+<ul>
+  <li>Next.js automatically <strong>maps files to URL routes</strong>.</li>
+  <li>A <strong>folder + <code class="language-plaintext highlighter-rouge">page.js</code></strong> combination defines a single route:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/
+├── page.js          → "/"
+├── about/page.js    → "/about"
+├── dashboard/page.js → "/dashboard"
+</code></pre></div></div>
+
+<ul>
+  <li>Each folder can have <strong>nested folders</strong> for subroutes, but the route <strong>must end in a <code class="language-plaintext highlighter-rouge">page.js</code></strong> to render a page.</li>
+  <li>
+    <p><strong>Why not multiple files?</strong></p>
+
+    <ul>
+      <li>If there were multiple page files per folder, Next.js would not know which one to render for the route.</li>
+      <li><code class="language-plaintext highlighter-rouge">page.js</code> is the <strong>single entry point</strong> for that URL path.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="2-how-pagejs-works"><strong>2. How <code class="language-plaintext highlighter-rouge">page.js</code> Works</strong></h2>
+
+<ol>
+  <li>
+    <p><strong>Every <code class="language-plaintext highlighter-rouge">page.js</code> is a React component.</strong></p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/about/page.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">AboutPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>About Us<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Next.js automatically converts it to a route.</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/about</code> → <code class="language-plaintext highlighter-rouge">app/about/page.js</code></li>
+      <li><code class="language-plaintext highlighter-rouge">/dashboard/settings</code> → <code class="language-plaintext highlighter-rouge">app/dashboard/settings/page.js</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Can include layouts or wrappers via <code class="language-plaintext highlighter-rouge">layout.js</code>.</strong></p>
+
+    <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/layout.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">DashboardLayout</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Navbar</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">children</code> automatically renders <code class="language-plaintext highlighter-rouge">page.js</code> inside the layout.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="3-difference-between-pagejs-and-layoutjs"><strong>3. Difference Between <code class="language-plaintext highlighter-rouge">page.js</code> and <code class="language-plaintext highlighter-rouge">layout.js</code></strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Purpose</th>
+      <th>Rendered At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">page.js</code></td>
+      <td>Main content of a route</td>
+      <td>Represents URL route</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">layout.js</code></td>
+      <td>Wraps pages inside a folder; reusable layout</td>
+      <td>Wraps all child pages</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>You can have <strong>multiple <code class="language-plaintext highlighter-rouge">layout.js</code></strong> nested at different folder levels.</li>
+  <li>But <strong>only one <code class="language-plaintext highlighter-rouge">page.js</code> per folder</strong> represents the route content.</li>
+</ul>
+
+<hr />
+
+<h2 id="4-why-only-pagejs-is-needed"><strong>4. Why Only <code class="language-plaintext highlighter-rouge">page.js</code> is Needed</strong></h2>
+
+<ol>
+  <li>
+    <p><strong>Simplicity:</strong></p>
+
+    <ul>
+      <li>Developers don’t need to configure routes manually.</li>
+      <li>The URL automatically matches the folder structure + <code class="language-plaintext highlighter-rouge">page.js</code>.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Predictable Routing:</strong></p>
+
+    <ul>
+      <li>Every folder has <strong>one route</strong>.</li>
+      <li>Helps avoid conflicts with multiple components in the same route folder.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Works With Layouts:</strong></p>
+
+    <ul>
+      <li>Nested layouts can wrap the <code class="language-plaintext highlighter-rouge">page.js</code> dynamically.</li>
+      <li>Makes UI components like Navbar, Sidebar, and Footer reusable without repeating code.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Supports Dynamic Routing:</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">[param]/page.js</code> for dynamic segments.</li>
+      <li>Deep nesting like <code class="language-plaintext highlighter-rouge">[userId]/projects/[projectId]/tasks/[taskId]/page.js</code> works seamlessly.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Automatic Code Splitting:</strong></p>
+
+    <ul>
+      <li>Each <code class="language-plaintext highlighter-rouge">page.js</code> generates a <strong>separate bundle</strong>, so only the route code loads when visiting that page.</li>
+      <li>Improves <strong>performance and SEO</strong>.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="5-key-points"><strong>5. Key Points</strong></h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">page.js</code> is the <strong>single source of truth for route content</strong>.</li>
+  <li><code class="language-plaintext highlighter-rouge">layout.js</code> wraps multiple pages and can be nested.</li>
+  <li>Dynamic or nested routes still <strong>end in <code class="language-plaintext highlighter-rouge">page.js</code></strong> to indicate “this is what renders for this path”.</li>
+  <li>You don’t need extra routing configuration like React Router — the <strong>file structure + page.js</strong> handles everything.</li>
+</ul>
+
+<hr />
+
+<p><strong>Summary:</strong>
+Next.js uses <strong>only <code class="language-plaintext highlighter-rouge">page.js</code></strong> per folder because it defines the <strong>renderable content of a route</strong>, keeps routing <strong>predictable, automatic, and scalable</strong>, and allows <strong>layouts and dynamic routing</strong> to work seamlessly. It simplifies both <strong>development</strong> and <strong>optimization</strong>, while supporting <strong>SSR, SSG, and client-side navigation</strong> automatically.</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

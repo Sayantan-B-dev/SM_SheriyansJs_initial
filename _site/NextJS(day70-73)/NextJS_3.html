@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Handling “Page Not Found” in Next.js (not-found.js) | DSA</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Handling “Page Not Found” in Next.js (not-found.js)" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/NextJS(day70-73)/NextJS_3.html" />
+<meta property="og:url" content="http://localhost:4000/NextJS(day70-73)/NextJS_3.html" />
+<meta property="og:site_name" content="DSA" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Handling “Page Not Found” in Next.js (not-found.js)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Handling “Page Not Found” in Next.js (not-found.js)","url":"http://localhost:4000/NextJS(day70-73)/NextJS_3.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=eb851b6aaa504547164c33929306bfda94528571">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="http://localhost:4000/">DSA</a></h1>
+      
+
+      <h1 id="handling-page-not-found-in-nextjs-not-foundjs">Handling “Page Not Found” in Next.js (<code class="language-plaintext highlighter-rouge">not-found.js</code>)</h1>
+
+<p>Next.js provides a <strong>built-in way to handle 404 pages</strong> in the <strong>App Router</strong> using a special file called <code class="language-plaintext highlighter-rouge">not-found.js</code>. This replaces the older <code class="language-plaintext highlighter-rouge">_error.js</code> or custom routing logic for missing pages.</p>
+
+<hr />
+
+<h2 id="1-file-location"><strong>1. File Location</strong></h2>
+
+<ul>
+  <li><strong>Global 404</strong> (applies to the entire app):</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/
+└── not-found.js
+</code></pre></div></div>
+
+<ul>
+  <li><strong>Nested 404</strong> (applies only to a specific folder):</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/dashboard/
+├── layout.js
+└── not-found.js
+</code></pre></div></div>
+
+<blockquote>
+  <p>Nested <code class="language-plaintext highlighter-rouge">not-found.js</code> only handles unknown routes <strong>within its folder</strong>.
+Global <code class="language-plaintext highlighter-rouge">not-found.js</code> handles everything else.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="2-basic-global-404-page"><strong>2. Basic Global 404 Page</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/not-found.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">NotFound</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex flex-col items-center justify-center min-h-screen text-center"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">className</span><span class="p">=</span><span class="s">"text-6xl font-bold"</span><span class="p">&gt;</span>404<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">className</span><span class="p">=</span><span class="s">"text-xl mt-2"</span><span class="p">&gt;</span>Oops! Page not found.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="p">=</span><span class="s">"/"</span> <span class="na">className</span><span class="p">=</span><span class="s">"mt-4 text-blue-600 hover:underline"</span><span class="p">&gt;</span>
+        Go back home
+      <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Automatically rendered for <strong>any undefined route</strong>.</li>
+  <li>No special routing configuration needed.</li>
+</ul>
+
+<hr />
+
+<h2 id="3-using-notfound-function-for-programmatic-404"><strong>3. Using <code class="language-plaintext highlighter-rouge">notFound()</code> Function for Programmatic 404</strong></h2>
+
+<p>Next.js also provides a helper <code class="language-plaintext highlighter-rouge">notFound()</code> to trigger a 404 programmatically in <strong>server components</strong>.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/[userId]/page.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">notFound</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">UserPage</span><span class="p">({</span> <span class="nx">params</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">userId</span> <span class="o">=</span> <span class="nx">params</span><span class="p">.</span><span class="nx">userId</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getUserFromDatabase</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Automatically renders `not-found.js` page</span>
+    <span class="nx">notFound</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>Welcome, <span class="si">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Notes:</strong></p>
+
+<ul>
+  <li>Works <strong>only in server components</strong> (<code class="language-plaintext highlighter-rouge">page.js</code> without <code class="language-plaintext highlighter-rouge">"use client"</code>).</li>
+  <li>Automatically falls back to the nearest <code class="language-plaintext highlighter-rouge">not-found.js</code> file (nested or global).</li>
+</ul>
+
+<hr />
+
+<h2 id="4-nested-404-example"><strong>4. Nested 404 Example</strong></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/dashboard/
+├── layout.js
+├── page.js            // /dashboard
+├── not-found.js       // 404 only for /dashboard/* routes
+└── [userId]/
+    └── page.js        // /dashboard/:userId
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/dashboard/unknown</code> → renders <code class="language-plaintext highlighter-rouge">app/dashboard/not-found.js</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/dashboard/123</code> → renders user page if exists, otherwise can call <code class="language-plaintext highlighter-rouge">notFound()</code>.</li>
+</ul>
+
+<hr />
+
+<h2 id="5-key-points"><strong>5. Key Points</strong></h2>
+
+<ol>
+  <li><strong>Automatic 404 handling</strong>: Any undefined route triggers <code class="language-plaintext highlighter-rouge">not-found.js</code>.</li>
+  <li><strong>Nested 404 pages</strong>: Localize 404 handling for specific sections.</li>
+  <li><strong>Programmatic 404</strong>: Call <code class="language-plaintext highlighter-rouge">notFound()</code> in server components when data is missing.</li>
+  <li>
+    <p><strong>Server + Client awareness</strong>:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">not-found.js</code> works for both SSR and client-side navigation.</li>
+      <li><code class="language-plaintext highlighter-rouge">"use client"</code> is not needed for <code class="language-plaintext highlighter-rouge">not-found.js</code>.</li>
+    </ul>
+  </li>
+  <li><strong>SEO-friendly</strong>: Next.js automatically returns <strong>HTTP 404 status</strong>.</li>
+</ol>
+
+<hr />
+
+<h2 id="6-example-with-layout--not-found"><strong>6. Example With Layout + Not Found</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/layout.js</span>
+<span class="k">import</span> <span class="nx">Navbar</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/ui/Navbar</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">DashboardLayout</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Navbar</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// app/dashboard/not-found.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">DashboardNotFound</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"text-center mt-20"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">className</span><span class="p">=</span><span class="s">"text-4xl font-bold"</span><span class="p">&gt;</span>Dashboard Page Not Found<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">className</span><span class="p">=</span><span class="s">"mt-2"</span><span class="p">&gt;</span>This dashboard route does not exist.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/dashboard/unknown</code> → Shows <strong>Dashboard-specific 404</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">/unknown-route</code> → Shows <strong>global <code class="language-plaintext highlighter-rouge">app/not-found.js</code></strong></li>
+</ul>
+
+<hr />
+
+<p>This approach is the <strong>recommended way in Next.js App Router</strong> to handle <strong>default 404 pages</strong>, <strong>nested 404s</strong>, and <strong>programmatic 404 handling</strong>.</p>
+
+<hr />
+
+<h1 id="default-files-and-special-terms-in-nextjs-app-router"><strong>Default Files and Special Terms in Next.js App Router</strong></h1>
+
+<p>Next.js App Router introduces <strong>conventions</strong> with specific filenames that automatically define routing, layouts, metadata, error handling, and more. Understanding these files is essential for building robust Next.js applications.</p>
+
+<hr />
+
+<h2 id="1-pagejs"><strong>1. <code class="language-plaintext highlighter-rouge">page.js</code></strong></h2>
+
+<ul>
+  <li><strong>Purpose:</strong> Represents the <strong>main content of a route</strong>.</li>
+  <li><strong>Location:</strong> Every folder can have one <code class="language-plaintext highlighter-rouge">page.js</code> which maps to the folder path.</li>
+  <li>
+    <p><strong>Behavior:</strong></p>
+
+    <ul>
+      <li>If folder is <code class="language-plaintext highlighter-rouge">app/about/</code>, then <code class="language-plaintext highlighter-rouge">page.js</code> → <code class="language-plaintext highlighter-rouge">/about</code></li>
+      <li>Can be <strong>client component</strong> (<code class="language-plaintext highlighter-rouge">"use client"</code>) or <strong>server component</strong> (default)</li>
+    </ul>
+  </li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/about/page.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">AboutPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>About Us<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="2-layoutjs"><strong>2. <code class="language-plaintext highlighter-rouge">layout.js</code></strong></h2>
+
+<ul>
+  <li><strong>Purpose:</strong> Defines a <strong>persistent layout</strong> that wraps all <code class="language-plaintext highlighter-rouge">page.js</code> and nested routes in a folder.</li>
+  <li><strong>Location:</strong> Can exist in any folder (root, nested)</li>
+  <li>
+    <p><strong>Behavior:</strong></p>
+
+    <ul>
+      <li>Supports nested layouts. Outer layouts wrap inner layouts.</li>
+      <li>Can include <strong>navigation, sidebar, footer, etc.</strong></li>
+    </ul>
+  </li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/layout.js</span>
+<span class="k">import</span> <span class="nx">Navbar</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/ui/Navbar</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">DashboardLayout</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Navbar</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="3-not-foundjs"><strong>3. <code class="language-plaintext highlighter-rouge">not-found.js</code></strong></h2>
+
+<ul>
+  <li><strong>Purpose:</strong> Default 404 page for <strong>undefined routes</strong>.</li>
+  <li>
+    <p><strong>Behavior:</strong></p>
+
+    <ul>
+      <li>Can exist globally (<code class="language-plaintext highlighter-rouge">app/not-found.js</code>) or nested (<code class="language-plaintext highlighter-rouge">app/dashboard/not-found.js</code>)</li>
+      <li>Programmatically trigger with <code class="language-plaintext highlighter-rouge">notFound()</code> in server components</li>
+    </ul>
+  </li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/not-found.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">NotFound</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>404 – Page Not Found<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="4-loadingjs"><strong>4. <code class="language-plaintext highlighter-rouge">loading.js</code></strong></h2>
+
+<ul>
+  <li><strong>Purpose:</strong> Shows a <strong>loading state</strong> while server components fetch data or during route transitions.</li>
+  <li><strong>Location:</strong> Optional; can exist in any folder</li>
+  <li><strong>Behavior:</strong> Automatically renders when parent route is loading.</li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/loading.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Loading</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Loading dashboard...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="5-errorjs"><strong>5. <code class="language-plaintext highlighter-rouge">error.js</code></strong></h2>
+
+<ul>
+  <li><strong>Purpose:</strong> Displays <strong>error UI</strong> if a route or layout throws an exception.</li>
+  <li><strong>Location:</strong> Optional; nested or global</li>
+  <li><strong>Behavior:</strong> Catches errors for its folder and children.</li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/error.js</span>
+<span class="dl">'</span><span class="s1">use client</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nb">Error</span><span class="p">({</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">reset</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Something went wrong!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">reset</span><span class="p">()</span><span class="si">}</span><span class="p">&gt;</span>Try again<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="6-headjs"><strong>6. <code class="language-plaintext highlighter-rouge">head.js</code></strong></h2>
+
+<ul>
+  <li><strong>Purpose:</strong> Adds <strong>metadata</strong> for the route (title, meta tags, Open Graph, etc.)</li>
+  <li><strong>Location:</strong> Optional, per folder</li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/about/head.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Head</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>About Us<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="p">=</span><span class="s">"description"</span> <span class="na">content</span><span class="p">=</span><span class="s">"Learn more about us."</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="7-templatejs"><strong>7. <code class="language-plaintext highlighter-rouge">template.js</code></strong></h2>
+
+<ul>
+  <li><strong>Purpose:</strong> Alternative layout for a route that <strong>does not persist state</strong> between navigations.</li>
+  <li>
+    <p><strong>Difference from <code class="language-plaintext highlighter-rouge">layout.js</code>:</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">layout.js</code> is <strong>persistent</strong></li>
+      <li><code class="language-plaintext highlighter-rouge">template.js</code> <strong>remounts children every navigation</strong></li>
+    </ul>
+  </li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/template.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">DashboardTemplate</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"dashboard-template"</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="8-errorjs--loadingjs--not-foundjs-in-nested-routes"><strong>8. <code class="language-plaintext highlighter-rouge">error.js</code> + <code class="language-plaintext highlighter-rouge">loading.js</code> + <code class="language-plaintext highlighter-rouge">not-found.js</code> in Nested Routes</strong></h2>
+
+<ul>
+  <li>
+    <p><strong>Nested Handling:</strong> Each folder can have its own versions of these files to <strong>localize behavior</strong>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/
+└── dashboard/
+    ├── layout.js
+    ├── page.js
+    ├── loading.js
+    ├── error.js
+    └── not-found.js
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Example:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">/dashboard/unknown</code> → <code class="language-plaintext highlighter-rouge">dashboard/not-found.js</code></li>
+      <li><code class="language-plaintext highlighter-rouge">/dashboard/page</code> errors → <code class="language-plaintext highlighter-rouge">dashboard/error.js</code></li>
+      <li><code class="language-plaintext highlighter-rouge">/dashboard</code> loading data → <code class="language-plaintext highlighter-rouge">dashboard/loading.js</code></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="9-other-important-termsfiles"><strong>9. Other Important Terms/Files</strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>File/Term</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">globals.css</code></td>
+      <td>Global CSS file, imported in <code class="language-plaintext highlighter-rouge">layout.js</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">favicon.ico</code></td>
+      <td>Default favicon in <code class="language-plaintext highlighter-rouge">app/</code> folder</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[param]</code></td>
+      <td>Dynamic route segment, accessed via <code class="language-plaintext highlighter-rouge">useParams()</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[[...slug]]</code></td>
+      <td>Optional catch-all dynamic route for arbitrary depth</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">route.js</code></td>
+      <td>Auto-generated file for internal Next.js routing, not manually created</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">page_client-reference-manifest.js</code></td>
+      <td>Internal Next.js reference mapping for client/server components</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">loading.tsx/jsx</code></td>
+      <td>TypeScript/JS version of <code class="language-plaintext highlighter-rouge">loading.js</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="10-how-they-work-together"><strong>10. How They Work Together</strong></h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Route URL Example: /dashboard/123/projects/456
+
+Files Used:
+- app/layout.js                   → wraps all pages
+- app/dashboard/layout.js         → wraps dashboard routes
+- app/dashboard/[userId]/layout.js → wraps user-specific pages
+- app/dashboard/[userId]/page.js  → renders /dashboard/123
+- app/dashboard/[userId]/projects/page.js → renders projects list
+- app/dashboard/[userId]/projects/[projectId]/page.js → renders specific project
+- app/dashboard/[userId]/projects/[projectId]/tasks/[taskId]/page.js → renders task
+- Any missing route → nearest not-found.js
+- During loading → nearest loading.js
+- On error → nearest error.js
+</code></pre></div></div>
+
+<p><strong>Key Concept:</strong></p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">page.js</code> = route content</strong></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">layout.js</code> = persistent wrapper</strong></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">not-found.js</code> = 404 handler</strong></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">loading.js</code> = skeleton/loading state</strong></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">error.js</code> = error boundary</strong></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">head.js</code> = metadata</strong></li>
+  <li><strong><code class="language-plaintext highlighter-rouge">template.js</code> = non-persistent layout</strong></li>
+</ul>
+
+<hr />
+
+<p>This <strong>file-based approach</strong> allows <strong>automatic routing, SSR/SSG, dynamic routes, nested layouts, and error/loading handling</strong> without manually configuring routes or using React Router.</p>
+
+<hr />
+
+<h1 id="global-vs-local-js-and-data-fetching-in-nextjs-vs-react"><strong>Global vs Local JS and Data Fetching in Next.js vs React</strong></h1>
+
+<p>Next.js and React handle <strong>data fetching</strong> and <strong>JS code scoping</strong> differently. Understanding <strong>global vs local JS</strong>, and <strong>data fetching strategies</strong>, is crucial for building optimized apps.</p>
+
+<hr />
+
+<h2 id="1-global-js-vs-local-js"><strong>1. Global JS vs Local JS</strong></h2>
+
+<h3 id="global-js"><strong>Global JS</strong></h3>
+
+<ul>
+  <li><strong>Definition:</strong> Code that is loaded <strong>once</strong> and available throughout the entire app.</li>
+  <li>
+    <p><strong>In Next.js:</strong></p>
+
+    <ul>
+      <li>Usually placed in <code class="language-plaintext highlighter-rouge">app/layout.js</code> or imported in <code class="language-plaintext highlighter-rouge">globals.css</code> (for JS, can import scripts globally)</li>
+      <li>Can include global state (e.g., via <strong>React Context</strong>, Redux, Zustand)</li>
+    </ul>
+  </li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/layout.js</span>
+<span class="k">import</span> <span class="dl">'</span><span class="s1">@/styles/globals.css</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Navbar</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/Navbar</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Footer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/components/Footer</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">RootLayout</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="p">=</span><span class="s">"en"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Navbar</span> <span class="p">/&gt;</span>
+        <span class="si">{</span><span class="nx">children</span><span class="si">}</span> <span class="si">{</span><span class="cm">/* main page content */</span><span class="si">}</span>
+        <span class="p">&lt;</span><span class="nc">Footer</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Navbar</code>, <code class="language-plaintext highlighter-rouge">Footer</code>, global event listeners, or shared utilities are <strong>loaded once</strong>.</li>
+</ul>
+
+<hr />
+
+<h3 id="local-js"><strong>Local JS</strong></h3>
+
+<ul>
+  <li><strong>Definition:</strong> Code that runs <strong>only in a specific component or page</strong>.</li>
+  <li>
+    <p><strong>In Next.js:</strong></p>
+
+    <ul>
+      <li>Code inside <code class="language-plaintext highlighter-rouge">page.js</code>, component files, or hooks is <strong>local</strong>.</li>
+      <li>Useful for <strong>per-page logic, state, or event handlers</strong>.</li>
+    </ul>
+  </li>
+  <li><strong>Example:</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/page.js</span>
+<span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">DashboardPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// local state</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Dashboard<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Increment <span class="si">{</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="2-data-fetching-in-nextjs"><strong>2. Data Fetching in Next.js</strong></h2>
+
+<p>Next.js provides <strong>different approaches depending on server/client context</strong>:</p>
+
+<h3 id="a-server-side-data-fetching-server-components"><strong>A. Server-Side Data Fetching (Server Components)</strong></h3>
+
+<ul>
+  <li>Default <code class="language-plaintext highlighter-rouge">page.js</code> is <strong>server component</strong> (no <code class="language-plaintext highlighter-rouge">"use client"</code> needed)</li>
+  <li>Fetch data <strong>before rendering</strong> on the server</li>
+  <li><strong>SEO-friendly and fast</strong> (SSR)</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/page.js</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">getData</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">DashboardPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getData</span><span class="p">();</span> <span class="c1">// server fetch</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Posts<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">p</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+          <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">p</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">))</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Notes:</strong></p>
+
+<ul>
+  <li>No <code class="language-plaintext highlighter-rouge">useEffect</code> needed</li>
+  <li>Data is fetched <strong>on the server</strong> before page loads</li>
+  <li>Supports <strong>static generation (SSG)</strong> if fetch is inside a page with caching</li>
+</ul>
+
+<hr />
+
+<h3 id="b-client-side-data-fetching"><strong>B. Client-Side Data Fetching</strong></h3>
+
+<ul>
+  <li>For <strong>interactive pages</strong> or components with changing data</li>
+  <li>Requires <code class="language-plaintext highlighter-rouge">"use client"</code> and React hooks like <code class="language-plaintext highlighter-rouge">useEffect</code>, <code class="language-plaintext highlighter-rouge">useState</code></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">UserComponent</span><span class="p">({</span> <span class="nx">userId</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">user</span><span class="p">,</span> <span class="nx">setUser</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fetch</span><span class="p">(</span><span class="s2">`https://jsonplaceholder.typicode.com/users/</span><span class="p">${</span><span class="nx">userId</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">setUser</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">userId</span><span class="p">]);</span> <span class="c1">// refetch when userId changes</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Useful for <strong>dynamic updates</strong>, dropdowns, or components whose data changes <strong>on client interactions</strong>.</li>
+</ul>
+
+<hr />
+
+<h3 id="c-fetching-in-nested-components"><strong>C. Fetching in Nested Components</strong></h3>
+
+<ul>
+  <li>You can <strong>fetch data locally</strong> inside components:</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Comments</span><span class="p">({</span> <span class="nx">postId</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">comments</span><span class="p">,</span> <span class="nx">setComments</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([]);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fetch</span><span class="p">(</span><span class="s2">`https://jsonplaceholder.typicode.com/posts/</span><span class="p">${</span><span class="nx">postId</span><span class="p">}</span><span class="s2">/comments`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">setComments</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">postId</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">comments</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">c</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">c</span><span class="p">.</span><span class="nx">body</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+      <span class="p">))</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Each nested component fetches its <strong>own data independently</strong>.</li>
+  <li>In <strong>Next.js</strong>, nested components can also be <strong>server components</strong> if no <code class="language-plaintext highlighter-rouge">"use client"</code> is used.</li>
+</ul>
+
+<hr />
+
+<h3 id="d-differences-from-react-js"><strong>D. Differences from React JS</strong></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>React JS</th>
+      <th>Next.js (App Router)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Server-Side Fetching</td>
+      <td>Not built-in</td>
+      <td>Default page.js is server component → fetch server-side</td>
+    </tr>
+    <tr>
+      <td>Client-Side Fetching</td>
+      <td><code class="language-plaintext highlighter-rouge">useEffect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">"use client"</code> + hooks like <code class="language-plaintext highlighter-rouge">useEffect</code>, <code class="language-plaintext highlighter-rouge">useState</code></td>
+    </tr>
+    <tr>
+      <td>SEO</td>
+      <td>Requires SSR setup (Next.js or frameworks)</td>
+      <td>SSR/SSG built-in, automatically SEO-friendly</td>
+    </tr>
+    <tr>
+      <td>Routing</td>
+      <td><code class="language-plaintext highlighter-rouge">react-router-dom</code></td>
+      <td>File-based routing (<code class="language-plaintext highlighter-rouge">page.js</code>)</td>
+    </tr>
+    <tr>
+      <td>Nested Layouts</td>
+      <td>Manual composition</td>
+      <td>Nested <code class="language-plaintext highlighter-rouge">layout.js</code> automatically wraps children</td>
+    </tr>
+    <tr>
+      <td>Data Caching</td>
+      <td>Manual setup</td>
+      <td><code class="language-plaintext highlighter-rouge">fetch</code> supports <code class="language-plaintext highlighter-rouge">{ cache: 'force-cache' }</code> for SSG</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="3-fetching-with-page-changes"><strong>3. Fetching with Page Changes</strong></h3>
+
+<ul>
+  <li><strong>React:</strong> You often fetch data <strong>on route change</strong> using <code class="language-plaintext highlighter-rouge">useEffect</code> or <code class="language-plaintext highlighter-rouge">componentDidMount</code>.</li>
+  <li>
+    <p><strong>Next.js:</strong></p>
+
+    <ul>
+      <li>If server component (<code class="language-plaintext highlighter-rouge">page.js</code>), fetch happens <strong>on server before rendering</strong></li>
+      <li>If client component, fetch happens <strong>on client</strong> (with <code class="language-plaintext highlighter-rouge">useEffect</code>) and can <strong>react to props or route params</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Example with changing route param:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useParams</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/navigation</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Post</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">params</span> <span class="o">=</span> <span class="nx">useParams</span><span class="p">();</span> <span class="c1">// dynamic route like /blog/[id]</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">post</span><span class="p">,</span> <span class="nx">setPost</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fetch</span><span class="p">(</span><span class="s2">`https://jsonplaceholder.typicode.com/posts/</span><span class="p">${</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">setPost</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">post</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Updates automatically when <strong>route changes</strong> (<code class="language-plaintext highlighter-rouge">params.id</code> changes)</li>
+  <li>Combines <strong>dynamic routing + client-side fetching</strong></li>
+</ul>
+
+<hr />
+
+<h3 id="4-best-practices-in-nextjs"><strong>4. Best Practices in Next.js</strong></h3>
+
+<ol>
+  <li>
+    <p><strong>Use Server Components for static/fetch-on-load pages</strong></p>
+
+    <ul>
+      <li>Faster, SEO-friendly</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Use Client Components for interactive, dynamic data</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">"use client"</code> + <code class="language-plaintext highlighter-rouge">useEffect</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Separate global vs local state</strong></p>
+
+    <ul>
+      <li>Global state in context providers, Redux, or Zustand</li>
+      <li>Local state in component itself</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Nested Components can fetch their own data</strong></p>
+
+    <ul>
+      <li>Keeps each component independent</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Use caching strategies</strong></p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">fetch(url, { cache: 'force-cache' })</code> → SSG</li>
+      <li><code class="language-plaintext highlighter-rouge">fetch(url, { cache: 'no-store' })</code> → always fresh SSR</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<p>Next, I can make a <strong>diagram showing global vs local JS + server vs client data fetching flow</strong> in a Next.js app with multiple nested components so it’s easy to visualize.</p>
+
+<hr />
+
+<hr />
+
+<h1 id="rendering-images-and-media-in-nextjs"><strong>Rendering Images and Media in Next.js</strong></h1>
+
+<p>Next.js provides a <strong>specialized <code class="language-plaintext highlighter-rouge">Image</code> component</strong> and other tools for handling images and media efficiently. Using these improves <strong>performance, SEO, and user experience</strong>.</p>
+
+<hr />
+
+<h2 id="1-nextjs-image-component"><strong>1. Next.js <code class="language-plaintext highlighter-rouge">&lt;Image&gt;</code> Component</strong></h2>
+
+<p>Next.js replaces the standard HTML <code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> tag with its optimized <code class="language-plaintext highlighter-rouge">&lt;Image&gt;</code> component:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/image</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">MyComponent</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>My Next.js Image<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Image</span>
+        <span class="na">src</span><span class="p">=</span><span class="s">"/vercel.svg"</span>       <span class="c1">// can be from /public or external</span>
+        <span class="na">alt</span><span class="p">=</span><span class="s">"Vercel Logo"</span>
+        <span class="na">width</span><span class="p">=</span><span class="si">{</span><span class="mi">200</span><span class="si">}</span>             <span class="c1">// required</span>
+        <span class="na">height</span><span class="p">=</span><span class="si">{</span><span class="mi">200</span><span class="si">}</span>            <span class="c1">// required</span>
+      <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Key Features:</strong></p>
+
+<ol>
+  <li>
+    <p><strong>Automatic Optimization</strong></p>
+
+    <ul>
+      <li>Generates multiple image sizes for different devices</li>
+      <li>Serves WebP/AVIF formats automatically if supported</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Lazy Loading</strong></p>
+
+    <ul>
+      <li>Images load only when they appear in the viewport</li>
+      <li>Improves performance and speed metrics</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Responsive Images</strong></p>
+
+    <ul>
+      <li>Can use <code class="language-plaintext highlighter-rouge">fill</code> mode with CSS to adapt images to container</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Caching</strong></p>
+
+    <ul>
+      <li>Next.js automatically caches optimized images for performance</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="2-using-images-from-the-public-folder"><strong>2. Using Images from the <code class="language-plaintext highlighter-rouge">public</code> Folder</strong></h2>
+
+<ul>
+  <li>All files in <code class="language-plaintext highlighter-rouge">public/</code> are served <strong>as-is</strong>.</li>
+  <li>Example:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public/
+├── logo.png
+├── banner.jpg
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Image</span> <span class="na">src</span><span class="p">=</span><span class="s">"/logo.png"</span> <span class="na">width</span><span class="p">=</span><span class="si">{</span><span class="mi">100</span><span class="si">}</span> <span class="na">height</span><span class="p">=</span><span class="si">{</span><span class="mi">100</span><span class="si">}</span> <span class="na">alt</span><span class="p">=</span><span class="s">"Logo"</span> <span class="p">/&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Path <code class="language-plaintext highlighter-rouge">/logo.png</code> maps directly to <code class="language-plaintext highlighter-rouge">public/logo.png</code></li>
+  <li>No import needed for static assets in <code class="language-plaintext highlighter-rouge">public/</code></li>
+</ul>
+
+<hr />
+
+<h2 id="3-importing-images-directly"><strong>3. Importing Images Directly</strong></h2>
+
+<p>Next.js also supports <strong>importing images as modules</strong> (requires Webpack support):</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">logo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/public/logo.png</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/image</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Header</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Image</span> <span class="na">src</span><span class="p">=</span><span class="si">{</span><span class="nx">logo</span><span class="si">}</span> <span class="na">alt</span><span class="p">=</span><span class="s">"Logo"</span> <span class="na">width</span><span class="p">=</span><span class="si">{</span><span class="mi">150</span><span class="si">}</span> <span class="na">height</span><span class="p">=</span><span class="si">{</span><span class="mi">150</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Benefits:</p>
+
+    <ul>
+      <li>Type safety in TypeScript</li>
+      <li>Can use image <code class="language-plaintext highlighter-rouge">src</code> as JS variable</li>
+    </ul>
+  </li>
+  <li>
+    <p>Works for <strong>SVG, PNG, JPG, WebP, GIF</strong></p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="4-responsive-images-with-layout-fill"><strong>4. Responsive Images with Layout <code class="language-plaintext highlighter-rouge">fill</code></strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="dl">'</span><span class="s1">300px</span><span class="dl">'</span><span class="p">,</span> <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">relative</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Image</span>
+    <span class="na">src</span><span class="p">=</span><span class="s">"/banner.jpg"</span>
+    <span class="na">alt</span><span class="p">=</span><span class="s">"Banner"</span>
+    <span class="na">fill</span>                  <span class="c1">// fills parent div</span>
+    <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">objectFit</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cover</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span> <span class="c1">// cover, contain, etc.</span>
+  <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">fill</code></strong> mode removes need to set fixed width/height</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">objectFit</code></strong> controls how image scales</li>
+</ul>
+
+<hr />
+
+<h2 id="5-external-images"><strong>5. External Images</strong></h2>
+
+<ul>
+  <li>To use images from another domain, add <strong><code class="language-plaintext highlighter-rouge">next.config.js</code> remote patterns</strong>:</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// next.config.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">images</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">domains</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">images.unsplash.com</span><span class="dl">'</span><span class="p">],</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Image</span>
+  <span class="na">src</span><span class="p">=</span><span class="s">"https://images.unsplash.com/photo-123"</span>
+  <span class="na">width</span><span class="p">=</span><span class="si">{</span><span class="mi">600</span><span class="si">}</span>
+  <span class="na">height</span><span class="p">=</span><span class="si">{</span><span class="mi">400</span><span class="si">}</span>
+  <span class="na">alt</span><span class="p">=</span><span class="s">"Unsplash"</span>
+<span class="p">/&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Next.js will optimize and cache these external images</li>
+</ul>
+
+<hr />
+
+<h2 id="6-svg-images"><strong>6. SVG Images</strong></h2>
+
+<ul>
+  <li>SVG can be imported as <strong>React components</strong>:</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Logo</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@/public/logo.svg</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Header</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nc">Logo</span> <span class="na">width</span><span class="p">=</span><span class="si">{</span><span class="mi">100</span><span class="si">}</span> <span class="na">height</span><span class="p">=</span><span class="si">{</span><span class="mi">100</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Alternatively, use <code class="language-plaintext highlighter-rouge">&lt;Image&gt;</code> for static rendering if no interactivity is needed.</li>
+</ul>
+
+<hr />
+
+<h2 id="7-videos-and-other-media"><strong>7. Videos and Other Media</strong></h2>
+
+<p>Next.js does not have a specialized video component, but you can use <strong>HTML <code class="language-plaintext highlighter-rouge">&lt;video&gt;</code></strong>:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">video</span> <span class="na">width</span><span class="p">=</span><span class="s">"600"</span> <span class="na">controls</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="p">=</span><span class="s">"/sample-video.mp4"</span> <span class="na">type</span><span class="p">=</span><span class="s">"video/mp4"</span> <span class="p">/&gt;</span>
+  Your browser does not support the video tag.
+<span class="p">&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Place media files in <code class="language-plaintext highlighter-rouge">/public/</code> for direct URL access</li>
+  <li>For large media, consider <strong>streaming or external CDNs</strong> for performance</li>
+</ul>
+
+<hr />
+
+<h2 id="8-benefits-of-nextjs-image-optimization"><strong>8. Benefits of Next.js Image Optimization</strong></h2>
+
+<ol>
+  <li>
+    <p><strong>Performance</strong></p>
+
+    <ul>
+      <li>Reduced image sizes, responsive serving, lazy loading</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>SEO</strong></p>
+
+    <ul>
+      <li>Faster Largest Contentful Paint (LCP) → better Lighthouse score</li>
+    </ul>
+  </li>
+  <li><strong>Automatic WebP/AVIF conversion</strong></li>
+  <li>
+    <p><strong>CDN-friendly</strong></p>
+
+    <ul>
+      <li>Works with Vercel Image CDN out-of-the-box</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="9-example-combined-component"><strong>9. Example Combined Component</strong></h2>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">next/image</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">Hero</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"hero"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welcome to Next.js<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">width</span><span class="p">:</span> <span class="dl">'</span><span class="s1">100%</span><span class="dl">'</span><span class="p">,</span> <span class="na">height</span><span class="p">:</span> <span class="dl">'</span><span class="s1">400px</span><span class="dl">'</span><span class="p">,</span> <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">relative</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Image</span>
+          <span class="na">src</span><span class="p">=</span><span class="s">"/banner.jpg"</span>
+          <span class="na">alt</span><span class="p">=</span><span class="s">"Hero Banner"</span>
+          <span class="na">fill</span>
+          <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">objectFit</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cover</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Optimized for <strong>all devices</strong></li>
+  <li>Lazy loads</li>
+  <li>SEO-friendly</li>
+  <li>Works with <strong>layouts</strong> and SSR</li>
+</ul>
+
+<hr />
+
+<p>Next.js also allows <strong>image placeholders</strong>, blur-up effects, and <strong>priority images</strong> for LCP optimization:</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nc">Image</span>
+  <span class="na">src</span><span class="p">=</span><span class="s">"/banner.jpg"</span>
+  <span class="na">width</span><span class="p">=</span><span class="si">{</span><span class="mi">1200</span><span class="si">}</span>
+  <span class="na">height</span><span class="p">=</span><span class="si">{</span><span class="mi">600</span><span class="si">}</span>
+  <span class="na">alt</span><span class="p">=</span><span class="s">"Banner"</span>
+  <span class="na">placeholder</span><span class="p">=</span><span class="s">"blur"</span>
+  <span class="na">blurDataURL</span><span class="p">=</span><span class="s">"/banner-blur.jpg"</span>
+  <span class="na">priority</span> <span class="c1">// preloads for LCP</span>
+<span class="p">/&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>This is the <strong>recommended way to render images and media</strong> in Next.js for <strong>performance, SEO, and user experience</strong>.</p>
+
+<hr />
+
+<hr />
+
+<h1 id="data-fetching-through-apis-in-nextjs-app-router"><strong>Data Fetching Through APIs in Next.js (App Router)</strong></h1>
+
+<p>Next.js provides <strong>multiple strategies</strong> to fetch data from APIs depending on whether you are using <strong>server components</strong>, <strong>client components</strong>, <strong>dynamic routes</strong>, or want <strong>static generation</strong>. Here’s a complete breakdown.</p>
+
+<hr />
+
+<h2 id="1-server-side-data-fetching-server-components"><strong>1. Server-Side Data Fetching (Server Components)</strong></h2>
+
+<ul>
+  <li>Default <code class="language-plaintext highlighter-rouge">page.js</code> in App Router is a <strong>server component</strong>.</li>
+  <li>Fetching happens <strong>on the server before rendering</strong>.</li>
+  <li>SEO-friendly and fast.</li>
+  <li>Can fetch from <strong>internal or external APIs</strong>.</li>
+</ul>
+
+<h3 id="example-fetch-from-external-api"><strong>Example: Fetch from external API</strong></h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/page.js</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">getPosts</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to fetch posts</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">DashboardPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">posts</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPosts</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Posts<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">posts</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">post</span> <span class="o">=&gt;</span> <span class="p">(</span>
+          <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">))</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Notes:</strong></p>
+
+<ul>
+  <li>No <code class="language-plaintext highlighter-rouge">useEffect</code> needed.</li>
+  <li>Can combine with <strong>dynamic routes</strong> (<code class="language-plaintext highlighter-rouge">params</code>) to fetch specific data.</li>
+</ul>
+
+<hr />
+
+<h2 id="2-client-side-data-fetching"><strong>2. Client-Side Data Fetching</strong></h2>
+
+<ul>
+  <li>Necessary for <strong>interactive or dynamic components</strong>.</li>
+  <li>Requires <code class="language-plaintext highlighter-rouge">"use client"</code> directive.</li>
+  <li>Uses React hooks like <code class="language-plaintext highlighter-rouge">useEffect</code> and <code class="language-plaintext highlighter-rouge">useState</code>.</li>
+</ul>
+
+<h3 id="example-client-component-fetching"><strong>Example: Client component fetching</strong></h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">UserComponent</span><span class="p">({</span> <span class="nx">userId</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">user</span><span class="p">,</span> <span class="nx">setUser</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">loading</span><span class="p">,</span> <span class="nx">setLoading</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="kd">function</span> <span class="nx">fetchUser</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`https://jsonplaceholder.typicode.com/users/</span><span class="p">${</span><span class="nx">userId</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+      <span class="nx">setUser</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+      <span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">fetchUser</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">userId</span><span class="p">]);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">loading</span><span class="p">)</span> <span class="k">return</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Loading...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;;</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Notes:</strong></p>
+
+<ul>
+  <li>Works when <strong>data changes with client interaction</strong>.</li>
+  <li>Must handle <strong>loading/error states manually</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="3-fetching-for-dynamic-routes"><strong>3. Fetching for Dynamic Routes</strong></h2>
+
+<ul>
+  <li>Dynamic routes use <strong>folder <code class="language-plaintext highlighter-rouge">[param]</code></strong>.</li>
+  <li>Fetch server-side data using <code class="language-plaintext highlighter-rouge">params</code>.</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/posts/[postId]/page.js</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">getPost</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`https://jsonplaceholder.typicode.com/posts/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Post not found</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">PostPage</span><span class="p">({</span> <span class="nx">params</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getPost</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">postId</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">post</span><span class="p">.</span><span class="nx">body</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>For <strong>client components</strong>, fetch inside <code class="language-plaintext highlighter-rouge">useEffect</code> as usual and read <code class="language-plaintext highlighter-rouge">useParams()</code>.</li>
+</ul>
+
+<hr />
+
+<h2 id="4-incremental-static-regeneration-isr"><strong>4. Incremental Static Regeneration (ISR)</strong></h2>
+
+<ul>
+  <li>Next.js allows <strong>static generation with periodic revalidation</strong>.</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">fetch</code> with <code class="language-plaintext highlighter-rouge">{ next: { revalidate: seconds } }</code>:</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/data</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">next</span><span class="p">:</span> <span class="p">{</span> <span class="na">revalidate</span><span class="p">:</span> <span class="mi">60</span> <span class="p">}</span> <span class="c1">// cache for 60 seconds</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Page is <strong>pre-rendered at build time</strong> but <strong>updates automatically</strong> every <code class="language-plaintext highlighter-rouge">n</code> seconds.</li>
+  <li>Great for SEO + partially dynamic content.</li>
+</ul>
+
+<hr />
+
+<h2 id="5-using-internal-api-routes"><strong>5. Using Internal API Routes</strong></h2>
+
+<p>Next.js allows <strong>API routes</strong> under <code class="language-plaintext highlighter-rouge">app/api</code> (App Router) or <code class="language-plaintext highlighter-rouge">pages/api</code> (Pages Router).</p>
+
+<ul>
+  <li>Good for <strong>server-side logic</strong> or <strong>proxying external APIs</strong>.</li>
+</ul>
+
+<h3 id="example-api-route"><strong>Example: API Route</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/api/posts/route.js
+</code></pre></div></div>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">GET</span><span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/posts</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="p">{</span>
+    <span class="na">status</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span> <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="fetch-from-api-route-in-page"><strong>Fetch from API Route in Page</strong></h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/page.js</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">getPosts</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NEXT_PUBLIC_BASE_URL</span><span class="p">}</span><span class="s2">/api/posts`</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="6-client--server-hybrid"><strong>6. Client + Server Hybrid</strong></h2>
+
+<ul>
+  <li>Server Component fetches <strong>initial data</strong> for SEO</li>
+  <li>Client Component fetches <strong>interactive/updating data</strong></li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app/dashboard/page.js (server component)</span>
+<span class="k">import</span> <span class="nx">UsersList</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./UsersList</span><span class="dl">'</span><span class="p">;</span> <span class="c1">// client component</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">getUsers</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://jsonplaceholder.typicode.com/users</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">DashboardPage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">getUsers</span><span class="p">();</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nc">UsersList</span> <span class="na">initialUsers</span><span class="p">=</span><span class="si">{</span><span class="nx">users</span><span class="si">}</span> <span class="p">/&gt;;</span>
+<span class="p">}</span>
+
+<span class="c1">// UsersList.js (client component)</span>
+<span class="dl">"</span><span class="s2">use client</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">UsersList</span><span class="p">({</span> <span class="nx">initialUsers</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">users</span><span class="p">,</span> <span class="nx">setUsers</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialUsers</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">/api/users</span><span class="dl">'</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+      <span class="nx">setUsers</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">60000</span><span class="p">);</span> <span class="c1">// update every 60s</span>
+
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">users</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">u</span> <span class="o">=&gt;</span> <span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">u</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">u</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;)</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Initial render <strong>server-side</strong> → SEO-friendly</li>
+  <li>Updates <strong>client-side</strong> → dynamic content</li>
+</ul>
+
+<hr />
+
+<h2 id="7-error-handling"><strong>7. Error Handling</strong></h2>
+
+<ul>
+  <li>Use <strong><code class="language-plaintext highlighter-rouge">try/catch</code></strong> or <strong>error boundaries</strong> (<code class="language-plaintext highlighter-rouge">error.js</code>) for API fetches.</li>
+</ul>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.example.com/data</span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="dl">'</span><span class="s1">Failed to fetch</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">notFound</span><span class="p">();</span> <span class="c1">// or render fallback</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">notFound()</code> triggers <strong><code class="language-plaintext highlighter-rouge">not-found.js</code></strong> page automatically.</li>
+</ul>
+
+<hr />
+
+<h2 id="8-fetch-options"><strong>8. Fetch Options</strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{ cache: 'no-store' }</code></td>
+      <td>Always fetch fresh data (SSR)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{ next: { revalidate: 60 }}</code></td>
+      <td>Fetch and cache for 60 seconds (ISR/SSG)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{ headers: { ... } }</code></td>
+      <td>Add custom headers for authentication</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">{ method: 'POST' }</code></td>
+      <td>Fetch POST data from API</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="9-summary-of-fetching-strategies"><strong>9. Summary of Fetching Strategies</strong></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Strategy</th>
+      <th>Where Used</th>
+      <th>Pros</th>
+      <th>Cons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Server-side fetch (default)</td>
+      <td>page.js (server)</td>
+      <td>SEO-friendly, fast, no client JS needed</td>
+      <td>Cannot access client events directly</td>
+    </tr>
+    <tr>
+      <td>Client-side fetch</td>
+      <td><code class="language-plaintext highlighter-rouge">"use client"</code> component</td>
+      <td>Dynamic, interactive UI</td>
+      <td>Slower first render, SEO not automatic</td>
+    </tr>
+    <tr>
+      <td>ISR</td>
+      <td>server fetch</td>
+      <td>Static + periodic update</td>
+      <td>Slight delay in fresh data</td>
+    </tr>
+    <tr>
+      <td>API routes</td>
+      <td>app/api or pages/api</td>
+      <td>Server-side logic, data proxy</td>
+      <td>Extra layer, may need authentication</td>
+    </tr>
+    <tr>
+      <td>Hybrid</td>
+      <td>Server + Client</td>
+      <td>Best of both worlds</td>
+      <td>More complex code</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>This setup allows <strong>Next.js apps</strong> to:</p>
+
+<ul>
+  <li>Be <strong>SEO-friendly</strong></li>
+  <li>Serve <strong>fast initial HTML</strong></li>
+  <li>Update <strong>dynamic data</strong> on the client</li>
+  <li>Handle <strong>errors and missing data gracefully</strong></li>
+  <li>Optimize <strong>performance with caching &amp; revalidation</strong></li>
+</ul>
+
+<hr />
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

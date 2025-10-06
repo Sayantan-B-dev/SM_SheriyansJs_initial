@@ -67,7 +67,7 @@ Options:
 
 **Example: Next.js SSG (pages router)**
 
-```js
+```jsx
 // pages/posts/[slug].js
 import Head from 'next/head'
 
@@ -213,7 +213,7 @@ Key tactics:
 
 Example config (next-sitemap):
 
-```js
+```jsx
 // next-sitemap.config.js
 module.exports = {
   siteUrl: 'https://example.com',
@@ -342,7 +342,7 @@ Next.js has built-in server-side rendering. Pages can be rendered into full HTML
   * Always up-to-date content (perfect for news feeds, dashboards, dynamic product listings, etc.).
 * Example:
 
-  ```js
+  ```jsx
   export async function getServerSideProps(context) {
     const data = await fetch('https://api.example.com/posts');
     return { props: { data } };
@@ -367,7 +367,7 @@ Static Site Generation allows pages to be pre-rendered at **build time** instead
   * Perfect for blogs, documentation, portfolios, marketing pages, product listings, or any content that doesn’t change frequently.
 * Example:
 
-  ```js
+  ```jsx
   export async function getStaticProps() {
     const posts = await fetch('https://api.example.com/posts').then(r => r.json());
     return { props: { posts } };
@@ -385,7 +385,7 @@ ISR extends SSG by allowing pages to be regenerated incrementally in the backgro
 * This provides the speed of static pages with the freshness of dynamic content.
 * Example:
 
-  ```js
+  ```jsx
   export async function getStaticProps() {
     const data = await fetch('https://api.example.com/posts').then(r => r.json());
     return { props: { data }, revalidate: 60 };
@@ -466,7 +466,7 @@ Next.js automatically optimizes and inlines fonts using its `next/font` module.
 * They’re preloaded and inlined with proper `font-display` strategies (`swap` by default), improving rendering performance and preventing layout shift (CLS).
 * Example:
 
-  ```js
+  ```jsx
   import { Roboto } from 'next/font/google'
   const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] })
   export default function Page() {
@@ -818,14 +818,14 @@ npx eslint src/ --fix
 
 **Before linting:**
 
-```js
+```jsx
 const message = "Hello World"
 console.log( message )
 ```
 
 **After ESLint fixes automatically:**
 
-```js
+```jsx
 const message = 'Hello World';
 console.log(message);
 ```

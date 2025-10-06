@@ -1,6 +1,4 @@
----
-
-# **Handling “Page Not Found” in Next.js (`not-found.js`)**
+# Handling “Page Not Found” in Next.js (`not-found.js`)
 
 Next.js provides a **built-in way to handle 404 pages** in the **App Router** using a special file called `not-found.js`. This replaces the older `_error.js` or custom routing logic for missing pages.
 

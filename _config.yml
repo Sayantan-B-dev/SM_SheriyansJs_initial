@@ -1,0 +1,14 @@
+# _config.yml
+markdown: kramdown
+kramdown:
+  parse_block_html: true
+  input: GFM
+  syntax_highlighter: rouge
+
+# Optional: disable Liquid in Markdown files
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      render_with_liquid: false

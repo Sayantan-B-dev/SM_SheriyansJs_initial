@@ -67,7 +67,7 @@ Options:
 
 **Example: Next.js SSG (pages router)**
 
-```jsx
+{% raw %}
 // pages/posts/[slug].js
 import Head from 'next/head'
 
@@ -101,7 +101,7 @@ export default function Post({ post }) {
     </>
   )
 }
-```
+{% endraw %}
 
 ---
 
@@ -152,7 +152,7 @@ export default function Page({ data }) {
 
 Example:
 
-```jsx
+{% raw %}
 <script
   type="application/ld+json"
   dangerouslySetInnerHTML={{
@@ -165,7 +165,7 @@ Example:
     })
   }}
 />
-```
+{% endraw %}
 
 ---
 

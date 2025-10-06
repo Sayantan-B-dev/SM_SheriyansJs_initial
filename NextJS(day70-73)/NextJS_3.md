@@ -690,7 +690,7 @@ export default function Header() {
 
 ## **4. Responsive Images with Layout `fill`**
 
-```jsx
+{% raw %}
 <div style={{ width: '100%', height: '300px', position: 'relative' }}>
   <Image
     src="/banner.jpg"
@@ -699,7 +699,7 @@ export default function Header() {
     style={{ objectFit: 'cover' }} // cover, contain, etc.
   />
 </div>
-```
+{% endraw %}
 
 * **`fill`** mode removes need to set fixed width/height
 * **`objectFit`** controls how image scales
@@ -781,7 +781,7 @@ Next.js does not have a specialized video component, but you can use **HTML `<vi
 
 ## **9. Example Combined Component**
 
-```jsx
+{% raw %}
 import Image from 'next/image';
 
 export default function Hero() {
@@ -799,7 +799,7 @@ export default function Hero() {
     </div>
   );
 }
-```
+{% endraw %}
 
 * Optimized for **all devices**
 * Lazy loads

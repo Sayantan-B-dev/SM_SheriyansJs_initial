@@ -1,13 +1,14 @@
 # Some folder numbering are incorrect. Viewing deployed page is Recommanded 
 
 ## DSA Lec1 - ec19
-> Continuation in [KeepIt application](https://github.com/Sayantan-B-dev/SM_DSA_Sheriyans)
+> Continuation in [SheriyansDSA](https://github.com/Sayantan-B-dev/SM_SheriyansDSA)
 
 ## Frontend Lec14 - 33 
-> Continuation in KeepIt application
+> Continuation in [KeepIt](https://keepit-ok.vercel.app/profile/68646da5337d7a3d34be8436) application
 
 ## Frontend Lec34 - 69
-> React,Redux
+> [React,Redux](https://keepit-ok.vercel.app/profile/68646da5337d7a3d34be8436)
 
 ## Frontend Lec70 - 73
-> NextJS
+
+> [NextJS](https://keepit-ok.vercel.app/profile/68646da5337d7a3d34be8436)
